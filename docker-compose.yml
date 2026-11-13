@@ -67,7 +67,7 @@ services:
       - ./data:/workspace/data:ro
       - ./.git:/workspace/.git:ro
       - ./.runtime/training:/workspace/.runtime/training
-      - ./.runtime/airflow-secrets:/run/airflow-secrets:ro
+      - ./.runtime/airflow-secrets:/run/airflow-secrets
       - airflow-home:/opt/airflow
     restart: unless-stopped
 

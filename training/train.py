@@ -101,7 +101,9 @@ def evaluate(work: Path, workflow_run: str = "local") -> dict:
         "f1": float(f1_score(split["y_test"], prediction, average="macro")),
         "accuracy": float(accuracy_score(split["y_test"], prediction)),
     }
-    tags = read_json(work / "provenance.json") | {"airflow.run_id": workflow_run, "quality_gate": "pending"}
+    tags = read_json(work / "provenance.json") | {"workflow.run_id": workflow_run, "quality_gate": "pending"}
+    if not workflow_run.startswith("local"):
+        tags["airflow.run_id"] = workflow_run
     with mlflow.start_run(tags=tags, run_name=workflow_run) as run:
         mlflow.log_params(read_json(work / "parameters.json"))
         mlflow.log_metrics(metrics)
