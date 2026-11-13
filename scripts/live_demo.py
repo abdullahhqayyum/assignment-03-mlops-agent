@@ -162,6 +162,30 @@ def main():
     command(*kube, "apply", "-f", "kubernetes/namespace.yaml")
     command(*kube, "apply", "-f", "kubernetes/")
     command(*kube, "-n", settings.namespace, "rollout", "status", "deployment/iris-api", "--timeout=180s")
+    sample = {"features": [5.1, 3.5, 1.4, 0.2]}
+    predicted = subprocess.run(
+        [
+            *kube,
+            "create",
+            "--raw",
+            f"/api/v1/namespaces/{settings.namespace}/services/iris-api:80/proxy/predict",
+            "-f",
+            "-",
+        ],
+        cwd=ROOT,
+        input=json.dumps(sample),
+        capture_output=True,
+        text=True,
+        check=True,
+        timeout=30,
+    )
+    prediction = json.loads(predicted.stdout)
+    assert prediction["class_name"] == "setosa"
+    assert prediction["run_id"] == best["best"]["run_id"]
+    save(
+        "inference-prediction",
+        {"input": sample, "response": prediction, "source": "POST /predict through Kubernetes Service proxy"},
+    )
     save(
         "kubernetes-healthy",
         {
