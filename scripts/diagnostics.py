@@ -22,6 +22,19 @@ def main():
     commands = {
         "compose_status": ["docker", "compose", "ps", "--all", "--format", "json"],
         "compose_logs": ["docker", "compose", "logs", "--no-color", "--tail", "100"],
+        "airflow_startup": ["docker", "compose", "logs", "--no-color", "--tail", "1000", "airflow"],
+        "dag_import_errors": [
+            "docker",
+            "compose",
+            "exec",
+            "-T",
+            "airflow",
+            "airflow",
+            "dags",
+            "list-import-errors",
+            "--output",
+            "json",
+        ],
         "kubernetes": [
             "kubectl",
             "--kubeconfig",
@@ -39,7 +52,7 @@ def main():
             process = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=25)
             result[name] = {
                 "returncode": process.returncode,
-                "stdout": process.stdout[-30000:],
+                "stdout": process.stdout[:120000],
                 "stderr": process.stderr[-3000:],
             }
         except (OSError, subprocess.TimeoutExpired) as exc:
