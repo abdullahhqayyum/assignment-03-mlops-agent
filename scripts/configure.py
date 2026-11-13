@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import os
 import secrets
 import sys
 from pathlib import Path
@@ -31,6 +32,10 @@ def main() -> None:
     for key, value in defaults.items():
         if not values.get(key):
             values[key] = value
+    if not values.get("KUBECONFIG"):
+        values["KUBECONFIG"] = str(ROOT / ".runtime/kubeconfig")
+    if not values.get("AIRFLOW_UID"):
+        values["AIRFLOW_UID"] = str(os.getuid() if hasattr(os, "getuid") else 50000)
     target.write_text("".join(f"{key}={value or ''}\n" for key, value in values.items()), encoding="utf-8")
     secret_dir = ROOT / ".runtime/airflow-secrets"
     secret_dir.mkdir(parents=True, exist_ok=True)

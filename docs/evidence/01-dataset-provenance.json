@@ -1,0 +1,142 @@
+{
+  "scenario": "dataset-provenance",
+  "mode": "live_services_and_llm",
+  "turns": [
+    {
+      "user": "List the DVC-tracked datasets, show dataset-v1 provenance, and explain how to reproduce that dataset version.",
+      "assistant": {
+        "request_id": "req_3fc3640a5d004bb0a492823fe7863cec",
+        "answer": "**1. DVC\u2011tracked datasets (evidence\u202f`ev_352d1c2e0541`)**\n\n| Path | Size | MD5 | Status |\n|------|------|-----|--------|\n| `.runtime\\training\\local\\metadata.json` | 0\u202fB | \u2013 | output |\n| `.runtime\\training\\local\\model.joblib` | 0\u202fB | \u2013 | output |\n| `.runtime\\training\\local\\parameters.json` | 0\u202fB | \u2013 | output |\n| `.runtime\\training\\local\\provenance.json` | 0\u202fB | \u2013 | output |\n| `.runtime\\training\\local\\split.npz` | 0\u202fB | \u2013 | output |\n| `.runtime\\training\\local\\validated.npy` | 0\u202fB | \u2013 | output |\n| `data\\iris.csv` | **2\u202f217\u202fB** | `4a3beb7462eb695a87c685647c3245c2` | versioned dataset |\n\nThe only dataset that is version\u2011controlled by DVC is **`data/iris.csv`** (the rest are runtime artifacts).\n\n---\n\n**2. Provenance of *dataset\u2011v1*** (evidence\u202f`ev_40016d341be5`)\n\n```\nreference      : dataset-v1\ndataset        : data/iris.csv\ngit_commit     : 4f8232c6eef70251749e6c007ebeadb37261db8e\nmd5            : 4a3beb7462eb695a87c685647c3245c2\nsize           : 2\u202f217\u202fbytes\nhash type      : md5\npath (recorded): iris.csv\n```\n\n*Interpretation*: The commit `4f8232c6\u2026` is the Git revision that produced the `iris.csv` file currently recorded under the DVC tag **`dataset-v1`**. The file\u2019s MD5 matches the hash stored in the DVC `.dvc` lock file, confirming that this is the exact data version the tag points to.\n\n---\n\n**3. How to reproduce *dataset\u2011v1*** (evidence\u202f`ev_8fd77e86d7ba`)\n\nThe DVC reproduction instructions for the `dataset-v1` revision are:\n\n```\n# 1\ufe0f\u20e3  Create a temporary work\u2011tree at the exact Git commit\ngit worktree add --detach ../dataset-reproduction 4f8232c6eef70251749e6c007ebeadb37261db8e\n\n# 2\ufe0f\u20e3  Change into that directory\ncd ../dataset-reproduction\n\n# 3\ufe0f\u20e3  Pull the DVC\u2011tracked data file\ndvc pull data/iris.csv.dvc\n\n# 4\ufe0f\u20e3  Checkout the file so the working tree matches the recorded hash\ndvc checkout data/iris.csv.dvc\n\n# 5\ufe0f\u20e3  Verify the state (optional)\ndvc data status --json\n```\n\n**Prerequisite** \u2013 The DVC remote must already contain the blob with hash `4a3beb7462eb695a87c685647c3245c2`. If the remote is empty or the hash is missing, run the project\u2019s data\u2011bootstrap script (e.g., `scripts/bootstrap_data.py`) to populate the remote before reproducing.\n\nRunning the above steps will checkout the exact `iris.csv` that corresponds to **`dataset-v1`** (Git commit `4f8232c6\u2026`), matching the MD5 and size recorded in the provenance.\n\n---\n\n### Quick summary\n\n| Item | Evidence ID | Key value |\n|------|-------------|-----------|\n| List of DVC datasets | `ev_352d1c2e0541` | `data/iris.csv` is the only versioned dataset |\n| Dataset\u2011v1 provenance | `ev_40016d341be5` | Git\u202fcommit `4f8232c6\u2026`, MD5 `4a3beb7462eb695a87c685647c3245c2`, size\u202f2217\u202fB |\n| Reproduction steps | `ev_8fd77e86d7ba` | `git worktree add`, `dvc pull`, `dvc checkout` as shown above |\n\nThese three pieces give you a complete picture: what datasets DVC tracks, the exact provenance of the `dataset-v1` tag, and the concrete commands needed to recreate that data version from scratch.",
+        "status": "complete",
+        "evidence": [
+          {
+            "evidence_id": "ev_352d1c2e0541",
+            "request_id": "req_3fc3640a5d004bb0a492823fe7863cec",
+            "tool": "dvc_list_datasets",
+            "source": "dvc",
+            "status": "ok",
+            "observed_at": "2026-11-13T21:39:57.988392+00:00",
+            "duration_ms": 2369.1,
+            "data": {
+              "datasets": [
+                {
+                  "isout": true,
+                  "isdir": false,
+                  "isexec": false,
+                  "size": 0,
+                  "md5": null,
+                  "path": ".runtime\\training\\local\\metadata.json"
+                },
+                {
+                  "isout": true,
+                  "isdir": false,
+                  "isexec": false,
+                  "size": 0,
+                  "md5": null,
+                  "path": ".runtime\\training\\local\\model.joblib"
+                },
+                {
+                  "isout": true,
+                  "isdir": false,
+                  "isexec": false,
+                  "size": 0,
+                  "md5": null,
+                  "path": ".runtime\\training\\local\\parameters.json"
+                },
+                {
+                  "isout": true,
+                  "isdir": false,
+                  "isexec": false,
+                  "size": 0,
+                  "md5": null,
+                  "path": ".runtime\\training\\local\\provenance.json"
+                },
+                {
+                  "isout": true,
+                  "isdir": false,
+                  "isexec": false,
+                  "size": 0,
+                  "md5": null,
+                  "path": ".runtime\\training\\local\\split.npz"
+                },
+                {
+                  "isout": true,
+                  "isdir": false,
+                  "isexec": false,
+                  "size": 0,
+                  "md5": null,
+                  "path": ".runtime\\training\\local\\validated.npy"
+                },
+                {
+                  "isout": true,
+                  "isdir": false,
+                  "isexec": false,
+                  "size": 2217,
+                  "md5": "4a3beb7462eb695a87c685647c3245c2",
+                  "path": "data\\iris.csv"
+                }
+              ]
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_40016d341be5",
+            "request_id": "req_3fc3640a5d004bb0a492823fe7863cec",
+            "tool": "dvc_dataset_version",
+            "source": "dvc",
+            "status": "ok",
+            "observed_at": "2026-11-13T21:40:02.496741+00:00",
+            "duration_ms": 95.45,
+            "data": {
+              "git_commit": "4f8232c6eef70251749e6c007ebeadb37261db8e",
+              "reference": "dataset-v1",
+              "dataset": "data/iris.csv",
+              "outputs": [
+                {
+                  "md5": "4a3beb7462eb695a87c685647c3245c2",
+                  "size": 2217,
+                  "hash": "md5",
+                  "path": "iris.csv"
+                }
+              ]
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_8fd77e86d7ba",
+            "request_id": "req_3fc3640a5d004bb0a492823fe7863cec",
+            "tool": "dvc_reproduction",
+            "source": "dvc",
+            "status": "ok",
+            "observed_at": "2026-11-13T21:40:06.448973+00:00",
+            "duration_ms": 127.05,
+            "data": {
+              "git_commit": "4f8232c6eef70251749e6c007ebeadb37261db8e",
+              "reference": "dataset-v1",
+              "dataset": "data/iris.csv",
+              "outputs": [
+                {
+                  "md5": "4a3beb7462eb695a87c685647c3245c2",
+                  "size": 2217,
+                  "hash": "md5",
+                  "path": "iris.csv"
+                }
+              ],
+              "executed": false,
+              "instructions": [
+                "git worktree add --detach ../dataset-reproduction 4f8232c6eef70251749e6c007ebeadb37261db8e",
+                "cd ../dataset-reproduction",
+                "dvc pull data/iris.csv.dvc",
+                "dvc checkout data/iris.csv.dvc",
+                "dvc data status --json"
+              ],
+              "prerequisite": "DVC remote must contain this hash. Run scripts/bootstrap_data.py for demo data."
+            },
+            "error": null
+          }
+        ],
+        "model": "openrouter/free"
+      }
+    }
+  ]
+}

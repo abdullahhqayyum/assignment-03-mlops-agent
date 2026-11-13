@@ -1,0 +1,56 @@
+name: Dedicated live demonstration
+on:
+  workflow_dispatch:
+    inputs:
+      with_llm:
+        description: Use the configured OpenRouter secret for real agent conversations
+        type: boolean
+        default: false
+      approve_demo_operations:
+        description: Approve training runs and fault injection in the disposable mlops-agent namespace
+        type: boolean
+        required: true
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: live-demo
+  cancel-in-progress: false
+jobs:
+  demonstrate:
+    if: inputs.approve_demo_operations
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Install pinned kind
+        run: |
+          curl -fsSLo /tmp/kind-linux-amd64 https://github.com/kubernetes-sigs/kind/releases/download/v0.30.0/kind-linux-amd64
+          curl -fsSLo /tmp/kind-linux-amd64.sha256sum https://github.com/kubernetes-sigs/kind/releases/download/v0.30.0/kind-linux-amd64.sha256sum
+          (cd /tmp && sha256sum -c kind-linux-amd64.sha256sum)
+          sudo install -m 0755 /tmp/kind-linux-amd64 /usr/local/bin/kind
+      - run: |
+          python scripts/configure.py
+          python scripts/bootstrap_data.py
+          docker compose up -d --build
+      - name: Run real services and bounded operator-approved demonstrations
+        run: |
+          args=""
+          if [ "${{ inputs.with_llm }}" = "true" ]; then args="--with-llm"; fi
+          python scripts/live_demo.py --approve-demo-training --approve-demo-failures $args
+      - name: Upload actual service evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-demonstration-evidence
+          path: docs/evidence/
+          retention-days: 14

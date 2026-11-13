@@ -3,6 +3,7 @@
 import argparse
 import json
 import logging
+import sys
 from pathlib import Path
 
 from agent.config import Settings
@@ -10,6 +11,7 @@ from agent.orchestrator import Agent
 
 
 def main() -> None:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(description="Evidence-based MLOps operations agent")
     parser.add_argument("request")
     parser.add_argument("--output", type=Path)

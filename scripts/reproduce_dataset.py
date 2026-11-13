@@ -21,9 +21,8 @@ def main():
     commit = subprocess.check_output(
         ["git", "rev-parse", "--verify", "--end-of-options", args.revision + "^{commit}"], cwd=ROOT, text=True
     ).strip()
-    remote = subprocess.check_output(
-        [sys.executable, "-m", "dvc", "remote", "get-url", "local"], cwd=ROOT, text=True
-    ).strip()
+    # Resolve the repository's documented demo remote; no user credentials or remote URLs are exported.
+    remote = str((ROOT / ".runtime/dvc-remote").resolve())
     with tempfile.TemporaryDirectory(prefix="mlops-dataset-") as directory:
         worktree = Path(directory) / "checkout"
         subprocess.run(["git", "worktree", "add", "--detach", str(worktree), commit], cwd=ROOT, check=True)

@@ -15,6 +15,7 @@ from agent.orchestrator import Agent  # noqa: E402
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser()
     parser.add_argument("--name", required=True)
     parser.add_argument("--request", required=True)

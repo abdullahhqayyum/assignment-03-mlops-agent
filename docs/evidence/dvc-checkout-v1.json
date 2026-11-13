@@ -1,0 +1,9 @@
+{
+  "revision": "dataset-v1",
+  "git_commit": "4f8232c6eef70251749e6c007ebeadb37261db8e",
+  "expected_dvc_hash": "4a3beb7462eb695a87c685647c3245c2",
+  "restored_hash": "4a3beb7462eb695a87c685647c3245c2",
+  "matches": true,
+  "rows": 120,
+  "dvc_status": {}
+}

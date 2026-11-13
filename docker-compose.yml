@@ -33,6 +33,7 @@ services:
     restart: unless-stopped
 
   airflow:
+    user: "${AIRFLOW_UID:-50000}:0"
     build:
       context: .
       dockerfile: Dockerfile.airflow

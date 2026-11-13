@@ -4,8 +4,6 @@ import math
 import os
 from datetime import UTC, datetime
 
-from mlflow import MlflowClient
-
 from agent.config import Settings
 
 
@@ -14,7 +12,15 @@ class MLflowTools:
         self.settings = settings
         os.environ["MLFLOW_HTTP_REQUEST_TIMEOUT"] = str(int(settings.tool_timeout))
         os.environ["MLFLOW_HTTP_REQUEST_MAX_RETRIES"] = "0"
-        self.client = client or MlflowClient(tracking_uri=settings.mlflow_uri)
+        self._client = client
+
+    @property
+    def client(self):
+        if self._client is None:
+            from mlflow import MlflowClient
+
+            self._client = MlflowClient(tracking_uri=self.settings.mlflow_uri)
+        return self._client
 
     def list_experiments(self) -> dict:
         experiments = self.client.search_experiments(max_results=50)

@@ -1,0 +1,630 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "dvc_list_datasets",
+      "description": "List actual DVC-tracked datasets",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "dvc_dataset_version",
+      "description": "Read committed DVC hash and Git revision; use dataset.git_commit from MLflow",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "revision": {
+            "default": "HEAD",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_./~-]*$",
+            "title": "Revision",
+            "type": "string"
+          }
+        },
+        "title": "DatasetVersion",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "dvc_compare_versions",
+      "description": "Compare two committed dataset references with dvc diff",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "old_revision": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_./~-]*$",
+            "title": "Old Revision",
+            "type": "string"
+          },
+          "new_revision": {
+            "default": "HEAD",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_./~-]*$",
+            "title": "New Revision",
+            "type": "string"
+          }
+        },
+        "required": [
+          "old_revision"
+        ],
+        "title": "DatasetDiff",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "dvc_status",
+      "description": "Detect changed or missing versioned data in the workspace",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "dvc_reproduction",
+      "description": "Explain exact historical checkout commands; does not execute checkout",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "revision": {
+            "default": "HEAD",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_./~-]*$",
+            "title": "Revision",
+            "type": "string"
+          }
+        },
+        "title": "DatasetVersion",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "mlflow_list_experiments",
+      "description": "List MLflow experiment names and identifiers",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "mlflow_list_runs",
+      "description": "List a bounded number of recent runs across specified or all visible experiments",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "experiment_ids": {
+            "items": {
+              "maxLength": 250,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+              "type": "string"
+            },
+            "maxItems": 10,
+            "title": "Experiment Ids",
+            "type": "array"
+          },
+          "limit": {
+            "default": 5,
+            "maximum": 50,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "title": "Runs",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "mlflow_run_details",
+      "description": "Get recorded run metrics, parameters, dataset provenance, tags and artifacts",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "run_id": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+            "title": "Run Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id"
+        ],
+        "title": "Run",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "mlflow_best_run",
+      "description": "Rank recent FINISHED runs by metric/direction; check gate before promotion",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "experiment_ids": {
+            "items": {
+              "maxLength": 250,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+              "type": "string"
+            },
+            "maxItems": 10,
+            "title": "Experiment Ids",
+            "type": "array"
+          },
+          "limit": {
+            "default": 5,
+            "maximum": 50,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "metric": {
+            "default": "f1",
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+            "title": "Metric",
+            "type": "string"
+          },
+          "direction": {
+            "default": "maximize",
+            "enum": [
+              "maximize",
+              "minimize"
+            ],
+            "title": "Direction",
+            "type": "string"
+          }
+        },
+        "title": "BestRun",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "mlflow_compare_runs",
+      "description": "Compare two or more runs, including metrics and provenance",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "run_ids": {
+            "items": {
+              "maxLength": 250,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+              "type": "string"
+            },
+            "maxItems": 10,
+            "minItems": 2,
+            "title": "Run Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "run_ids"
+        ],
+        "title": "CompareRuns",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "mlflow_registry",
+      "description": "Retrieve registered model names, aliases and versions",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "airflow_list_dags",
+      "description": "List available DAGs and which DAGs are approved",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "airflow_list_runs",
+      "description": "Get the most recent Airflow DAG runs and their statuses",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "dag_id": {
+            "default": "training_pipeline",
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+            "title": "Dag Id",
+            "type": "string"
+          }
+        },
+        "title": "Dag",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "airflow_run_status",
+      "description": "Get the recorded state of one DAG run; queued/running is not success",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "dag_id": {
+            "default": "training_pipeline",
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+            "title": "Dag Id",
+            "type": "string"
+          },
+          "run_id": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+            "title": "Run Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id"
+        ],
+        "title": "DagRun",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "airflow_tasks",
+      "description": "Get task execution details and failed/upstream-failed tasks",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "dag_id": {
+            "default": "training_pipeline",
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+            "title": "Dag Id",
+            "type": "string"
+          },
+          "run_id": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+            "title": "Run Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id"
+        ],
+        "title": "DagRun",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "airflow_task_log",
+      "description": "Read available task log diagnostics for a specific attempt",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "dag_id": {
+            "default": "training_pipeline",
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+            "title": "Dag Id",
+            "type": "string"
+          },
+          "run_id": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+            "title": "Run Id",
+            "type": "string"
+          },
+          "task_id": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+            "title": "Task Id",
+            "type": "string"
+          },
+          "try_number": {
+            "default": 1,
+            "maximum": 20,
+            "minimum": 1,
+            "title": "Try Number",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "run_id",
+          "task_id"
+        ],
+        "title": "TaskLog",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "airflow_trigger",
+      "description": "Request approved training only when explicitly asked; requires human confirmation",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "dag_id": {
+            "default": "training_pipeline",
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+            "title": "Dag Id",
+            "type": "string"
+          },
+          "c": {
+            "default": 1.0,
+            "maximum": 100,
+            "minimum": 0.001,
+            "title": "C",
+            "type": "number"
+          },
+          "minimum_f1": {
+            "default": 0.9,
+            "maximum": 1,
+            "minimum": 0,
+            "title": "Minimum F1",
+            "type": "number"
+          },
+          "inject_validation_failure": {
+            "default": false,
+            "title": "Inject Validation Failure",
+            "type": "boolean"
+          }
+        },
+        "title": "TriggerDag",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": true
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "kubernetes_workloads",
+      "description": "Inspect inference Pods, Deployment, readiness, container state and restarts",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "namespace": {
+            "default": "mlops-agent",
+            "maxLength": 63,
+            "minLength": 1,
+            "pattern": "^[a-z0-9][a-z0-9-]*$",
+            "title": "Namespace",
+            "type": "string"
+          }
+        },
+        "title": "Cluster",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "kubernetes_services",
+      "description": "Inspect ClusterIP Service selectors, ports and ready/unready endpoints",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "namespace": {
+            "default": "mlops-agent",
+            "maxLength": 63,
+            "minLength": 1,
+            "pattern": "^[a-z0-9][a-z0-9-]*$",
+            "title": "Namespace",
+            "type": "string"
+          }
+        },
+        "title": "Cluster",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "kubernetes_pod_logs",
+      "description": "Read bounded logs for an application Pod",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "namespace": {
+            "default": "mlops-agent",
+            "maxLength": 63,
+            "minLength": 1,
+            "pattern": "^[a-z0-9][a-z0-9-]*$",
+            "title": "Namespace",
+            "type": "string"
+          },
+          "pod": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+            "title": "Pod",
+            "type": "string"
+          },
+          "tail_lines": {
+            "default": 80,
+            "maximum": 200,
+            "minimum": 1,
+            "title": "Tail Lines",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "pod"
+        ],
+        "title": "PodLog",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "kubernetes_events",
+      "description": "Inspect recent application scheduling, probe and container events",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "namespace": {
+            "default": "mlops-agent",
+            "maxLength": 63,
+            "minLength": 1,
+            "pattern": "^[a-z0-9][a-z0-9-]*$",
+            "title": "Namespace",
+            "type": "string"
+          }
+        },
+        "title": "Cluster",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "kubernetes_app_version",
+      "description": "Read running API version, model run ID and dataset provenance through Service proxy",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "namespace": {
+            "default": "mlops-agent",
+            "maxLength": 63,
+            "minLength": 1,
+            "pattern": "^[a-z0-9][a-z0-9-]*$",
+            "title": "Namespace",
+            "type": "string"
+          }
+        },
+        "title": "Cluster",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": false
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "kubernetes_restart",
+      "description": "Request iris-api restart in approved namespace; requires human confirmation",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "namespace": {
+            "default": "mlops-agent",
+            "maxLength": 63,
+            "minLength": 1,
+            "pattern": "^[a-z0-9][a-z0-9-]*$",
+            "title": "Namespace",
+            "type": "string"
+          },
+          "deployment": {
+            "default": "iris-api",
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_.:+@=-]+$",
+            "title": "Deployment",
+            "type": "string"
+          }
+        },
+        "title": "Restart",
+        "type": "object"
+      }
+    },
+    "requires_human_confirmation": true
+  }
+]
