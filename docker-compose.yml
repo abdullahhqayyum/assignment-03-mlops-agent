@@ -1,0 +1,76 @@
+name: assignment03
+services:
+  postgres:
+    image: postgres:16.10-alpine
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run python scripts/configure.py first}
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U airflow]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v3.5.1
+    command:
+      - mlflow
+      - server
+      - --host=0.0.0.0
+      - --port=5000
+      - --backend-store-uri=sqlite:////mlflow/mlflow.db
+      - --artifacts-destination=/mlflow/artifacts
+      - --serve-artifacts
+      - --allowed-hosts=localhost:*,127.0.0.1:*,mlflow:*
+    ports:
+      - 127.0.0.1:5000:5000
+    volumes:
+      - mlflow-data:/mlflow
+    restart: unless-stopped
+
+  airflow:
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
+    command: standalone
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:${POSTGRES_PASSWORD}@postgres/airflow
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_FOLDER: /workspace/dags
+      AIRFLOW__CORE__AUTH_MANAGER: airflow.api_fastapi.auth.managers.simple.simple_auth_manager.SimpleAuthManager
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_USERS: admin:admin
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_PASSWORDS_FILE: /run/airflow-secrets/passwords.json
+      AIRFLOW__CORE__PARALLELISM: "2"
+      AIRFLOW__API__WORKERS: "1"
+      AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW_JWT_SECRET:?Run python scripts/configure.py first}
+      AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY:?Run python scripts/configure.py first}
+      AIRFLOW__LOGGING__LOGGING_LEVEL: INFO
+      MLFLOW_TRACKING_URI: http://mlflow:5000
+      PYTHONPATH: /workspace
+      GIT_CONFIG_COUNT: "1"
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: /workspace
+    ports:
+      - 127.0.0.1:8080:8080
+    volumes:
+      - ./training:/workspace/training:ro
+      - ./dags:/workspace/dags:ro
+      - ./data:/workspace/data:ro
+      - ./.git:/workspace/.git:ro
+      - ./.runtime/training:/workspace/.runtime/training
+      - ./.runtime/airflow-secrets:/run/airflow-secrets:ro
+      - airflow-home:/opt/airflow
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+  mlflow-data:
+  airflow-home:

@@ -1,0 +1,37 @@
+stages:
+  validate:
+    cmd: python -m training.train validate
+    deps:
+      - data/iris.csv
+      - training/train.py
+    outs:
+      - .runtime/training/local/validated.npy
+      - .runtime/training/local/provenance.json
+  preprocess:
+    cmd: python -m training.train preprocess
+    deps:
+      - .runtime/training/local/validated.npy
+    outs:
+      - .runtime/training/local/split.npz
+  train:
+    cmd: python -m training.train train
+    deps:
+      - .runtime/training/local/split.npz
+    outs:
+      - .runtime/training/local/model.joblib
+      - .runtime/training/local/parameters.json
+  evaluate:
+    cmd: python -m training.train evaluate
+    deps:
+      - .runtime/training/local/model.joblib
+      - .runtime/training/local/parameters.json
+      - .runtime/training/local/provenance.json
+    outs:
+      - .runtime/training/local/metadata.json
+    metrics:
+      - .runtime/training/local/metrics.json:
+          cache: false
+  quality_gate:
+    cmd: python -m training.train gate
+    deps:
+      - .runtime/training/local/metrics.json

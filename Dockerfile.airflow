@@ -1,0 +1,5 @@
+FROM apache/airflow:3.1.0-python3.11
+RUN pip install --no-cache-dir "apache-airflow==3.1.0" \
+    "mlflow==3.5.1" "scikit-learn==1.7.2" "numpy==2.3.4" \
+    "scipy==1.16.3" "joblib==1.5.2" "PyYAML==6.0.3" "SQLAlchemy==2.0.44"
+WORKDIR /workspace
