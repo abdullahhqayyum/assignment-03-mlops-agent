@@ -183,6 +183,7 @@ def main():
     prediction = json.loads(predicted.stdout)
     assert prediction["class_name"] == "setosa"
     assert prediction["run_id"] == best["best"]["run_id"]
+    assert evidence("kubernetes_app_version").data["application"]["dataset"]["quality_gate"] == "passed"
     save(
         "inference-prediction",
         {"input": sample, "response": prediction, "source": "POST /predict through Kubernetes Service proxy"},

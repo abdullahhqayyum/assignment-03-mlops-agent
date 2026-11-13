@@ -1,6 +1,8 @@
 """Quality-gate and inference tests catch failures that would otherwise permit bad promotion."""
 
 import json
+import sys
+from types import SimpleNamespace
 
 import joblib
 import numpy as np
@@ -9,6 +11,7 @@ from fastapi.testclient import TestClient
 from sklearn.dummy import DummyClassifier
 
 from api.main import app
+from scripts import promote_model
 from training import train
 
 
@@ -33,6 +36,31 @@ def test_validation_rejects_bad_schema_before_training(tmp_path):
     with pytest.raises(ValueError, match="schema"):
         train.validate(tmp_path, source)
     assert not (tmp_path / "validated.npy").exists()
+
+
+def test_promotion_refreshes_gate_state_from_verified_run(tmp_path, monkeypatch):
+    artifacts = tmp_path / "artifacts"
+    artifacts.mkdir()
+    (artifacts / "model.joblib").write_bytes(b"model fixture")
+    (artifacts / "metadata.json").write_text(
+        json.dumps({"run_id": "passed-run", "dataset": {"quality_gate": "pending"}})
+    )
+    run = SimpleNamespace(
+        info=SimpleNamespace(status="FINISHED"),
+        data=SimpleNamespace(tags={"quality_gate": "passed", "quality_gate.minimum_f1": "0.9"}),
+    )
+    client = SimpleNamespace(
+        get_run=lambda _: run,
+        download_artifacts=lambda run_id, path, dest: str(artifacts / path.split("/")[-1]),
+    )
+    monkeypatch.setattr(promote_model, "ROOT", tmp_path)
+    monkeypatch.setattr(promote_model, "MlflowClient", lambda **kwargs: client)
+    monkeypatch.setattr(sys, "argv", ["promote_model.py", "--run-id", "passed-run"])
+    promote_model.main()
+    deployed = json.loads((tmp_path / "models/metadata.json").read_text())
+    assert deployed["run_id"] == "passed-run"
+    assert deployed["dataset"]["quality_gate"] == "passed"
+    assert deployed["dataset"]["quality_gate.minimum_f1"] == "0.9"
 
 
 def test_unavailable_model_fails_readiness_and_prediction(tmp_path, monkeypatch):

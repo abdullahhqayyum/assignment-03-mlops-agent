@@ -31,6 +31,12 @@ def main():
     metadata = json.loads((destination / "metadata.json").read_text())
     if metadata["run_id"] != args.run_id:
         raise SystemExit("Downloaded model provenance does not match requested run")
+    # Evaluation artifacts precede the gate. Carry its verified final state into
+    # the deployment metadata rather than serving the earlier 'pending' snapshot.
+    metadata["dataset"]["quality_gate"] = run.data.tags["quality_gate"]
+    if minimum := run.data.tags.get("quality_gate.minimum_f1"):
+        metadata["dataset"]["quality_gate.minimum_f1"] = minimum
+    (destination / "metadata.json").write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
     print("Prepared model run", args.run_id, "for an explicit image build; cluster unchanged.")
 
 
