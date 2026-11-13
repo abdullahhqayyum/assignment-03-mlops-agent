@@ -19,6 +19,7 @@ disk space for the environment, images, unpacking and build layers.
 
 **Ubuntu WSL:** Docker Engine can run directly in Ubuntu with Docker Desktop off.
 Run `sudo systemctl start docker`, then perform the setup in the Ubuntu terminal.
+Clone into the Linux home directory to avoid cross-system ownership and I/O issues.
 Create a separate Linux environment (`python3 -m venv .venv-wsl` and
 `source .venv-wsl/bin/activate`); a Windows `.venv` cannot be reused on Linux.
 If reusing a Windows `.env`, export `AIRFLOW_UID=$(id -u)` and

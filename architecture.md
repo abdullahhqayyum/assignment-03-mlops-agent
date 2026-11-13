@@ -69,7 +69,8 @@ Role cannot mutate a cluster even when application confirmation is approved.
 constraints, raw MD5, DVC pointer and committed pointer at HEAD. A fixed
 stratified test split is held out; the scaler fits only on training data.
 MLflow records `dataset.git_commit`, `dataset.dvc_hash`, path, rows,
-`airflow.run_id`, metrics, parameters, artifacts and gate result. Historical
+`workflow.run_id` (plus `airflow.run_id` for Airflow runs), metrics, parameters,
+artifacts and gate result. Historical
 provenance is read from that recorded commit, not inferred from today's HEAD.
 
 Airflow tasks have explicit dependencies, one retry, a ten-second retry interval,
