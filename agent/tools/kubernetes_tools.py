@@ -138,12 +138,20 @@ class KubernetesTools:
 
         self.scope(namespace)
         core, _ = self.clients()
-        result = core.connect_get_namespaced_service_proxy_with_path(
-            "iris-api:80", namespace, "version", _request_timeout=self.settings.tool_timeout
+        response = core.connect_get_namespaced_service_proxy_with_path(
+            "iris-api:80",
+            namespace,
+            "version",
+            _request_timeout=self.settings.tool_timeout,
+            _preload_content=False,
         )
+        try:
+            application = json.loads(response.data)
+        finally:
+            response.close()
         return {
             "namespace": namespace,
-            "application": json.loads(result) if isinstance(result, str) else result,
+            "application": application,
             "source": "Kubernetes Service proxy -> running application's /version",
         }
 

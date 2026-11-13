@@ -26,6 +26,8 @@ class Redactor:
         if isinstance(value, str):
             for secret in self.secrets:
                 value = value.replace(secret, "[REDACTED]")
+            value = re.sub(r"(?i)\bbearer\s+[A-Za-z0-9_.~+/-]+=*", "Bearer [REDACTED]", value)
+            value = re.sub(r"(?<=://)[^/@\s]+:[^/@\s]+@", "[REDACTED]@", value)
             value = TOKEN.sub("[REDACTED]", value)
             return ASSIGNMENT.sub(r"\1[REDACTED]", value)
         return value

@@ -22,7 +22,7 @@ def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     agent = Agent(Settings.from_env())
     response = agent.run(args.request)
-    result = response.model_dump()
+    result = response.model_dump(mode="json")
     print(response.answer)
     print(json.dumps(result, indent=2, ensure_ascii=True, allow_nan=False))
     if args.interactive:
@@ -32,7 +32,7 @@ def main() -> None:
                 approved = input("Type YES to execute this exact operation: ").strip() == "YES"
                 try:
                     confirmation = agent.registry.confirm(evidence.data["confirmation_id"], approved)
-                    result.setdefault("confirmed_operations", []).append(confirmation.model_dump())
+                    result.setdefault("confirmed_operations", []).append(confirmation.model_dump(mode="json"))
                     print(confirmation.model_dump_json(indent=2))
                 except (ValueError, PermissionError) as exc:
                     print(str(exc))

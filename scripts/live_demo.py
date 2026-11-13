@@ -13,6 +13,7 @@ import time
 from pathlib import Path
 
 import httpx
+from pydantic_core import to_jsonable_python
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -29,7 +30,9 @@ OUT = ROOT / "docs/evidence"
 
 def save(name, value):
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / (name + ".json")).write_text(json.dumps(value, indent=2, allow_nan=False) + "\n")
+    (OUT / (name + ".json")).write_text(
+        json.dumps(to_jsonable_python(value), indent=2, allow_nan=False) + "\n"
+    )
 
 
 def command(*args, timeout=300):

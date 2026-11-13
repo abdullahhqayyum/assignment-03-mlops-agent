@@ -139,3 +139,20 @@ def test_redaction_covers_nested_values_and_configured_secret():
     assert "hidden" not in json.dumps(cleaned)
     assert "credential-123" not in json.dumps(cleaned)
     assert "abcd" not in json.dumps(cleaned)
+
+
+def test_running_version_reads_raw_service_response():
+    closed = []
+    response = Obj(
+        data=b'{"run_id":"actual-running-model","app_version":"1.0.0"}', close=lambda: closed.append(True)
+    )
+    core = Obj(connect_get_namespaced_service_proxy_with_path=lambda *args, **kwargs: response)
+    result = KubernetesTools(Settings(), core=core, apps=Obj()).app_version()
+    assert result["application"]["run_id"] == "actual-running-model"
+    assert closed == [True]
+
+
+def test_unknown_bearer_and_url_credentials_are_scrubbed():
+    text = "Authorization: Bearer opaque123 https://user:private-password@example.test"
+    result = Redactor().clean(text)
+    assert "opaque123" not in result and "private-password" not in result

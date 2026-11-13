@@ -28,7 +28,7 @@ def main():
     transcript = {
         "scenario": args.name,
         "mode": "live_services_and_llm",
-        "turns": [{"user": args.request, "assistant": response.model_dump()}],
+        "turns": [{"user": args.request, "assistant": response.model_dump(mode="json")}],
     }
     print(response.answer)
     if args.interactive:
@@ -41,7 +41,7 @@ def main():
             transcript["turns"].append(
                 {
                     "user": "YES: " + json.dumps(item.data["arguments"]),
-                    "confirmed_tool_result": confirmation.model_dump(),
+                    "confirmed_tool_result": confirmation.model_dump(mode="json"),
                 }
             )
             if confirmation.status == "ok" and confirmation.tool == "airflow_trigger":
@@ -54,10 +54,10 @@ def main():
                     if observed.status == "error" or observed.data.get("state") in {"success", "failed"}:
                         break
                     time.sleep(5)
-                transcript["workflow_observation"] = observed.model_dump()
+                transcript["workflow_observation"] = observed.model_dump(mode="json")
                 followup = f"Report the actual outcome and task statuses of DAG {dag_id}, run {run_id}."
                 final = agent.run(followup)
-                transcript["turns"].append({"user": followup, "assistant": final.model_dump()})
+                transcript["turns"].append({"user": followup, "assistant": final.model_dump(mode="json")})
                 print(final.answer)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(transcript, indent=2, allow_nan=False) + "\n", encoding="utf-8")
