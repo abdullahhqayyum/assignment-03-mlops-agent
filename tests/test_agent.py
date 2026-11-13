@@ -49,6 +49,51 @@ def test_llm_selects_executes_and_observes_tool():
     assert llm.calls[1]["messages"][-1]["role"] == "tool"
 
 
+def test_retraining_without_policy_or_degradation_requires_uncertainty():
+    settings = Settings()
+    registry = Registry(
+        settings,
+        [
+            Tool(
+                "mlflow_best_run",
+                "best",
+                Empty,
+                lambda: {
+                    "best": {"tags": {"quality_gate": "passed"}},
+                    "freshness_policy_exceeded": None,
+                },
+            )
+        ],
+    )
+    llm = ScriptedLLM(
+        [
+            message("mlflow_best_run"),
+            message(content="Retraining is not necessary because the gate passed."),
+            message(content="Retraining necessity: unknown. No production degradation data was supplied."),
+        ]
+    )
+    result = Agent(settings, registry, llm).run("Is retraining necessary?")
+    assert result.status == "complete"
+    assert "Retraining necessity: unknown" in result.answer
+    assert len(llm.calls) == 3
+
+
+def test_repeated_unsupported_retraining_conclusion_is_incomplete():
+    settings = Settings()
+    registry = Registry(settings, [Tool("mlflow_best_run", "best", Empty, lambda: {"best": None})])
+    llm = ScriptedLLM(
+        [
+            message("mlflow_best_run"),
+            message(content="No retraining is needed."),
+            message(content="Retraining is definitely unnecessary."),
+        ]
+    )
+    result = Agent(settings, registry, llm).run("Is retraining necessary?")
+    assert result.status == "incomplete"
+    assert "Retraining necessity: unknown" in result.answer
+    assert "definitely" not in result.answer
+
+
 def test_unavailable_tool_cannot_be_replaced_with_invented_success():
     def unavailable():
         raise ConnectionError("Tracking service unavailable")

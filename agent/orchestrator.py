@@ -31,6 +31,10 @@ Retraining recommendations require a recorded freshness-policy violation, failed
 gate, or supplied degradation evidence. Deployment problems need deployment repair.
 With no freshness policy or degradation evidence, retraining necessity is unknown.
 Do not invent a freshness policy or data drift. Read historical provenance; do not assume HEAD.
+Unchanged versioned files do not establish absence of production data/concept drift.
+Without a recorded breached freshness policy or failed selected-model quality gate, write
+the exact phrase 'Retraining necessity: unknown'. Never conclude 'not necessary' from
+healthy Pods, unchanged files or a passing historical evaluation alone.
 Preserve exact tool IDs and values. Batch independent calls; follow up on returned identifiers.
 Avoid repeating identical calls. Finish concisely, grounded in evidence; mention unavailable checks.
 """
@@ -72,6 +76,7 @@ class Agent:
     def run(self, request: str) -> AgentResponse:
         request_id = "req_" + uuid4().hex
         evidence = []
+        corrected_assessment = False
         if not request.strip() or len(request) > 12000:
             return AgentResponse(
                 request_id=request_id,
@@ -101,6 +106,39 @@ class Agent:
                     answer = self.registry.redactor.clean(
                         message.content or "No conclusion returned; inspect the attached evidence."
                     )
+                    selections = [
+                        item.data
+                        for item in evidence
+                        if item.tool == "mlflow_best_run" and item.status == "ok"
+                    ]
+                    if "retrain" in request.lower() and selections:
+                        selected = selections[-1]
+                        signal = selected.get("freshness_policy_exceeded") is True or (
+                            (selected.get("best") or {}).get("tags", {}).get("quality_gate") == "failed"
+                        )
+                        if not signal and "retraining necessity: unknown" not in answer.lower():
+                            if corrected_assessment:
+                                return self.incomplete(
+                                    request_id,
+                                    evidence,
+                                    "Retraining necessity: unknown; "
+                                    "the model did not preserve this uncertainty",
+                                )
+                            corrected_assessment = True
+                            messages.append(message.model_dump(exclude_none=True))
+                            messages.append(
+                                {
+                                    "role": "system",
+                                    "content": (
+                                        "Revise the final answer using existing evidence. There is no "
+                                        "recorded breached freshness policy or failed selected-model gate. "
+                                        "Write 'Retraining necessity: unknown'. Do not claim retraining is "
+                                        "unnecessary or that unchanged files rule out production drift. "
+                                        "Keep the verified model, lineage and deployment facts."
+                                    ),
+                                }
+                            )
+                            continue
                     return AgentResponse(
                         request_id=request_id,
                         answer=answer,
