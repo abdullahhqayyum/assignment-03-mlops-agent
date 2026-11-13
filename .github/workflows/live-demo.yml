@@ -47,6 +47,9 @@ jobs:
           args=""
           if [ "${{ inputs.with_llm }}" = "true" ]; then args="--with-llm"; fi
           python scripts/live_demo.py --approve-demo-training --approve-demo-failures $args
+      - name: Collect bounded diagnostics on failure
+        if: failure()
+        run: python scripts/diagnostics.py
       - name: Upload actual service evidence
         if: always()
         uses: actions/upload-artifact@v4

@@ -14,8 +14,15 @@ is collected separately against running services and a real LLM.
 
 Requires Python **3.11-3.13**, Git, Docker with Linux containers and Compose,
 `kubectl`, [kind v0.30.0](https://github.com/kubernetes-sigs/kind/releases/tag/v0.30.0),
-and an OpenRouter key. Allocate at least 6 GB RAM to Docker and several GB of free
-disk space for dependencies and container images.
+and an OpenRouter key. Allocate at least 6 GB RAM to Docker; allow about 12 GB free
+disk space for the environment, images, unpacking and build layers.
+
+**Ubuntu WSL:** Docker Engine can run directly in Ubuntu with Docker Desktop off.
+Run `sudo systemctl start docker`, then perform the setup in the Ubuntu terminal.
+Create a separate Linux environment (`python3 -m venv .venv-wsl` and
+`source .venv-wsl/bin/activate`); a Windows `.venv` cannot be reused on Linux.
+If reusing a Windows `.env`, export `AIRFLOW_UID=$(id -u)` and
+`KUBECONFIG="$PWD/.runtime/kubeconfig"` in Ubuntu to override Windows-specific values.
 
 ```bash
 git clone https://github.com/abdullahhqayyum/assignment-03-mlops-agent.git
@@ -192,6 +199,13 @@ Add `--interactive` to confirm a training demonstration. The script then waits f
 that run's terminal state and asks the agent to inspect the outcome. The technical
 report links the five required conversations and two failure investigations.
 Never commit `.env`, kubeconfig, service tokens, `.runtime` or private artifacts.
+
+The optional **Dedicated live demonstration** Actions workflow provisions a real
+stack on a disposable Linux runner. It runs only by manual dispatch with explicit
+approval for training and namespace-scoped fault injection. Enable `with_llm` and
+configure an encrypted `OPENROUTER_API_KEY` repository secret to capture real
+agent conversations as well. It uploads exported evidence as an artifact; normal
+pull-request CI continues to use mocks and no credentials.
 
 ## 7. Shutdown
 
