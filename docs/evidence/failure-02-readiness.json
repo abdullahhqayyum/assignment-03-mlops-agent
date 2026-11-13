@@ -1,0 +1,420 @@
+{
+  "kubernetes_workloads": {
+    "evidence_id": "ev_4363d4e80e51",
+    "request_id": "dedicated-live-demo",
+    "tool": "kubernetes_workloads",
+    "source": "kubernetes",
+    "status": "ok",
+    "observed_at": "2026-11-13T22:51:33.499434+00:00",
+    "duration_ms": 12.7,
+    "data": {
+      "namespace": "mlops-agent",
+      "pods": [
+        {
+          "name": "iris-api-75c74587d6-rxc47",
+          "phase": "Running",
+          "conditions": [
+            {
+              "type": "PodReadyToStartContainers",
+              "status": "True",
+              "reason": null,
+              "message": null
+            },
+            {
+              "type": "Initialized",
+              "status": "True",
+              "reason": null,
+              "message": null
+            },
+            {
+              "type": "Ready",
+              "status": "True",
+              "reason": null,
+              "message": null
+            },
+            {
+              "type": "ContainersReady",
+              "status": "True",
+              "reason": null,
+              "message": null
+            },
+            {
+              "type": "PodScheduled",
+              "status": "True",
+              "reason": null,
+              "message": null
+            }
+          ],
+          "containers": [
+            {
+              "name": "inference",
+              "ready": true,
+              "restarts": 0,
+              "state": {
+                "running": {
+                  "started_at": "2026-11-13T22:47:06Z"
+                },
+                "terminated": null,
+                "waiting": null
+              },
+              "last_state": {
+                "running": null,
+                "terminated": null,
+                "waiting": null
+              }
+            }
+          ]
+        },
+        {
+          "name": "iris-api-75c74587d6-xjplv",
+          "phase": "Running",
+          "conditions": [
+            {
+              "type": "PodReadyToStartContainers",
+              "status": "True",
+              "reason": null,
+              "message": null
+            },
+            {
+              "type": "Initialized",
+              "status": "True",
+              "reason": null,
+              "message": null
+            },
+            {
+              "type": "Ready",
+              "status": "True",
+              "reason": null,
+              "message": null
+            },
+            {
+              "type": "ContainersReady",
+              "status": "True",
+              "reason": null,
+              "message": null
+            },
+            {
+              "type": "PodScheduled",
+              "status": "True",
+              "reason": null,
+              "message": null
+            }
+          ],
+          "containers": [
+            {
+              "name": "inference",
+              "ready": true,
+              "restarts": 0,
+              "state": {
+                "running": {
+                  "started_at": "2026-11-13T22:47:06Z"
+                },
+                "terminated": null,
+                "waiting": null
+              },
+              "last_state": {
+                "running": null,
+                "terminated": null,
+                "waiting": null
+              }
+            }
+          ]
+        },
+        {
+          "name": "iris-api-7f6788548f-6dkbc",
+          "phase": "Running",
+          "conditions": [
+            {
+              "type": "PodReadyToStartContainers",
+              "status": "True",
+              "reason": null,
+              "message": null
+            },
+            {
+              "type": "Initialized",
+              "status": "True",
+              "reason": null,
+              "message": null
+            },
+            {
+              "type": "Ready",
+              "status": "False",
+              "reason": "ContainersNotReady",
+              "message": "containers with unready status: [inference]"
+            },
+            {
+              "type": "ContainersReady",
+              "status": "False",
+              "reason": "ContainersNotReady",
+              "message": "containers with unready status: [inference]"
+            },
+            {
+              "type": "PodScheduled",
+              "status": "True",
+              "reason": null,
+              "message": null
+            }
+          ],
+          "containers": [
+            {
+              "name": "inference",
+              "ready": false,
+              "restarts": 0,
+              "state": {
+                "running": {
+                  "started_at": "2026-11-13T22:51:18Z"
+                },
+                "terminated": null,
+                "waiting": null
+              },
+              "last_state": {
+                "running": null,
+                "terminated": null,
+                "waiting": null
+              }
+            }
+          ]
+        }
+      ],
+      "deployments": [
+        {
+          "name": "iris-api",
+          "desired_replicas": 2,
+          "ready_replicas": 2,
+          "available_replicas": 2,
+          "images": [
+            "mlops-iris:1.0.0"
+          ],
+          "conditions": [
+            {
+              "type": "Available",
+              "status": "True",
+              "reason": "MinimumReplicasAvailable",
+              "message": "Deployment has minimum availability."
+            },
+            {
+              "type": "Progressing",
+              "status": "True",
+              "reason": "ReplicaSetUpdated",
+              "message": "ReplicaSet \"iris-api-7f6788548f\" is progressing."
+            }
+          ]
+        }
+      ]
+    },
+    "error": null
+  },
+  "kubernetes_events": {
+    "evidence_id": "ev_58c91b2cf39b",
+    "request_id": "dedicated-live-demo",
+    "tool": "kubernetes_events",
+    "source": "kubernetes",
+    "status": "ok",
+    "observed_at": "2026-11-13T22:51:33.512497+00:00",
+    "duration_ms": 8.41,
+    "data": {
+      "namespace": "mlops-agent",
+      "events": [
+        {
+          "object": "iris-api-75c74587d6-rxc47",
+          "type": "Normal",
+          "reason": "Scheduled",
+          "message": "Successfully assigned mlops-agent/iris-api-75c74587d6-rxc47 to assignment03-control-plane",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:47:06+00:00"
+        },
+        {
+          "object": "iris-api-75c74587d6-rxc47",
+          "type": "Normal",
+          "reason": "Pulled",
+          "message": "Container image \"mlops-iris:1.0.0\" already present on machine",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:47:06+00:00"
+        },
+        {
+          "object": "iris-api-75c74587d6-rxc47",
+          "type": "Normal",
+          "reason": "Created",
+          "message": "Created container: inference",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:47:06+00:00"
+        },
+        {
+          "object": "iris-api-75c74587d6-rxc47",
+          "type": "Normal",
+          "reason": "Started",
+          "message": "Started container inference",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:47:06+00:00"
+        },
+        {
+          "object": "iris-api-75c74587d6-xjplv",
+          "type": "Normal",
+          "reason": "Scheduled",
+          "message": "Successfully assigned mlops-agent/iris-api-75c74587d6-xjplv to assignment03-control-plane",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:47:06+00:00"
+        },
+        {
+          "object": "iris-api-75c74587d6-xjplv",
+          "type": "Normal",
+          "reason": "Pulled",
+          "message": "Container image \"mlops-iris:1.0.0\" already present on machine",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:47:06+00:00"
+        },
+        {
+          "object": "iris-api-75c74587d6-xjplv",
+          "type": "Normal",
+          "reason": "Created",
+          "message": "Created container: inference",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:47:06+00:00"
+        },
+        {
+          "object": "iris-api-75c74587d6-xjplv",
+          "type": "Normal",
+          "reason": "Started",
+          "message": "Started container inference",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:47:06+00:00"
+        },
+        {
+          "object": "iris-api-75c74587d6",
+          "type": "Normal",
+          "reason": "SuccessfulCreate",
+          "message": "Created pod: iris-api-75c74587d6-xjplv",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:47:06+00:00"
+        },
+        {
+          "object": "iris-api-75c74587d6",
+          "type": "Normal",
+          "reason": "SuccessfulCreate",
+          "message": "Created pod: iris-api-75c74587d6-rxc47",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:47:06+00:00"
+        },
+        {
+          "object": "iris-api-7f6788548f-6dkbc",
+          "type": "Normal",
+          "reason": "Scheduled",
+          "message": "Successfully assigned mlops-agent/iris-api-7f6788548f-6dkbc to assignment03-control-plane",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:51:18+00:00"
+        },
+        {
+          "object": "iris-api-7f6788548f-6dkbc",
+          "type": "Normal",
+          "reason": "Pulled",
+          "message": "Container image \"mlops-iris:1.0.0\" already present on machine",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:51:18+00:00"
+        },
+        {
+          "object": "iris-api-7f6788548f-6dkbc",
+          "type": "Normal",
+          "reason": "Created",
+          "message": "Created container: inference",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:51:18+00:00"
+        },
+        {
+          "object": "iris-api-7f6788548f-6dkbc",
+          "type": "Normal",
+          "reason": "Started",
+          "message": "Started container inference",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:51:18+00:00"
+        },
+        {
+          "object": "iris-api-7f6788548f-6dkbc",
+          "type": "Warning",
+          "reason": "Unhealthy",
+          "message": "Readiness probe failed: HTTP probe failed with statuscode: 503",
+          "count": 2,
+          "last_timestamp": "2026-11-13 22:51:30+00:00"
+        },
+        {
+          "object": "iris-api-7f6788548f",
+          "type": "Normal",
+          "reason": "SuccessfulCreate",
+          "message": "Created pod: iris-api-7f6788548f-6dkbc",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:51:18+00:00"
+        },
+        {
+          "object": "iris-api",
+          "type": "Normal",
+          "reason": "ScalingReplicaSet",
+          "message": "Scaled up replica set iris-api-75c74587d6 from 0 to 2",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:47:06+00:00"
+        },
+        {
+          "object": "iris-api",
+          "type": "Normal",
+          "reason": "ScalingReplicaSet",
+          "message": "Scaled up replica set iris-api-7f6788548f from 0 to 1",
+          "count": 1,
+          "last_timestamp": "2026-11-13 22:51:18+00:00"
+        }
+      ]
+    },
+    "error": null
+  },
+  "kubernetes_services": {
+    "evidence_id": "ev_b0916a7ed3fe",
+    "request_id": "dedicated-live-demo",
+    "tool": "kubernetes_services",
+    "source": "kubernetes",
+    "status": "ok",
+    "observed_at": "2026-11-13T22:51:33.521451+00:00",
+    "duration_ms": 4.6,
+    "data": {
+      "namespace": "mlops-agent",
+      "services": [
+        {
+          "name": "iris-api",
+          "type": "ClusterIP",
+          "cluster_ip": "10.96.126.124",
+          "selector": {
+            "app": "iris-api"
+          },
+          "ports": [
+            {
+              "port": 80,
+              "target_port": 8000
+            }
+          ]
+        }
+      ],
+      "ready_endpoints": [
+        "10.244.0.5",
+        "10.244.0.6"
+      ],
+      "unready_endpoints": [
+        "10.244.0.7"
+      ]
+    },
+    "error": null
+  },
+  "logs": [
+    {
+      "evidence_id": "ev_41f14eb130ec",
+      "request_id": "dedicated-live-demo",
+      "tool": "kubernetes_pod_logs",
+      "source": "kubernetes",
+      "status": "ok",
+      "observed_at": "2026-11-13T22:51:33.537276+00:00",
+      "duration_ms": 9.89,
+      "data": {
+        "pod": "iris-api-7f6788548f-6dkbc",
+        "namespace": "mlops-agent",
+        "logs": "INFO:     Started server process [1]\nINFO:     Waiting for application startup.\nModel is unavailable; readiness will fail\nTraceback (most recent call last):\n  File \"/app/api/main.py\", line 23, in lifespan\n    app.state.model = joblib.load(path)\n                      ^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/joblib/numpy_pickle.py\", line 735, in load\n    with open(filename, \"rb\") as f:\n         ^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/app/models/missing.joblib'\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)\nINFO:     10.244.0.1:56628 - \"GET /readyz HTTP/1.1\" 503 Service Unavailable\nINFO:     10.244.0.1:36902 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:36908 - \"GET /readyz HTTP/1.1\" 503 Service Unavailable\n",
+        "tail_lines": 80
+      },
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "proposed": {
+    "evidence_id": "ev_e29a11f4f1fa",
+    "request_id": "dedicated-live-demo",
+    "tool": "airflow_trigger",
+    "source": "airflow",
+    "status": "confirmation_required",
+    "observed_at": "2026-11-13T22:45:40.808450+00:00",
+    "duration_ms": 0.16,
+    "data": {
+      "confirmation_id": "649887bd4888454cbc6a9229bb6ae925",
+      "operation": "airflow_trigger",
+      "arguments": {
+        "dag_id": "training_pipeline",
+        "c": 1.0,
+        "minimum_f1": 0.9,
+        "inject_validation_failure": false
+      },
+      "expires_in_seconds": 300,
+      "executed": false,
+      "instruction": "Human confirmation required via CLI prompt or POST /confirm"
+    },
+    "error": null
+  },
+  "operator_approval": "--approve-demo-training",
+  "confirmed": {
+    "evidence_id": "ev_f1efa8cbde11",
+    "request_id": "dedicated-live-demo",
+    "tool": "airflow_trigger",
+    "source": "airflow",
+    "status": "ok",
+    "observed_at": "2026-11-13T22:45:40.809049+00:00",
+    "duration_ms": 49.3,
+    "data": {
+      "dag_run_id": "agent_d0fce86f899f4f7d82c7f98f2fdb3a0e",
+      "dag_id": "training_pipeline",
+      "logical_date": "2026-11-13T22:45:40.809106Z",
+      "queued_at": "2026-11-13T22:45:40.826381Z",
+      "start_date": null,
+      "end_date": null,
+      "duration": null,
+      "data_interval_start": "2026-11-13T22:45:40.809106Z",
+      "data_interval_end": "2026-11-13T22:45:40.809106Z",
+      "run_after": "2026-11-13T22:45:40.809106Z",
+      "last_scheduling_decision": null,
+      "run_type": "manual",
+      "state": "queued",
+      "triggered_by": "rest_api",
+      "triggering_user_name": "admin",
+      "conf": {
+        "c": 1.0,
+        "minimum_f1": 0.9,
+        "inject_validation_failure": false
+      },
+      "note": null,
+      "dag_versions": [
+        {
+          "id": "01a1d716-516e-79ed-82b8-23a7eee596de",
+          "version_number": 1,
+          "dag_id": "training_pipeline",
+          "bundle_name": "dags-folder",
+          "bundle_version": null,
+          "created_at": "2026-11-13T22:45:26.510398Z",
+          "dag_display_name": "training_pipeline",
+          "bundle_url": null
+        }
+      ],
+      "bundle_version": null,
+      "dag_display_name": "training_pipeline"
+    },
+    "error": null
+  },
+  "final_status": {
+    "dag_run_id": "agent_d0fce86f899f4f7d82c7f98f2fdb3a0e",
+    "dag_id": "training_pipeline",
+    "logical_date": "2026-11-13T22:45:40.809106Z",
+    "queued_at": "2026-11-13T22:45:40.826381Z",
+    "start_date": "2026-11-13T22:45:41.079552Z",
+    "end_date": "2026-11-13T22:45:56.124688Z",
+    "duration": 15.045136,
+    "data_interval_start": "2026-11-13T22:45:40.809106Z",
+    "data_interval_end": "2026-11-13T22:45:40.809106Z",
+    "run_after": "2026-11-13T22:45:40.809106Z",
+    "last_scheduling_decision": "2026-11-13T22:45:56.122867Z",
+    "run_type": "manual",
+    "state": "success",
+    "triggered_by": "rest_api",
+    "triggering_user_name": "admin",
+    "conf": {
+      "c": 1.0,
+      "minimum_f1": 0.9,
+      "inject_validation_failure": false
+    },
+    "note": null,
+    "dag_versions": [
+      {
+        "id": "01a1d716-516e-79ed-82b8-23a7eee596de",
+        "version_number": 1,
+        "dag_id": "training_pipeline",
+        "bundle_name": "dags-folder",
+        "bundle_version": null,
+        "created_at": "2026-11-13T22:45:26.510398Z",
+        "dag_display_name": "training_pipeline",
+        "bundle_url": null
+      }
+    ],
+    "bundle_version": null,
+    "dag_display_name": "training_pipeline"
+  },
+  "tasks": {
+    "tasks": [
+      {
+        "task_id": "validate_dataset",
+        "state": "success",
+        "try_number": 1,
+        "start_date": "2026-11-13T22:45:41.154580Z",
+        "end_date": "2026-11-13T22:45:43.042318Z",
+        "duration": 1.887738,
+        "hostname": "dd1a02abadae"
+      },
+      {
+        "task_id": "preprocess_data",
+        "state": "success",
+        "try_number": 1,
+        "start_date": "2026-11-13T22:45:43.234757Z",
+        "end_date": "2026-11-13T22:45:44.236320Z",
+        "duration": 1.001563,
+        "hostname": "dd1a02abadae"
+      },
+      {
+        "task_id": "train_model",
+        "state": "success",
+        "try_number": 1,
+        "start_date": "2026-11-13T22:45:48.088670Z",
+        "end_date": "2026-11-13T22:45:49.144432Z",
+        "duration": 1.055762,
+        "hostname": "dd1a02abadae"
+      },
+      {
+        "task_id": "evaluate_and_log",
+        "state": "success",
+        "try_number": 1,
+        "start_date": "2026-11-13T22:45:49.282842Z",
+        "end_date": "2026-11-13T22:45:53.106850Z",
+        "duration": 3.824008,
+        "hostname": "dd1a02abadae"
+      },
+      {
+        "task_id": "apply_quality_gate",
+        "state": "success",
+        "try_number": 1,
+        "start_date": "2026-11-13T22:45:53.394483Z",
+        "end_date": "2026-11-13T22:45:55.129810Z",
+        "duration": 1.735327,
+        "hostname": "dd1a02abadae"
+      }
+    ],
+    "failed_tasks": []
+  }
+}

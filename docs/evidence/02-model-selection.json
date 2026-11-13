@@ -1,0 +1,530 @@
+{
+  "scenario": "02-model-selection",
+  "mode": "live_services_and_llm",
+  "turns": [
+    {
+      "user": "Compare the last five training runs and recommend the best candidate based on F1 score.",
+      "assistant": {
+        "request_id": "req_477bd455fc9043739f43ec87a4d1cd75",
+        "answer": "**Last\u202f5 finished MLflow runs (experiment\u202f`iris\u2011classification`, ranked by F1\u202f\u2191)**  \n\n| # | Run\u202fID | F1\u202fscore | Accuracy |\u202fC\u202f(param) |\u202fquality_gate\u202f(min\u202fF1) |\u202fdvc_hash |\u202fgit_commit |\u202fworkflow.run_id |\u202fEvidence |\n|---|--------|----------|----------|----------|------------------------|----------|------------|----------------|----------|\n| 1 | **1352ff12feab4c9da84fe87526e060ca** | 0.92296 | 0.92105 | 1.0 | 0.9 (passed) | 4224576f0267bf88902f87f0f6200967 | 8234870d72d3b706fa963335857a0c80f0252cab | agent_d0fce86f899f4f7d82c7f98f2fdb3a0e | ev_0c36047d1f8b (best\u2011run) |\n| 2 | **7eb81dbcea2446acaff98ed69c2fd237** | **0.94872** | 0.94737 | 10.0 | 0.7 (passed) | 4224576f0267bf88902f87f0f6200967 | 8234870d72d3b706fa963335857a0c80f0252cab | local\u2011seed\u2011C\u201110.0 | ev_0c36047d1f8b |\n| 3 | **2846b18c93324fb88d0adc0d3716c4a9** | 0.94872 | 0.94737 | 5.0 | 0.7 (passed) | 4224576f0267bf88902f87f0f6200967 | 8234870d72d3b706fa963335857a0c80f0252cab | local\u2011seed\u2011C\u20115.0 | ev_0c36047d1f8b |\n| 4 | **b5d4c86c55d748ea8c84a4f802072dec** | 0.92296 | 0.92105 | 1.0 | 0.7 (passed) | 4224576f0267bf88902f87f0f6200967 | 8234870d72d3b706fa963335857a0c80f0252cab | local\u2011seed\u2011C\u20111.0 | ev_0c36047d1f8b |\n| 5 | **7b771232f85c4c269677a299de065936** | 0.84524 | 0.84211 | 0.1 | 0.7 (passed) | 4224576f0267bf88902f87f0f6200967 | 8234870d72d3b706fa963335857a0c80f0252cab | local\u2011seed\u2011C\u20110.1 | ev_0c36047d1f8b |\n\n*All five runs are **FINISHED** and their quality\u2011gate tags show \u201cpassed\u201d.*  \n\n### Best candidate (highest F1)\n\n- **Run\u202fID:** `7eb81dbcea2446acaff98ed69c2fd237`  \n- **F1:** **0.9487179487179488** (maximising macro\u202fF1)  \n- **Accuracy:** 0.9473684210526315  \n- **Parameter C:**\u202f10.0  \n- **Quality\u2011gate minimum F1:**\u202f0.7 (passed; actual F1\u202f\u226b\u202f0.9)  \n\n**Evidence IDs** supporting this selection:  \n\n- `ev_0c36047d1f8b` \u2013 `mlflow_best_run` result (the tool that ranked the five runs).  \n- `ev_89d605c8",
+        "status": "complete",
+        "evidence": [
+          {
+            "evidence_id": "ev_16fef2b88318",
+            "request_id": "req_477bd455fc9043739f43ec87a4d1cd75",
+            "tool": "mlflow_list_experiments",
+            "source": "mlflow",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:47:28.049638+00:00",
+            "duration_ms": 13.89,
+            "data": {
+              "experiments": [
+                {
+                  "id": "1",
+                  "name": "iris-classification"
+                },
+                {
+                  "id": "0",
+                  "name": "Default"
+                }
+              ],
+              "limit": 50
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_0c36047d1f8b",
+            "request_id": "req_477bd455fc9043739f43ec87a4d1cd75",
+            "tool": "mlflow_best_run",
+            "source": "mlflow",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:47:28.063786+00:00",
+            "duration_ms": 58.87,
+            "data": {
+              "runs": [
+                {
+                  "run_id": "1352ff12feab4c9da84fe87526e060ca",
+                  "experiment_id": "1",
+                  "status": "FINISHED",
+                  "start_time": 1794609950340,
+                  "metrics": {
+                    "f1": 0.9229629629629629,
+                    "accuracy": 0.9210526315789473
+                  },
+                  "params": {
+                    "C": "1.0",
+                    "random_state": "42",
+                    "test_size": "0.25"
+                  },
+                  "tags": {
+                    "mlflow.user": "default",
+                    "mlflow.source.name": "/home/airflow/.local/bin/airflow",
+                    "mlflow.source.type": "LOCAL",
+                    "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                    "dataset.path": "data/iris.csv",
+                    "dataset.rows": "150",
+                    "workflow.run_id": "agent_d0fce86f899f4f7d82c7f98f2fdb3a0e",
+                    "quality_gate": "passed",
+                    "airflow.run_id": "agent_d0fce86f899f4f7d82c7f98f2fdb3a0e",
+                    "mlflow.runName": "agent_d0fce86f899f4f7d82c7f98f2fdb3a0e",
+                    "quality_gate.minimum_f1": "0.9"
+                  }
+                },
+                {
+                  "run_id": "7eb81dbcea2446acaff98ed69c2fd237",
+                  "experiment_id": "1",
+                  "status": "FINISHED",
+                  "start_time": 1794609938379,
+                  "metrics": {
+                    "f1": 0.9487179487179488,
+                    "accuracy": 0.9473684210526315
+                  },
+                  "params": {
+                    "C": "10.0",
+                    "random_state": "42",
+                    "test_size": "0.25"
+                  },
+                  "tags": {
+                    "mlflow.user": "runner",
+                    "mlflow.source.name": "scripts/live_demo.py",
+                    "mlflow.source.type": "LOCAL",
+                    "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                    "dataset.path": "data/iris.csv",
+                    "dataset.rows": "150",
+                    "workflow.run_id": "local-seed-C-10.0",
+                    "quality_gate": "passed",
+                    "mlflow.runName": "local-seed-C-10.0",
+                    "quality_gate.minimum_f1": "0.7"
+                  }
+                },
+                {
+                  "run_id": "2846b18c93324fb88d0adc0d3716c4a9",
+                  "experiment_id": "1",
+                  "status": "FINISHED",
+                  "start_time": 1794609935898,
+                  "metrics": {
+                    "f1": 0.9487179487179488,
+                    "accuracy": 0.9473684210526315
+                  },
+                  "params": {
+                    "C": "5.0",
+                    "random_state": "42",
+                    "test_size": "0.25"
+                  },
+                  "tags": {
+                    "mlflow.user": "runner",
+                    "mlflow.source.name": "scripts/live_demo.py",
+                    "mlflow.source.type": "LOCAL",
+                    "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                    "dataset.path": "data/iris.csv",
+                    "dataset.rows": "150",
+                    "workflow.run_id": "local-seed-C-5.0",
+                    "quality_gate": "passed",
+                    "mlflow.runName": "local-seed-C-5.0",
+                    "quality_gate.minimum_f1": "0.7"
+                  }
+                },
+                {
+                  "run_id": "b5d4c86c55d748ea8c84a4f802072dec",
+                  "experiment_id": "1",
+                  "status": "FINISHED",
+                  "start_time": 1794609933346,
+                  "metrics": {
+                    "f1": 0.9229629629629629,
+                    "accuracy": 0.9210526315789473
+                  },
+                  "params": {
+                    "C": "1.0",
+                    "random_state": "42",
+                    "test_size": "0.25"
+                  },
+                  "tags": {
+                    "mlflow.user": "runner",
+                    "mlflow.source.name": "scripts/live_demo.py",
+                    "mlflow.source.type": "LOCAL",
+                    "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                    "dataset.path": "data/iris.csv",
+                    "dataset.rows": "150",
+                    "workflow.run_id": "local-seed-C-1.0",
+                    "quality_gate": "passed",
+                    "mlflow.runName": "local-seed-C-1.0",
+                    "quality_gate.minimum_f1": "0.7"
+                  }
+                },
+                {
+                  "run_id": "7b771232f85c4c269677a299de065936",
+                  "experiment_id": "1",
+                  "status": "FINISHED",
+                  "start_time": 1794609930423,
+                  "metrics": {
+                    "f1": 0.8452380952380952,
+                    "accuracy": 0.8421052631578947
+                  },
+                  "params": {
+                    "C": "0.1",
+                    "random_state": "42",
+                    "test_size": "0.25"
+                  },
+                  "tags": {
+                    "mlflow.user": "runner",
+                    "mlflow.source.name": "scripts/live_demo.py",
+                    "mlflow.source.type": "LOCAL",
+                    "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                    "dataset.path": "data/iris.csv",
+                    "dataset.rows": "150",
+                    "workflow.run_id": "local-seed-C-0.1",
+                    "quality_gate": "passed",
+                    "mlflow.runName": "local-seed-C-0.1",
+                    "quality_gate.minimum_f1": "0.7"
+                  }
+                }
+              ],
+              "limit": 5,
+              "experiment_ids": [
+                "1",
+                "0"
+              ],
+              "metric": "f1",
+              "direction": "maximize",
+              "best": {
+                "run_id": "7eb81dbcea2446acaff98ed69c2fd237",
+                "experiment_id": "1",
+                "status": "FINISHED",
+                "start_time": 1794609938379,
+                "metrics": {
+                  "f1": 0.9487179487179488,
+                  "accuracy": 0.9473684210526315
+                },
+                "params": {
+                  "C": "10.0",
+                  "random_state": "42",
+                  "test_size": "0.25"
+                },
+                "tags": {
+                  "mlflow.user": "runner",
+                  "mlflow.source.name": "scripts/live_demo.py",
+                  "mlflow.source.type": "LOCAL",
+                  "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                  "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                  "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                  "dataset.path": "data/iris.csv",
+                  "dataset.rows": "150",
+                  "workflow.run_id": "local-seed-C-10.0",
+                  "quality_gate": "passed",
+                  "mlflow.runName": "local-seed-C-10.0",
+                  "quality_gate.minimum_f1": "0.7"
+                }
+              },
+              "candidate_age_days": 0.0012701807290536385,
+              "freshness_policy_days": null,
+              "freshness_policy_exceeded": null,
+              "selection_scope": "Best finite metric among at most 5 recent runs, not all history",
+              "caution": "Metric ranking alone does not establish production readiness; check gate, data, workflow and deployment."
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_89d605c84167",
+            "request_id": "req_477bd455fc9043739f43ec87a4d1cd75",
+            "tool": "dvc_dataset_version",
+            "source": "dvc",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:47:35.923206+00:00",
+            "duration_ms": 3.13,
+            "data": {
+              "git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+              "reference": "8234870d72d3b706fa963335857a0c80f0252cab",
+              "dataset": "data/iris.csv",
+              "outputs": [
+                {
+                  "md5": "4224576f0267bf88902f87f0f6200967",
+                  "size": 2757,
+                  "hash": "md5",
+                  "path": "iris.csv"
+                }
+              ]
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_9ced985c3c55",
+            "request_id": "req_477bd455fc9043739f43ec87a4d1cd75",
+            "tool": "kubernetes_workloads",
+            "source": "kubernetes",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:47:44.145781+00:00",
+            "duration_ms": 10.62,
+            "data": {
+              "namespace": "mlops-agent",
+              "pods": [
+                {
+                  "name": "iris-api-75c74587d6-rxc47",
+                  "phase": "Running",
+                  "conditions": [
+                    {
+                      "type": "PodReadyToStartContainers",
+                      "status": "True",
+                      "reason": null,
+                      "message": null
+                    },
+                    {
+                      "type": "Initialized",
+                      "status": "True",
+                      "reason": null,
+                      "message": null
+                    },
+                    {
+                      "type": "Ready",
+                      "status": "True",
+                      "reason": null,
+                      "message": null
+                    },
+                    {
+                      "type": "ContainersReady",
+                      "status": "True",
+                      "reason": null,
+                      "message": null
+                    },
+                    {
+                      "type": "PodScheduled",
+                      "status": "True",
+                      "reason": null,
+                      "message": null
+                    }
+                  ],
+                  "containers": [
+                    {
+                      "name": "inference",
+                      "ready": true,
+                      "restarts": 0,
+                      "state": {
+                        "running": {
+                          "started_at": "2026-11-13T22:47:06Z"
+                        },
+                        "terminated": null,
+                        "waiting": null
+                      },
+                      "last_state": {
+                        "running": null,
+                        "terminated": null,
+                        "waiting": null
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "iris-api-75c74587d6-xjplv",
+                  "phase": "Running",
+                  "conditions": [
+                    {
+                      "type": "PodReadyToStartContainers",
+                      "status": "True",
+                      "reason": null,
+                      "message": null
+                    },
+                    {
+                      "type": "Initialized",
+                      "status": "True",
+                      "reason": null,
+                      "message": null
+                    },
+                    {
+                      "type": "Ready",
+                      "status": "True",
+                      "reason": null,
+                      "message": null
+                    },
+                    {
+                      "type": "ContainersReady",
+                      "status": "True",
+                      "reason": null,
+                      "message": null
+                    },
+                    {
+                      "type": "PodScheduled",
+                      "status": "True",
+                      "reason": null,
+                      "message": null
+                    }
+                  ],
+                  "containers": [
+                    {
+                      "name": "inference",
+                      "ready": true,
+                      "restarts": 0,
+                      "state": {
+                        "running": {
+                          "started_at": "2026-11-13T22:47:06Z"
+                        },
+                        "terminated": null,
+                        "waiting": null
+                      },
+                      "last_state": {
+                        "running": null,
+                        "terminated": null,
+                        "waiting": null
+                      }
+                    }
+                  ]
+                }
+              ],
+              "deployments": [
+                {
+                  "name": "iris-api",
+                  "desired_replicas": 2,
+                  "ready_replicas": 2,
+                  "available_replicas": 2,
+                  "images": [
+                    "mlops-iris:1.0.0"
+                  ],
+                  "conditions": [
+                    {
+                      "type": "Available",
+                      "status": "True",
+                      "reason": "MinimumReplicasAvailable",
+                      "message": "Deployment has minimum availability."
+                    },
+                    {
+                      "type": "Progressing",
+                      "status": "True",
+                      "reason": "NewReplicaSetAvailable",
+                      "message": "ReplicaSet \"iris-api-75c74587d6\" has successfully progressed."
+                    }
+                  ]
+                }
+              ]
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_2d027abf1071",
+            "request_id": "req_477bd455fc9043739f43ec87a4d1cd75",
+            "tool": "kubernetes_services",
+            "source": "kubernetes",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:47:44.156772+00:00",
+            "duration_ms": 4.43,
+            "data": {
+              "namespace": "mlops-agent",
+              "services": [
+                {
+                  "name": "iris-api",
+                  "type": "ClusterIP",
+                  "cluster_ip": "10.96.126.124",
+                  "selector": {
+                    "app": "iris-api"
+                  },
+                  "ports": [
+                    {
+                      "port": 80,
+                      "target_port": 8000
+                    }
+                  ]
+                }
+              ],
+              "ready_endpoints": [
+                "10.244.0.5",
+                "10.244.0.6"
+              ],
+              "unready_endpoints": []
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_c43c6bb770b9",
+            "request_id": "req_477bd455fc9043739f43ec87a4d1cd75",
+            "tool": "kubernetes_app_version",
+            "source": "kubernetes",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:47:44.161397+00:00",
+            "duration_ms": 3.43,
+            "data": {
+              "namespace": "mlops-agent",
+              "application": {
+                "app_version": "1.0.0",
+                "run_id": "7eb81dbcea2446acaff98ed69c2fd237",
+                "dataset": {
+                  "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                  "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                  "dataset.path": "data/iris.csv",
+                  "dataset.rows": "150",
+                  "workflow.run_id": "local-seed-C-10.0",
+                  "quality_gate": "pending"
+                },
+                "metrics": {
+                  "f1": 0.9487179487179488,
+                  "accuracy": 0.9473684210526315
+                },
+                "model_uri": "models:/m-48d36560713a4092836b0dca8488013d"
+              },
+              "source": "Kubernetes Service proxy -> running application's /version"
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_49358351c70e",
+            "request_id": "req_477bd455fc9043739f43ec87a4d1cd75",
+            "tool": "airflow_list_runs",
+            "source": "airflow",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:47:44.165014+00:00",
+            "duration_ms": 18.08,
+            "data": {
+              "dag_runs": [
+                {
+                  "dag_run_id": "agent_d0fce86f899f4f7d82c7f98f2fdb3a0e",
+                  "dag_id": "training_pipeline",
+                  "logical_date": "2026-11-13T22:45:40.809106Z",
+                  "queued_at": "2026-11-13T22:45:40.826381Z",
+                  "start_date": "2026-11-13T22:45:41.079552Z",
+                  "end_date": "2026-11-13T22:45:56.124688Z",
+                  "duration": 15.045136,
+                  "data_interval_start": "2026-11-13T22:45:40.809106Z",
+                  "data_interval_end": "2026-11-13T22:45:40.809106Z",
+                  "run_after": "2026-11-13T22:45:40.809106Z",
+                  "last_scheduling_decision": "2026-11-13T22:45:56.122867Z",
+                  "run_type": "manual",
+                  "state": "success",
+                  "triggered_by": "rest_api",
+                  "triggering_user_name": "admin",
+                  "conf": {
+                    "c": 1.0,
+                    "minimum_f1": 0.9,
+                    "inject_validation_failure": false
+                  },
+                  "note": null,
+                  "dag_versions": [
+                    {
+                      "id": "01a1d716-516e-79ed-82b8-23a7eee596de",
+                      "version_number": 1,
+                      "dag_id": "training_pipeline",
+                      "bundle_name": "dags-folder",
+                      "bundle_version": null,
+                      "created_at": "2026-11-13T22:45:26.510398Z",
+                      "dag_display_name": "training_pipeline",
+                      "bundle_url": null
+                    }
+                  ],
+                  "bundle_version": null,
+                  "dag_display_name": "training_pipeline"
+                }
+              ],
+              "total_entries": 1
+            },
+            "error": null
+          }
+        ],
+        "model": "openrouter/free"
+      }
+    }
+  ]
+}

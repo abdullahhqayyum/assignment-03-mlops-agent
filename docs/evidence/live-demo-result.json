@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "with_llm": true,
+  "pipeline_run_id": "agent_d0fce86f899f4f7d82c7f98f2fdb3a0e",
+  "best_run_id": "7eb81dbcea2446acaff98ed69c2fd237",
+  "quality_gate_failure_run_id": "agent_e3190a18e0064e61b67643e7a895942a",
+  "resolution_run_id": "agent_4063548b9f44402f8bb4fe9c23fe6386"
+}

@@ -1,0 +1,16 @@
+{
+  "input": {
+    "features": [
+      5.1,
+      3.5,
+      1.4,
+      0.2
+    ]
+  },
+  "response": {
+    "class_id": 0,
+    "class_name": "setosa",
+    "run_id": "7eb81dbcea2446acaff98ed69c2fd237"
+  },
+  "source": "POST /predict through Kubernetes Service proxy"
+}

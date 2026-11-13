@@ -1,0 +1,81 @@
+schema: '2.0'
+stages:
+  validate:
+    cmd: python -m training.train validate
+    deps:
+    - path: data/iris.csv
+      hash: md5
+      md5: 4224576f0267bf88902f87f0f6200967
+      size: 2757
+    - path: training/train.py
+      hash: md5
+      md5: 56388cb0a45ba6088f08886095c61c85
+      size: 7359
+    outs:
+    - path: .runtime/training/local/provenance.json
+      hash: md5
+      md5: 7f118deebbe79ed4f8482e1d2f31054b
+      size: 189
+    - path: .runtime/training/local/validated.npy
+      hash: md5
+      md5: fe13d561bdebe0f29a35f4c75cd401ee
+      size: 6128
+  preprocess:
+    cmd: python -m training.train preprocess
+    deps:
+    - path: .runtime/training/local/validated.npy
+      hash: md5
+      md5: fe13d561bdebe0f29a35f4c75cd401ee
+      size: 6128
+    outs:
+    - path: .runtime/training/local/split.npz
+      hash: md5
+      md5: a844df34d22d0e13a853595d5c79cd75
+      size: 7002
+  train:
+    cmd: python -m training.train train
+    deps:
+    - path: .runtime/training/local/split.npz
+      hash: md5
+      md5: a844df34d22d0e13a853595d5c79cd75
+      size: 7002
+    outs:
+    - path: .runtime/training/local/model.joblib
+      hash: md5
+      md5: 5c7414d5b8f4e3d0e871055cfa43fc54
+      size: 1585
+    - path: .runtime/training/local/parameters.json
+      hash: md5
+      md5: 2390fc970b7f6c5fb5ed89eb5c68e9d2
+      size: 58
+  evaluate:
+    cmd: python -m training.train evaluate
+    deps:
+    - path: .runtime/training/local/model.joblib
+      hash: md5
+      md5: 5c7414d5b8f4e3d0e871055cfa43fc54
+      size: 1585
+    - path: .runtime/training/local/parameters.json
+      hash: md5
+      md5: 2390fc970b7f6c5fb5ed89eb5c68e9d2
+      size: 58
+    - path: .runtime/training/local/provenance.json
+      hash: md5
+      md5: 7f118deebbe79ed4f8482e1d2f31054b
+      size: 189
+    outs:
+    - path: .runtime/training/local/metadata.json
+      hash: md5
+      md5: d6281879a9ff3de1d50a4fcc233d9abc
+      size: 473
+    - path: .runtime/training/local/metrics.json
+      hash: md5
+      md5: d6281879a9ff3de1d50a4fcc233d9abc
+      size: 473
+  quality_gate:
+    cmd: python -m training.train gate
+    deps:
+    - path: .runtime/training/local/metrics.json
+      hash: md5
+      md5: d6281879a9ff3de1d50a4fcc233d9abc
+      size: 473

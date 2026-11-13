@@ -1,0 +1,397 @@
+{
+  "scenario": "failure-01-agent",
+  "mode": "live_services_and_llm",
+  "turns": [
+    {
+      "user": "Investigate failed training_pipeline run agent_e3190a18e0064e61b67643e7a895942a. Inspect failed tasks and logs, explain the root cause, and recommend a resolution without triggering another run.",
+      "assistant": {
+        "request_id": "req_2ebbcd63f8454995b40285f53c4c2456",
+        "answer": "## Investigation: `training_pipeline` run `agent_e3190a18e0064e61b67643e7a895942a`\n\n### Run outcome\n- **State: `failed`** (manual trigger by `admin`, run_type `rest_api`), duration ~31s (ev_7da9e6730621).\n- Trigger config: `{\"c\": 0.001, \"minimum_f1\": 1.0, \"inject_validation_failure\": false}` (ev_7da9e6730621).\n\n### Task-level results (ev_b25796983b34)\n| Task | State |\n|---|---|\n| validate_dataset | success |\n| preprocess_data | success |\n| train_model | success |\n| evaluate_and_log | success |\n| **apply_quality_gate** | **failed** (try 2) |\n\nOnly `apply_quality_gate` failed. Both attempts (try 1 and try 2) failed identically.\n\n### Root cause (supported by logs)\nThe quality gate rejected the model because its F1 score was below the configured threshold:\n\n> `ValueError: Quality gate failed: F1=0.7454 < 1.0` \u2014 raised in `training/train.py:135` `quality_gate` (ev_8d4514526af4, ev_ab7e5089c7f2).\n\nThe evaluation task logged the actual metrics for MLflow run `de3892e9d10b49d3a7f0ce62a3c708ab`:\n- **f1 = 0.7454**, accuracy = 0.7632 (ev_da77bdb81513).\n\nThe MLflow run record confirms `quality_gate: failed` and `quality_gate.minimum_f1: 1.0` (ev_5b657545423b).\n\n**Two contributing factors:**\n1. **Unrealistic threshold** \u2014 `minimum_f1` was set to **1.0**, which requires perfect classification and is effectively unachievable. Prior successful runs used `minimum_f1` of 0.9 or 0.7 (ev_5b657545423b).\n2. **Weak hyperparameter** \u2014 the run used `C=0.001` (very strong regularization), producing F1=0.7454. Comparable recent runs with `C=1.0` \u2192 F1=0.9230, `C=5.0`/`C=10.0` \u2192 F1=0.9487 (ev_5b657545423b).\n\nThe gate behaved as designed \u2014 this is a legitimate quality rejection, not an infrastructure bug.\n\n### Data provenance (not the cause)\nThe dataset was consistent and valid: `data/iris.csv`, git commit `8234870d72d3b706fa963335857a0c80f0252cab`, DVC hash `4224576f0267bf88902f87f0f6200967`, 150 rows (ev_55f0188ff7d8, ev_5b657545423b). The same commit/hash appears across the other recent runs, so data drift/versioning is not implicated.\n\n### Recommendation (no run triggered)\nThe failure is a **quality-gate configuration issue**, not a pipeline defect. To resolve:\n- Re-run with a **realistic `minimum_f1`** (e.g., 0.9, matching the prior passing run) instead of 1.0.\n- Use a **better `C`** (e.g., 1.0, 5.0, or 10.0), which historically yielded F1 \u2265 0.92.\n\nI have **not** triggered any new run, per your request. If you'd like me to trigger a corrected run, confirm the desired `minimum_f1` and `C` values and I'll request it (it will require your separate confirmation).\n\n**Uncertainty note:** I did not inspect Kubernetes/deployment state, as this is a training-workflow failure unrelated to serving; that check is available if you want to confirm the currently deployed model is unaffected.",
+        "status": "complete",
+        "evidence": [
+          {
+            "evidence_id": "ev_c3209a4dc3f4",
+            "request_id": "req_2ebbcd63f8454995b40285f53c4c2456",
+            "tool": "airflow_list_dags",
+            "source": "airflow",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:50:25.869476+00:00",
+            "duration_ms": 10.83,
+            "data": {
+              "dags": [
+                {
+                  "dag_id": "training_pipeline",
+                  "is_paused": false
+                }
+              ],
+              "total_entries": 1,
+              "approved_dags": [
+                "training_pipeline"
+              ]
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_7da9e6730621",
+            "request_id": "req_2ebbcd63f8454995b40285f53c4c2456",
+            "tool": "airflow_run_status",
+            "source": "airflow",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:50:25.880476+00:00",
+            "duration_ms": 9.18,
+            "data": {
+              "dag_run_id": "agent_e3190a18e0064e61b67643e7a895942a",
+              "dag_id": "training_pipeline",
+              "logical_date": "2026-11-13T22:49:48.880411Z",
+              "queued_at": "2026-11-13T22:49:48.888447Z",
+              "start_date": "2026-11-13T22:49:49.534512Z",
+              "end_date": "2026-11-13T22:50:20.646531Z",
+              "duration": 31.112019,
+              "data_interval_start": "2026-11-13T22:49:48.880411Z",
+              "data_interval_end": "2026-11-13T22:49:48.880411Z",
+              "run_after": "2026-11-13T22:49:48.880411Z",
+              "last_scheduling_decision": "2026-11-13T22:50:20.644785Z",
+              "run_type": "manual",
+              "state": "failed",
+              "triggered_by": "rest_api",
+              "triggering_user_name": "admin",
+              "conf": {
+                "c": 0.001,
+                "minimum_f1": 1.0,
+                "inject_validation_failure": false
+              },
+              "note": null,
+              "dag_versions": [
+                {
+                  "id": "01a1d716-516e-79ed-82b8-23a7eee596de",
+                  "version_number": 1,
+                  "dag_id": "training_pipeline",
+                  "bundle_name": "dags-folder",
+                  "bundle_version": null,
+                  "created_at": "2026-11-13T22:45:26.510398Z",
+                  "dag_display_name": "training_pipeline",
+                  "bundle_url": null
+                }
+              ],
+              "bundle_version": null,
+              "dag_display_name": "training_pipeline"
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_b25796983b34",
+            "request_id": "req_2ebbcd63f8454995b40285f53c4c2456",
+            "tool": "airflow_tasks",
+            "source": "airflow",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:50:28.654266+00:00",
+            "duration_ms": 20.99,
+            "data": {
+              "tasks": [
+                {
+                  "task_id": "validate_dataset",
+                  "state": "success",
+                  "try_number": 1,
+                  "start_date": "2026-11-13T22:49:49.573184Z",
+                  "end_date": "2026-11-13T22:49:50.593453Z",
+                  "duration": 1.020269,
+                  "hostname": "dd1a02abadae"
+                },
+                {
+                  "task_id": "preprocess_data",
+                  "state": "success",
+                  "try_number": 1,
+                  "start_date": "2026-11-13T22:49:51.645553Z",
+                  "end_date": "2026-11-13T22:49:52.646467Z",
+                  "duration": 1.000914,
+                  "hostname": "dd1a02abadae"
+                },
+                {
+                  "task_id": "train_model",
+                  "state": "success",
+                  "try_number": 1,
+                  "start_date": "2026-11-13T22:49:55.633364Z",
+                  "end_date": "2026-11-13T22:49:56.644904Z",
+                  "duration": 1.01154,
+                  "hostname": "dd1a02abadae"
+                },
+                {
+                  "task_id": "evaluate_and_log",
+                  "state": "success",
+                  "try_number": 1,
+                  "start_date": "2026-11-13T22:49:57.687327Z",
+                  "end_date": "2026-11-13T22:50:01.557095Z",
+                  "duration": 3.869768,
+                  "hostname": "dd1a02abadae"
+                },
+                {
+                  "task_id": "apply_quality_gate",
+                  "state": "failed",
+                  "try_number": 2,
+                  "start_date": "2026-11-13T22:50:13.506884Z",
+                  "end_date": "2026-11-13T22:50:19.606344Z",
+                  "duration": 6.09946,
+                  "hostname": "dd1a02abadae"
+                }
+              ],
+              "failed_tasks": [
+                {
+                  "task_id": "apply_quality_gate",
+                  "state": "failed",
+                  "try_number": 2,
+                  "start_date": "2026-11-13T22:50:13.506884Z",
+                  "end_date": "2026-11-13T22:50:19.606344Z",
+                  "duration": 6.09946,
+                  "hostname": "dd1a02abadae"
+                }
+              ]
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_8d4514526af4",
+            "request_id": "req_2ebbcd63f8454995b40285f53c4c2456",
+            "tool": "airflow_task_log",
+            "source": "airflow",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:50:33.144466+00:00",
+            "duration_ms": 13.32,
+            "data": {
+              "dag_id": "training_pipeline",
+              "run_id": "agent_e3190a18e0064e61b67643e7a895942a",
+              "task_id": "apply_quality_gate",
+              "try_number": 2,
+              "content": "[{'event': '::group::Log message source details', 'sources': ['/opt/airflow/logs/dag_id=training_pipeline/run_id=agent_e3190a18e0064e61b67643e7a895942a/task_id=apply_quality_gate/attempt=2.log']}, {'event': '::endgroup::'}, {'timestamp': '2026-11-13T22:50:13.520794Z', 'event': 'DAG bundles loaded: dags-folder', 'level': 'info', 'logger': 'airflow.dag_processing.bundles.manager.DagBundlesManager', 'filename': 'manager.py', 'lineno': 179}, {'timestamp': '2026-11-13T22:50:13.521407Z', 'event': 'Filling up the DagBag from /workspace/dags/training_pipeline.py', 'level': 'info', 'logger': 'airflow.models.dagbag.DagBag', 'filename': 'dagbag.py', 'lineno': 593}, {'timestamp': '2026-11-13T22:50:14.588380Z', 'event': 'Task failed with exception', 'level': 'error', 'logger': 'task', 'filename': 'task_runner.py', 'lineno': 994, 'error_detail': [{'exc_type': 'ValueError', 'exc_value': 'Quality gate failed: F1=0.7454 < 1.0', 'exc_notes': [], 'syntax_error': None, 'is_cause': False, 'frames': [{'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/execution_time/task_runner.py', 'lineno': 920, 'name': 'run'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/execution_time/task_runner.py', 'lineno': 1302, 'name': '_execute_task'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/bases/operator.py', 'lineno': 416, 'name': 'wrapper'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/bases/decorator.py', 'lineno': 252, 'name': 'execute'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/bases/operator.py', 'lineno': 416, 'name': 'wrapper'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/providers/standard/operators/python.py', 'lineno': 216, 'name': 'execute'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/providers/standard/operators/python.py', 'lineno': 239, 'name': 'execute_callable'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/execution_time/callback_runner.py', 'lineno': 82, 'name': 'run'}, {'filename': '/workspace/dags/training_pipeline.py', 'lineno': 67, 'name': 'apply_quality_gate'}, {'filename': '/workspace/training/train.py', 'lineno': 135, 'name': 'quality_gate'}], 'is_group': False, 'exceptions': []}]}]",
+              "truncated": false
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_da77bdb81513",
+            "request_id": "req_2ebbcd63f8454995b40285f53c4c2456",
+            "tool": "airflow_task_log",
+            "source": "airflow",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:50:52.036952+00:00",
+            "duration_ms": 14.32,
+            "data": {
+              "dag_id": "training_pipeline",
+              "run_id": "agent_e3190a18e0064e61b67643e7a895942a",
+              "task_id": "evaluate_and_log",
+              "try_number": 1,
+              "content": "[{'event': '::group::Log message source details', 'sources': ['/opt/airflow/logs/dag_id=training_pipeline/run_id=agent_e3190a18e0064e61b67643e7a895942a/task_id=evaluate_and_log/attempt=1.log']}, {'event': '::endgroup::'}, {'timestamp': '2026-11-13T22:49:57.701820Z', 'event': 'DAG bundles loaded: dags-folder', 'level': 'info', 'logger': 'airflow.dag_processing.bundles.manager.DagBundlesManager', 'filename': 'manager.py', 'lineno': 179}, {'timestamp': '2026-11-13T22:49:57.702385Z', 'event': 'Filling up the DagBag from /workspace/dags/training_pipeline.py', 'level': 'info', 'logger': 'airflow.models.dagbag.DagBag', 'filename': 'dagbag.py', 'lineno': 593}, {'timestamp': '2026-11-13T22:49:58.708944Z', 'event': 'Evaluating training workflow agent_e3190a18e0064e61b67643e7a895942a', 'level': 'info', 'logger': 'root', 'filename': 'training_pipeline.py', 'lineno': 61}, {'timestamp': '2026-11-13T22:50:01.062445Z', 'event': '\\x1b[31m2026/11/13 22:50:01 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.\\x1b[0m', 'level': 'error', 'logger': 'task.stderr'}, {'timestamp': '2026-11-13T22:50:01.499709Z', 'event': '\ud83c\udfc3 View run agent_e3190a18e0064e61b67643e7a895942a at: http://mlflow:5000/#/experiments/1/runs/de3892e9d10b49d3a7f0ce62a3c708ab', 'level': 'info', 'logger': 'task.stdout'}, {'timestamp': '2026-11-13T22:50:01.499841Z', 'event': '\ud83e\uddea View experiment at: http://mlflow:5000/#/experiments/1', 'level': 'info', 'logger': 'task.stdout'}, {'timestamp': '2026-11-13T22:50:01.547508Z', 'event': \"MLflow run de3892e9d10b49d3a7f0ce62a3c708ab metrics={'f1': 0.745438596491228, 'accuracy': 0.7631578947368421}\", 'level': 'info', 'logger': 'training.train', 'filename': 'train.py', 'lineno': 122}, {'timestamp': '2026-11-13T22:50:01.547758Z', 'event': 'Done. Returned value was: de3892e9d10b49d3a7f0ce62a3c708ab', 'level': 'info', 'logger': 'airflow.task.operators.airflow.providers.standard.decorators.python._PythonDecoratedOperator', 'filename': 'python.py', 'lineno': 218}, {'timestamp': '2026-11-13T22:50:01.547956Z', 'event': 'Pushing xcom', 'level': 'info', 'ti': \"RuntimeTaskInstance(id=UUID('01a1d71a-5263-7bdf-abce-e49bca70b3d2'), task_id='evaluate_and_log', dag_id='training_pipeline', run_id='agent_e3190a18e0064e61b67643e7a895942a', try_number=1, dag_version_id=UUID('01a1d716-516e-79ed-82b8-23a7eee596de'), map_index=-1, hostname='dd1a02abadae', context_carrier={}, task=<Task(_PythonDecoratedOperator): evaluate_and_log>, bundle_instance=LocalDagBundle(name=dags-folder), max_tries=1, start_date=datetime.datetime(2026, 11, 13, 22, 49, 57, 687327, tzinfo=datetime.timezone.utc), end_date=None, state=<TaskInstanceState.RUNNING: 'running'>, is_mapped=False, rendered_map_index=None)\", 'logger': 'task', 'filename': 'task_runner.py', 'lineno': 1352}]",
+              "truncated": false
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_ab7e5089c7f2",
+            "request_id": "req_2ebbcd63f8454995b40285f53c4c2456",
+            "tool": "airflow_task_log",
+            "source": "airflow",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:50:52.051728+00:00",
+            "duration_ms": 14.14,
+            "data": {
+              "dag_id": "training_pipeline",
+              "run_id": "agent_e3190a18e0064e61b67643e7a895942a",
+              "task_id": "apply_quality_gate",
+              "try_number": 1,
+              "content": "[{'event': '::group::Log message source details', 'sources': ['/opt/airflow/logs/dag_id=training_pipeline/run_id=agent_e3190a18e0064e61b67643e7a895942a/task_id=apply_quality_gate/attempt=1.log']}, {'event': '::endgroup::'}, {'timestamp': '2026-11-13T22:50:01.713430Z', 'event': 'DAG bundles loaded: dags-folder', 'level': 'info', 'logger': 'airflow.dag_processing.bundles.manager.DagBundlesManager', 'filename': 'manager.py', 'lineno': 179}, {'timestamp': '2026-11-13T22:50:01.713961Z', 'event': 'Filling up the DagBag from /workspace/dags/training_pipeline.py', 'level': 'info', 'logger': 'airflow.models.dagbag.DagBag', 'filename': 'dagbag.py', 'lineno': 593}, {'timestamp': '2026-11-13T22:50:03.109399Z', 'event': 'Task failed with exception', 'level': 'error', 'logger': 'task', 'filename': 'task_runner.py', 'lineno': 994, 'error_detail': [{'exc_type': 'ValueError', 'exc_value': 'Quality gate failed: F1=0.7454 < 1.0', 'exc_notes': [], 'syntax_error': None, 'is_cause': False, 'frames': [{'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/execution_time/task_runner.py', 'lineno': 920, 'name': 'run'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/execution_time/task_runner.py', 'lineno': 1302, 'name': '_execute_task'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/bases/operator.py', 'lineno': 416, 'name': 'wrapper'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/bases/decorator.py', 'lineno': 252, 'name': 'execute'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/bases/operator.py', 'lineno': 416, 'name': 'wrapper'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/providers/standard/operators/python.py', 'lineno': 216, 'name': 'execute'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/providers/standard/operators/python.py', 'lineno': 239, 'name': 'execute_callable'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/execution_time/callback_runner.py', 'lineno': 82, 'name': 'run'}, {'filename': '/workspace/dags/training_pipeline.py', 'lineno': 67, 'name': 'apply_quality_gate'}, {'filename': '/workspace/training/train.py', 'lineno': 135, 'name': 'quality_gate'}], 'is_group': False, 'exceptions': []}]}]",
+              "truncated": false
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_5b657545423b",
+            "request_id": "req_2ebbcd63f8454995b40285f53c4c2456",
+            "tool": "mlflow_list_runs",
+            "source": "mlflow",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:50:52.066231+00:00",
+            "duration_ms": 29.08,
+            "data": {
+              "runs": [
+                {
+                  "run_id": "de3892e9d10b49d3a7f0ce62a3c708ab",
+                  "experiment_id": "1",
+                  "status": "FINISHED",
+                  "start_time": 1794610198752,
+                  "metrics": {
+                    "f1": 0.745438596491228,
+                    "accuracy": 0.7631578947368421
+                  },
+                  "params": {
+                    "C": "0.001",
+                    "random_state": "42",
+                    "test_size": "0.25"
+                  },
+                  "tags": {
+                    "mlflow.user": "default",
+                    "mlflow.source.name": "/home/airflow/.local/bin/airflow",
+                    "mlflow.source.type": "LOCAL",
+                    "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                    "dataset.path": "data/iris.csv",
+                    "dataset.rows": "150",
+                    "workflow.run_id": "agent_e3190a18e0064e61b67643e7a895942a",
+                    "quality_gate": "failed",
+                    "airflow.run_id": "agent_e3190a18e0064e61b67643e7a895942a",
+                    "mlflow.runName": "agent_e3190a18e0064e61b67643e7a895942a",
+                    "quality_gate.minimum_f1": "1.0"
+                  }
+                },
+                {
+                  "run_id": "1352ff12feab4c9da84fe87526e060ca",
+                  "experiment_id": "1",
+                  "status": "FINISHED",
+                  "start_time": 1794609950340,
+                  "metrics": {
+                    "f1": 0.9229629629629629,
+                    "accuracy": 0.9210526315789473
+                  },
+                  "params": {
+                    "C": "1.0",
+                    "random_state": "42",
+                    "test_size": "0.25"
+                  },
+                  "tags": {
+                    "mlflow.user": "default",
+                    "mlflow.source.name": "/home/airflow/.local/bin/airflow",
+                    "mlflow.source.type": "LOCAL",
+                    "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                    "dataset.path": "data/iris.csv",
+                    "dataset.rows": "150",
+                    "workflow.run_id": "agent_d0fce86f899f4f7d82c7f98f2fdb3a0e",
+                    "quality_gate": "passed",
+                    "airflow.run_id": "agent_d0fce86f899f4f7d82c7f98f2fdb3a0e",
+                    "mlflow.runName": "agent_d0fce86f899f4f7d82c7f98f2fdb3a0e",
+                    "quality_gate.minimum_f1": "0.9"
+                  }
+                },
+                {
+                  "run_id": "7eb81dbcea2446acaff98ed69c2fd237",
+                  "experiment_id": "1",
+                  "status": "FINISHED",
+                  "start_time": 1794609938379,
+                  "metrics": {
+                    "f1": 0.9487179487179488,
+                    "accuracy": 0.9473684210526315
+                  },
+                  "params": {
+                    "C": "10.0",
+                    "random_state": "42",
+                    "test_size": "0.25"
+                  },
+                  "tags": {
+                    "mlflow.user": "runner",
+                    "mlflow.source.name": "scripts/live_demo.py",
+                    "mlflow.source.type": "LOCAL",
+                    "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                    "dataset.path": "data/iris.csv",
+                    "dataset.rows": "150",
+                    "workflow.run_id": "local-seed-C-10.0",
+                    "quality_gate": "passed",
+                    "mlflow.runName": "local-seed-C-10.0",
+                    "quality_gate.minimum_f1": "0.7"
+                  }
+                },
+                {
+                  "run_id": "2846b18c93324fb88d0adc0d3716c4a9",
+                  "experiment_id": "1",
+                  "status": "FINISHED",
+                  "start_time": 1794609935898,
+                  "metrics": {
+                    "f1": 0.9487179487179488,
+                    "accuracy": 0.9473684210526315
+                  },
+                  "params": {
+                    "C": "5.0",
+                    "random_state": "42",
+                    "test_size": "0.25"
+                  },
+                  "tags": {
+                    "mlflow.user": "runner",
+                    "mlflow.source.name": "scripts/live_demo.py",
+                    "mlflow.source.type": "LOCAL",
+                    "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                    "dataset.path": "data/iris.csv",
+                    "dataset.rows": "150",
+                    "workflow.run_id": "local-seed-C-5.0",
+                    "quality_gate": "passed",
+                    "mlflow.runName": "local-seed-C-5.0",
+                    "quality_gate.minimum_f1": "0.7"
+                  }
+                },
+                {
+                  "run_id": "b5d4c86c55d748ea8c84a4f802072dec",
+                  "experiment_id": "1",
+                  "status": "FINISHED",
+                  "start_time": 1794609933346,
+                  "metrics": {
+                    "f1": 0.9229629629629629,
+                    "accuracy": 0.9210526315789473
+                  },
+                  "params": {
+                    "C": "1.0",
+                    "random_state": "42",
+                    "test_size": "0.25"
+                  },
+                  "tags": {
+                    "mlflow.user": "runner",
+                    "mlflow.source.name": "scripts/live_demo.py",
+                    "mlflow.source.type": "LOCAL",
+                    "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                    "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                    "dataset.path": "data/iris.csv",
+                    "dataset.rows": "150",
+                    "workflow.run_id": "local-seed-C-1.0",
+                    "quality_gate": "passed",
+                    "mlflow.runName": "local-seed-C-1.0",
+                    "quality_gate.minimum_f1": "0.7"
+                  }
+                }
+              ],
+              "limit": 5,
+              "experiment_ids": [
+                "1",
+                "0"
+              ]
+            },
+            "error": null
+          },
+          {
+            "evidence_id": "ev_55f0188ff7d8",
+            "request_id": "req_2ebbcd63f8454995b40285f53c4c2456",
+            "tool": "dvc_dataset_version",
+            "source": "dvc",
+            "status": "ok",
+            "observed_at": "2026-11-13T22:50:57.845953+00:00",
+            "duration_ms": 3.26,
+            "data": {
+              "git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+              "reference": "8234870d72d3b706fa963335857a0c80f0252cab",
+              "dataset": "data/iris.csv",
+              "outputs": [
+                {
+                  "md5": "4224576f0267bf88902f87f0f6200967",
+                  "size": 2757,
+                  "hash": "md5",
+                  "path": "iris.csv"
+                }
+              ]
+            },
+            "error": null
+          }
+        ],
+        "model": "openrouter/free"
+      }
+    }
+  ]
+}

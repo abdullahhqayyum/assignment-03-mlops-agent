@@ -1,0 +1,190 @@
+{
+  "runs": [
+    {
+      "run_id": "1352ff12feab4c9da84fe87526e060ca",
+      "experiment_id": "1",
+      "status": "FINISHED",
+      "start_time": 1794609950340,
+      "metrics": {
+        "f1": 0.9229629629629629,
+        "accuracy": 0.9210526315789473
+      },
+      "params": {
+        "C": "1.0",
+        "random_state": "42",
+        "test_size": "0.25"
+      },
+      "tags": {
+        "mlflow.user": "default",
+        "mlflow.source.name": "/home/airflow/.local/bin/airflow",
+        "mlflow.source.type": "LOCAL",
+        "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+        "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+        "dataset.path": "data/iris.csv",
+        "dataset.rows": "150",
+        "workflow.run_id": "agent_d0fce86f899f4f7d82c7f98f2fdb3a0e",
+        "quality_gate": "passed",
+        "airflow.run_id": "agent_d0fce86f899f4f7d82c7f98f2fdb3a0e",
+        "mlflow.runName": "agent_d0fce86f899f4f7d82c7f98f2fdb3a0e",
+        "quality_gate.minimum_f1": "0.9"
+      }
+    },
+    {
+      "run_id": "7eb81dbcea2446acaff98ed69c2fd237",
+      "experiment_id": "1",
+      "status": "FINISHED",
+      "start_time": 1794609938379,
+      "metrics": {
+        "f1": 0.9487179487179488,
+        "accuracy": 0.9473684210526315
+      },
+      "params": {
+        "C": "10.0",
+        "random_state": "42",
+        "test_size": "0.25"
+      },
+      "tags": {
+        "mlflow.user": "runner",
+        "mlflow.source.name": "scripts/live_demo.py",
+        "mlflow.source.type": "LOCAL",
+        "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+        "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+        "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+        "dataset.path": "data/iris.csv",
+        "dataset.rows": "150",
+        "workflow.run_id": "local-seed-C-10.0",
+        "quality_gate": "passed",
+        "mlflow.runName": "local-seed-C-10.0",
+        "quality_gate.minimum_f1": "0.7"
+      }
+    },
+    {
+      "run_id": "2846b18c93324fb88d0adc0d3716c4a9",
+      "experiment_id": "1",
+      "status": "FINISHED",
+      "start_time": 1794609935898,
+      "metrics": {
+        "f1": 0.9487179487179488,
+        "accuracy": 0.9473684210526315
+      },
+      "params": {
+        "C": "5.0",
+        "random_state": "42",
+        "test_size": "0.25"
+      },
+      "tags": {
+        "mlflow.user": "runner",
+        "mlflow.source.name": "scripts/live_demo.py",
+        "mlflow.source.type": "LOCAL",
+        "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+        "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+        "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+        "dataset.path": "data/iris.csv",
+        "dataset.rows": "150",
+        "workflow.run_id": "local-seed-C-5.0",
+        "quality_gate": "passed",
+        "mlflow.runName": "local-seed-C-5.0",
+        "quality_gate.minimum_f1": "0.7"
+      }
+    },
+    {
+      "run_id": "b5d4c86c55d748ea8c84a4f802072dec",
+      "experiment_id": "1",
+      "status": "FINISHED",
+      "start_time": 1794609933346,
+      "metrics": {
+        "f1": 0.9229629629629629,
+        "accuracy": 0.9210526315789473
+      },
+      "params": {
+        "C": "1.0",
+        "random_state": "42",
+        "test_size": "0.25"
+      },
+      "tags": {
+        "mlflow.user": "runner",
+        "mlflow.source.name": "scripts/live_demo.py",
+        "mlflow.source.type": "LOCAL",
+        "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+        "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+        "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+        "dataset.path": "data/iris.csv",
+        "dataset.rows": "150",
+        "workflow.run_id": "local-seed-C-1.0",
+        "quality_gate": "passed",
+        "mlflow.runName": "local-seed-C-1.0",
+        "quality_gate.minimum_f1": "0.7"
+      }
+    },
+    {
+      "run_id": "7b771232f85c4c269677a299de065936",
+      "experiment_id": "1",
+      "status": "FINISHED",
+      "start_time": 1794609930423,
+      "metrics": {
+        "f1": 0.8452380952380952,
+        "accuracy": 0.8421052631578947
+      },
+      "params": {
+        "C": "0.1",
+        "random_state": "42",
+        "test_size": "0.25"
+      },
+      "tags": {
+        "mlflow.user": "runner",
+        "mlflow.source.name": "scripts/live_demo.py",
+        "mlflow.source.type": "LOCAL",
+        "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+        "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+        "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+        "dataset.path": "data/iris.csv",
+        "dataset.rows": "150",
+        "workflow.run_id": "local-seed-C-0.1",
+        "quality_gate": "passed",
+        "mlflow.runName": "local-seed-C-0.1",
+        "quality_gate.minimum_f1": "0.7"
+      }
+    }
+  ],
+  "limit": 5,
+  "experiment_ids": [
+    "1",
+    "0"
+  ],
+  "metric": "f1",
+  "direction": "maximize",
+  "best": {
+    "run_id": "7eb81dbcea2446acaff98ed69c2fd237",
+    "experiment_id": "1",
+    "status": "FINISHED",
+    "start_time": 1794609938379,
+    "metrics": {
+      "f1": 0.9487179487179488,
+      "accuracy": 0.9473684210526315
+    },
+    "params": {
+      "C": "10.0",
+      "random_state": "42",
+      "test_size": "0.25"
+    },
+    "tags": {
+      "mlflow.user": "runner",
+      "mlflow.source.name": "scripts/live_demo.py",
+      "mlflow.source.type": "LOCAL",
+      "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+      "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+      "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+      "dataset.path": "data/iris.csv",
+      "dataset.rows": "150",
+      "workflow.run_id": "local-seed-C-10.0",
+      "quality_gate": "passed",
+      "mlflow.runName": "local-seed-C-10.0",
+      "quality_gate.minimum_f1": "0.7"
+    }
+  },
+  "candidate_age_days": 0.0002653857054533782,
+  "freshness_policy_days": null,
+  "freshness_policy_exceeded": null,
+  "selection_scope": "Best finite metric among at most 5 recent runs, not all history",
+  "caution": "Metric ranking alone does not establish production readiness; check gate, data, workflow and deployment."
+}

@@ -156,6 +156,7 @@ def main():
         "kindest/node:v1.34.0",
         "--wait",
         "180s",
+        timeout=900,
     )
     command("kind", "load", "docker-image", "mlops-iris:1.0.0", "--name", "assignment03")
     kube = ["kubectl", "--kubeconfig", ".runtime/kubeconfig"]

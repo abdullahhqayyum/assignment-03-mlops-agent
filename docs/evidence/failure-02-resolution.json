@@ -1,0 +1,205 @@
+{
+  "evidence_id": "ev_1d804b3fd36f",
+  "request_id": "dedicated-live-demo",
+  "tool": "kubernetes_workloads",
+  "source": "kubernetes",
+  "status": "ok",
+  "observed_at": "2026-11-13T22:53:11.562868+00:00",
+  "duration_ms": 18.97,
+  "data": {
+    "namespace": "mlops-agent",
+    "pods": [
+      {
+        "name": "iris-api-75c74587d6-rxc47",
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "PodReadyToStartContainers",
+            "status": "True",
+            "reason": null,
+            "message": null
+          },
+          {
+            "type": "Initialized",
+            "status": "True",
+            "reason": null,
+            "message": null
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "reason": null,
+            "message": null
+          },
+          {
+            "type": "ContainersReady",
+            "status": "True",
+            "reason": null,
+            "message": null
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "reason": null,
+            "message": null
+          }
+        ],
+        "containers": [
+          {
+            "name": "inference",
+            "ready": true,
+            "restarts": 0,
+            "state": {
+              "running": {
+                "started_at": "2026-11-13T22:47:06Z"
+              },
+              "terminated": null,
+              "waiting": null
+            },
+            "last_state": {
+              "running": null,
+              "terminated": null,
+              "waiting": null
+            }
+          }
+        ]
+      },
+      {
+        "name": "iris-api-75c74587d6-xjplv",
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "PodReadyToStartContainers",
+            "status": "True",
+            "reason": null,
+            "message": null
+          },
+          {
+            "type": "Initialized",
+            "status": "True",
+            "reason": null,
+            "message": null
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "reason": null,
+            "message": null
+          },
+          {
+            "type": "ContainersReady",
+            "status": "True",
+            "reason": null,
+            "message": null
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "reason": null,
+            "message": null
+          }
+        ],
+        "containers": [
+          {
+            "name": "inference",
+            "ready": true,
+            "restarts": 0,
+            "state": {
+              "running": {
+                "started_at": "2026-11-13T22:47:06Z"
+              },
+              "terminated": null,
+              "waiting": null
+            },
+            "last_state": {
+              "running": null,
+              "terminated": null,
+              "waiting": null
+            }
+          }
+        ]
+      },
+      {
+        "name": "iris-api-7f6788548f-6dkbc",
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "PodReadyToStartContainers",
+            "status": "True",
+            "reason": null,
+            "message": null
+          },
+          {
+            "type": "Initialized",
+            "status": "True",
+            "reason": null,
+            "message": null
+          },
+          {
+            "type": "Ready",
+            "status": "False",
+            "reason": "ContainersNotReady",
+            "message": "containers with unready status: [inference]"
+          },
+          {
+            "type": "ContainersReady",
+            "status": "False",
+            "reason": "ContainersNotReady",
+            "message": "containers with unready status: [inference]"
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "reason": null,
+            "message": null
+          }
+        ],
+        "containers": [
+          {
+            "name": "inference",
+            "ready": false,
+            "restarts": 0,
+            "state": {
+              "running": {
+                "started_at": "2026-11-13T22:51:18Z"
+              },
+              "terminated": null,
+              "waiting": null
+            },
+            "last_state": {
+              "running": null,
+              "terminated": null,
+              "waiting": null
+            }
+          }
+        ]
+      }
+    ],
+    "deployments": [
+      {
+        "name": "iris-api",
+        "desired_replicas": 2,
+        "ready_replicas": 2,
+        "available_replicas": 2,
+        "images": [
+          "mlops-iris:1.0.0"
+        ],
+        "conditions": [
+          {
+            "type": "Available",
+            "status": "True",
+            "reason": "MinimumReplicasAvailable",
+            "message": "Deployment has minimum availability."
+          },
+          {
+            "type": "Progressing",
+            "status": "True",
+            "reason": "NewReplicaSetAvailable",
+            "message": "ReplicaSet \"iris-api-75c74587d6\" has successfully progressed."
+          }
+        ]
+      }
+    ]
+  },
+  "error": null
+}
