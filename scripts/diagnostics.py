@@ -28,6 +28,8 @@ def main():
             "compose",
             "exec",
             "-T",
+            "--user",
+            "airflow",
             "airflow",
             "airflow",
             "dags",

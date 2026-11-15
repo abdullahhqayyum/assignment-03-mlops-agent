@@ -8,7 +8,8 @@ from pathlib import Path
 import pendulum
 from airflow.sdk import dag, get_current_context, task
 
-from training import train as stages
+# Keep scientific/MLflow imports inside tasks: the scheduler repeatedly parses
+# this module under a short import timeout, including on a cold WSL startup.
 
 
 def context() -> tuple[Path, dict, str]:
@@ -16,7 +17,7 @@ def context() -> tuple[Path, dict, str]:
     run_id = ctx["run_id"]
     directory = hashlib.sha256(run_id.encode()).hexdigest()[:20]
     conf = ctx["dag_run"].conf or {}
-    return stages.ROOT / ".runtime/training" / directory, conf, run_id
+    return Path(__file__).resolve().parents[1] / ".runtime/training" / directory, conf, run_id
 
 
 @dag(
@@ -40,15 +41,21 @@ def training_pipeline():
         # Explicit reproducible failure injection; never evaluates arbitrary paths or code.
         if conf.get("inject_validation_failure", False):
             raise ValueError("Injected validation failure: dataset schema missing target column")
+        from training import train as stages
+
         stages.validate(work)
 
     @task
     def preprocess_data():
+        from training import train as stages
+
         work, _, _ = context()
         stages.preprocess(work)
 
     @task
     def train_model():
+        from training import train as stages
+
         work, conf, _ = context()
         c = float(conf.get("c", 1.0))
         if not 0.001 <= c <= 100:
@@ -57,12 +64,16 @@ def training_pipeline():
 
     @task
     def evaluate_and_log():
+        from training import train as stages
+
         work, _, run_id = context()
         logging.info("Evaluating training workflow %s", run_id)
         return stages.evaluate(work, run_id)["run_id"]
 
     @task
     def apply_quality_gate():
+        from training import train as stages
+
         work, conf, _ = context()
         return stages.quality_gate(work, float(conf.get("minimum_f1", 0.9)))
 

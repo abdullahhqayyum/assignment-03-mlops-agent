@@ -3,6 +3,7 @@
 import argparse
 import json
 import os
+import re
 import secrets
 import sys
 from pathlib import Path
@@ -20,6 +21,10 @@ def main() -> None:
     target = ROOT / ".env"
     existing = dotenv_values(target) if target.exists() else {}
     values = dict(dotenv_values(ROOT / ".env.example")) | existing
+    username = values.get("AIRFLOW_USERNAME") or "admin"
+    if not re.fullmatch(r"[a-zA-Z0-9_.-]{1,64}", username):
+        raise SystemExit("AIRFLOW_USERNAME must contain 1-64 letters, digits, dots, underscores or hyphens")
+    values["AIRFLOW_USERNAME"] = username
     if args.reuse_env and not values.get("OPENROUTER_API_KEY"):
         previous = dotenv_values(args.reuse_env)
         values["OPENROUTER_API_KEY"] = previous.get("OPENROUTER_API_KEY", "")
@@ -39,7 +44,7 @@ def main() -> None:
     target.write_text("".join(f"{key}={value or ''}\n" for key, value in values.items()), encoding="utf-8")
     secret_dir = ROOT / ".runtime/airflow-secrets"
     secret_dir.mkdir(parents=True, exist_ok=True)
-    (secret_dir / "passwords.json").write_text(json.dumps({"admin": values["AIRFLOW_PASSWORD"]}))
+    (secret_dir / "passwords.json").write_text(json.dumps({username: values["AIRFLOW_PASSWORD"]}))
     (ROOT / ".runtime/training").mkdir(parents=True, exist_ok=True)
     print("Local .env and Airflow credentials configured; secret values were not printed.")
     if not values.get("OPENROUTER_API_KEY"):

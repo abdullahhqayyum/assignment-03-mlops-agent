@@ -9,7 +9,7 @@ import pytest
 from agent.config import Settings
 from agent.logging import Redactor
 from agent.registry import Registry, Tool
-from agent.schemas import DatasetVersion, TriggerDag
+from agent.schemas import Cluster, DatasetVersion, TriggerDag
 from agent.tools.airflow_tools import AirflowTools
 from agent.tools.dvc_tools import DVCTools
 from agent.tools.kubernetes_tools import KubernetesTools
@@ -156,3 +156,81 @@ def test_unknown_bearer_and_url_credentials_are_scrubbed():
     text = "Authorization: Bearer opaque123 https://user:private-password@example.test"
     result = Redactor().clean(text)
     assert "opaque123" not in result and "private-password" not in result
+
+
+@pytest.mark.parametrize("arguments", [{}, {"namespace": None}])
+def test_omitted_namespace_uses_configuration_and_still_rejects_other_namespaces(arguments):
+    registry = Registry(
+        Settings(namespace="team-demo"),
+        [Tool("kubernetes_workloads", "status", Cluster, lambda namespace: {"namespace": namespace})],
+    )
+    result = registry.execute("kubernetes_workloads", arguments, "configured-namespace")
+    assert result.status == "ok"
+    assert result.data["namespace"] == "team-demo"
+    denied = registry.execute("kubernetes_workloads", {"namespace": "mlops-agent"}, "wrong-namespace")
+    assert denied.error["code"] == "unauthorized"
+
+
+def test_direct_adapter_uses_configured_namespace():
+    observed = []
+
+    def proxy(service, namespace, path, **kwargs):
+        observed.append(namespace)
+        return Obj(data=b'{"run_id":"actual-model"}', close=lambda: None)
+
+    core = Obj(connect_get_namespaced_service_proxy_with_path=proxy)
+    result = KubernetesTools(Settings(namespace="team-demo"), core=core, apps=Obj()).app_version()
+    assert observed == ["team-demo"]
+    assert result["namespace"] == "team-demo"
+
+
+@pytest.mark.parametrize("kubeconfig", [None, "/custom/cluster-config"])
+def test_live_prediction_uses_configured_cluster_without_a_fixed_local_port(kubeconfig, monkeypatch):
+    from scripts import verify_live
+
+    observed = []
+
+    def run(command, **kwargs):
+        observed.append((command, kwargs))
+        return Obj(stdout='{"class_name":"setosa","run_id":"actual-model"}')
+
+    monkeypatch.setattr(verify_live.subprocess, "run", run)
+    sample = {"features": [5.1, 3.5, 1.4, 0.2]}
+    result = verify_live.predict_through_service(
+        Settings(namespace="team-demo", kubeconfig=kubeconfig), sample
+    )
+    command, kwargs = observed[0]
+    assert result["run_id"] == "actual-model"
+    assert "/api/v1/namespaces/team-demo/services/iris-api:80/proxy/predict" in command
+    assert json.loads(kwargs["input"]) == sample
+    assert ("--kubeconfig" in command) == bool(kubeconfig)
+    assert "port-forward" not in command and None not in command
+
+
+def test_configure_uses_custom_airflow_username_without_printing_credentials(tmp_path, monkeypatch, capsys):
+    import sys
+
+    from scripts import configure
+
+    (tmp_path / ".env.example").write_text(
+        "AIRFLOW_USERNAME=demo-operator\nAIRFLOW_PASSWORD=local-test-value\n"
+    )
+    monkeypatch.setattr(configure, "ROOT", tmp_path)
+    monkeypatch.setattr(sys, "argv", ["configure.py"])
+    configure.main()
+    passwords = json.loads((tmp_path / ".runtime/airflow-secrets/passwords.json").read_text())
+    assert passwords == {"demo-operator": "local-test-value"}
+    assert "local-test-value" not in capsys.readouterr().out
+
+
+def test_configure_rejects_airflow_username_role_injection(tmp_path, monkeypatch):
+    import sys
+
+    from scripts import configure
+
+    (tmp_path / ".env.example").write_text("AIRFLOW_USERNAME=operator:admin,other:admin\n")
+    monkeypatch.setattr(configure, "ROOT", tmp_path)
+    monkeypatch.setattr(sys, "argv", ["configure.py"])
+    with pytest.raises(SystemExit, match="AIRFLOW_USERNAME"):
+        configure.main()
+    assert not (tmp_path / ".env").exists()

@@ -12,3 +12,11 @@ __pycache__
 **/__pycache__
 .pytest_cache
 .ruff_cache
+.venv-wsl
+*.exe
+*.dll
+*.zip
+*.log
+*.pem
+*.key
+kubeconfig*

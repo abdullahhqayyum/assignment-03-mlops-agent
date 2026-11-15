@@ -17,12 +17,14 @@ class KubernetesTools:
             self._core, self._apps = client.CoreV1Api(), client.AppsV1Api()
         return self._core, self._apps
 
-    def scope(self, namespace: str) -> None:
+    def scope(self, namespace: str | None) -> str:
+        namespace = self.settings.namespace if namespace is None else namespace
         if namespace != self.settings.namespace:
             raise PermissionError("Namespace is outside the approved Kubernetes namespace")
+        return namespace
 
-    def workload_status(self, namespace: str = "mlops-agent") -> dict:
-        self.scope(namespace)
+    def workload_status(self, namespace: str | None = None) -> dict:
+        namespace = self.scope(namespace)
         core, apps = self.clients()
         kwargs = {"label_selector": "app=iris-api", "_request_timeout": self.settings.tool_timeout}
         pods = core.list_namespaced_pod(namespace, **kwargs)
@@ -69,8 +71,8 @@ class KubernetesTools:
         ]
         return {"namespace": namespace, "pods": pod_data, "deployments": deployment_data}
 
-    def services(self, namespace: str = "mlops-agent") -> dict:
-        self.scope(namespace)
+    def services(self, namespace: str | None = None) -> dict:
+        namespace = self.scope(namespace)
         core, _ = self.clients()
         services = core.list_namespaced_service(
             namespace, label_selector="", _request_timeout=self.settings.tool_timeout
@@ -99,7 +101,7 @@ class KubernetesTools:
         }
 
     def pod_logs(self, namespace: str, pod: str, tail_lines: int = 80) -> dict:
-        self.scope(namespace)
+        namespace = self.scope(namespace)
         core, _ = self.clients()
         obj = core.read_namespaced_pod(pod, namespace, _request_timeout=self.settings.tool_timeout)
         if (obj.metadata.labels or {}).get("app") != "iris-api":
@@ -113,8 +115,8 @@ class KubernetesTools:
         )
         return {"pod": pod, "namespace": namespace, "logs": logs, "tail_lines": tail_lines}
 
-    def events(self, namespace: str = "mlops-agent") -> dict:
-        self.scope(namespace)
+    def events(self, namespace: str | None = None) -> dict:
+        namespace = self.scope(namespace)
         core, _ = self.clients()
         result = core.list_namespaced_event(namespace, _request_timeout=self.settings.tool_timeout)
         selected = [e for e in result.items if e.involved_object.name.startswith("iris-api")]
@@ -133,10 +135,10 @@ class KubernetesTools:
             ][-40:],
         }
 
-    def app_version(self, namespace: str = "mlops-agent") -> dict:
+    def app_version(self, namespace: str | None = None) -> dict:
         import json
 
-        self.scope(namespace)
+        namespace = self.scope(namespace)
         core, _ = self.clients()
         response = core.connect_get_namespaced_service_proxy_with_path(
             "iris-api:80",
@@ -155,8 +157,8 @@ class KubernetesTools:
             "source": "Kubernetes Service proxy -> running application's /version",
         }
 
-    def restart(self, namespace: str = "mlops-agent", deployment: str = "iris-api") -> dict:
-        self.scope(namespace)
+    def restart(self, namespace: str | None = None, deployment: str = "iris-api") -> dict:
+        namespace = self.scope(namespace)
         if deployment != "iris-api":
             raise PermissionError("Only the iris-api Deployment can be restarted")
         _, apps = self.clients()

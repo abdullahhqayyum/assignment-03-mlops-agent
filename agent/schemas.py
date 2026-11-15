@@ -64,7 +64,7 @@ class TriggerDag(Dag):
 
 
 class Cluster(Arguments):
-    namespace: Namespace = "mlops-agent"
+    namespace: Namespace | None = Field(default=None, description="Defaults to KUBERNETES_NAMESPACE")
 
 
 class PodLog(Cluster):

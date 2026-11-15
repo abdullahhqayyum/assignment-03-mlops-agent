@@ -19,3 +19,26 @@ coverage.xml
 .coverage
 htmlcov/
 .tools/
+# Generated tools, archives, model artifacts and credentials are never submission source.
+*.exe
+*.dll
+*.pyd
+*.so
+*.bin
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.joblib
+*.pkl
+*.npy
+*.npz
+*.log
+*.pem
+*.key
+kubeconfig*
+.kube/
+build/
+dist/
+.DS_Store
+Thumbs.db

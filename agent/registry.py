@@ -207,6 +207,8 @@ class Registry:
                 raise ValueError("Unknown tool")
             tool = self.tools[name]
             values = tool.arguments.model_validate(arguments).model_dump()
+            if name.startswith("kubernetes_") and values.get("namespace") is None:
+                values["namespace"] = self.settings.namespace
             if name.startswith("kubernetes_") and values.get("namespace") != self.settings.namespace:
                 raise PermissionError("Namespace is outside the approved Kubernetes namespace")
             if name == "airflow_trigger" and values["dag_id"] not in self.settings.approved_dags:
