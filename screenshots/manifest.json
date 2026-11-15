@@ -1,0 +1,67 @@
+﻿{
+    "capture_date":  "2026-11-15",
+    "count":  10,
+    "index":  "README.md",
+    "screenshots":  [
+                        {
+                            "file":  "01-mlflow-runs.png",
+                            "bytes":  79958,
+                            "captured_at_utc":  "2026-11-15T16:07:46.0320828Z",
+                            "sha256":  "9e185728acb435860703d297c44c8fdbb1e948dd103d6881a5f4abe6f761435a"
+                        },
+                        {
+                            "file":  "01b-mlflow-best-model.png",
+                            "bytes":  83248,
+                            "captured_at_utc":  "2026-11-15T16:07:47.4821131Z",
+                            "sha256":  "de03a3aef90c71fade700a48143eaf1c43721e9f242f8c52d2bcc069ec0fdaac"
+                        },
+                        {
+                            "file":  "02-airflow-pipeline.png",
+                            "bytes":  95390,
+                            "captured_at_utc":  "2026-11-15T16:09:40.5790953Z",
+                            "sha256":  "d6ebb30715cd3061285bcd2a7c2aee6f85a8e0af27ad5fa989ee3519aa93e89e"
+                        },
+                        {
+                            "file":  "02b-airflow-success.png",
+                            "bytes":  94844,
+                            "captured_at_utc":  "2026-11-15T16:09:42.1424900Z",
+                            "sha256":  "ca288a6752edfadc79d99e465782b6f6150b15c9657e76ef196f51db839095d8"
+                        },
+                        {
+                            "file":  "03-dvc-provenance.png",
+                            "bytes":  72461,
+                            "captured_at_utc":  "2026-11-15T16:05:35.3916184Z",
+                            "sha256":  "803bf11fbf29ebd00b048c01ae070fe9220bd5bf5380d5d50365c67c4f174f72"
+                        },
+                        {
+                            "file":  "04-kubernetes-health.png",
+                            "bytes":  79673,
+                            "captured_at_utc":  "2026-11-15T16:05:35.9343240Z",
+                            "sha256":  "b218c8f13d79ba66bf011b600ef0ef91a5aa3dd905c3336e97ae196c68f4d717"
+                        },
+                        {
+                            "file":  "05-integrated-agent.png",
+                            "bytes":  146545,
+                            "captured_at_utc":  "2026-11-15T16:05:40.6218023Z",
+                            "sha256":  "33646ab3e9dc17f9265b3f562a119d302b0e3cdd3d1322ab96b9ab2174521122"
+                        },
+                        {
+                            "file":  "06-live-prediction.png",
+                            "bytes":  78432,
+                            "captured_at_utc":  "2026-11-15T16:05:37.6413903Z",
+                            "sha256":  "342701132e62f21717f0d22a27256fbb3b65a907bd53e74affffc84556af2eb0"
+                        },
+                        {
+                            "file":  "07-quality-gate-failure.png",
+                            "bytes":  128077,
+                            "captured_at_utc":  "2026-11-15T16:05:41.5044962Z",
+                            "sha256":  "174dd7b4018e02f8fca189e5729a2b1546754d4df8d65a7fbd0f1978afc3e6d0"
+                        },
+                        {
+                            "file":  "08-validation-failure.png",
+                            "bytes":  129808,
+                            "captured_at_utc":  "2026-11-15T16:05:42.1802325Z",
+                            "sha256":  "012bfcb3adde7d343226eb4a7c36b37c2b123849759fe8dce9ac060ef0d38b19"
+                        }
+                    ]
+}

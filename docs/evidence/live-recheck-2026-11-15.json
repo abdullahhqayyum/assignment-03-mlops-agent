@@ -1,0 +1,4345 @@
+{
+  "observed_at": "2026-11-15T15:53:39.986984+00:00",
+  "mode": "real_services",
+  "checks": {
+    "dvc_list_datasets": [
+      {
+        "evidence_id": "ev_7166d193edd8",
+        "request_id": "live-verification",
+        "tool": "dvc_list_datasets",
+        "source": "dvc",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:53:44.321122+00:00",
+        "duration_ms": 12224.33,
+        "data": {
+          "datasets": [
+            {
+              "isout": true,
+              "isdir": false,
+              "isexec": false,
+              "size": 473,
+              "md5": "d6281879a9ff3de1d50a4fcc233d9abc",
+              "path": ".runtime/training/local/metadata.json"
+            },
+            {
+              "isout": true,
+              "isdir": false,
+              "isexec": false,
+              "size": 1585,
+              "md5": "5c7414d5b8f4e3d0e871055cfa43fc54",
+              "path": ".runtime/training/local/model.joblib"
+            },
+            {
+              "isout": true,
+              "isdir": false,
+              "isexec": false,
+              "size": 58,
+              "md5": "2390fc970b7f6c5fb5ed89eb5c68e9d2",
+              "path": ".runtime/training/local/parameters.json"
+            },
+            {
+              "isout": true,
+              "isdir": false,
+              "isexec": false,
+              "size": 189,
+              "md5": "7f118deebbe79ed4f8482e1d2f31054b",
+              "path": ".runtime/training/local/provenance.json"
+            },
+            {
+              "isout": true,
+              "isdir": false,
+              "isexec": false,
+              "size": 7002,
+              "md5": "a844df34d22d0e13a853595d5c79cd75",
+              "path": ".runtime/training/local/split.npz"
+            },
+            {
+              "isout": true,
+              "isdir": false,
+              "isexec": false,
+              "size": 6128,
+              "md5": "fe13d561bdebe0f29a35f4c75cd401ee",
+              "path": ".runtime/training/local/validated.npy"
+            },
+            {
+              "isout": true,
+              "isdir": false,
+              "isexec": false,
+              "size": 2757,
+              "md5": "4224576f0267bf88902f87f0f6200967",
+              "path": "data/iris.csv"
+            }
+          ]
+        },
+        "error": null
+      }
+    ],
+    "dvc_status": [
+      {
+        "evidence_id": "ev_3d779167d23e",
+        "request_id": "live-verification",
+        "tool": "dvc_status",
+        "source": "dvc",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:53:56.547504+00:00",
+        "duration_ms": 2032.52,
+        "data": {
+          "status": {}
+        },
+        "error": null
+      }
+    ],
+    "mlflow_list_experiments": [
+      {
+        "evidence_id": "ev_e442b0e018d7",
+        "request_id": "live-verification",
+        "tool": "mlflow_list_experiments",
+        "source": "mlflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:53:58.581143+00:00",
+        "duration_ms": 1859.31,
+        "data": {
+          "experiments": [
+            {
+              "id": "1",
+              "name": "iris-classification"
+            },
+            {
+              "id": "0",
+              "name": "Default"
+            }
+          ],
+          "limit": 50
+        },
+        "error": null
+      }
+    ],
+    "airflow_list_dags": [
+      {
+        "evidence_id": "ev_a65b0d9a7f2e",
+        "request_id": "live-verification",
+        "tool": "airflow_list_dags",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:00.442078+00:00",
+        "duration_ms": 1867.57,
+        "data": {
+          "dags": [
+            {
+              "dag_id": "training_pipeline",
+              "is_paused": false
+            }
+          ],
+          "total_entries": 1,
+          "approved_dags": [
+            "training_pipeline"
+          ]
+        },
+        "error": null
+      }
+    ],
+    "mlflow_best_run": [
+      {
+        "evidence_id": "ev_56df64eb3ddb",
+        "request_id": "live-verification",
+        "tool": "mlflow_best_run",
+        "source": "mlflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:02.310684+00:00",
+        "duration_ms": 60.53,
+        "data": {
+          "runs": [
+            {
+              "run_id": "ef1d1a0baeb844199ee30601fc78cba3",
+              "experiment_id": "1",
+              "status": "FINISHED",
+              "start_time": 1794611066567,
+              "metrics": {
+                "f1": 0.9229629629629629,
+                "accuracy": 0.9210526315789473
+              },
+              "params": {
+                "C": "1.0",
+                "random_state": "42",
+                "test_size": "0.25"
+              },
+              "tags": {
+                "mlflow.user": "root",
+                "mlflow.source.name": "/root/assignment-03-mlops-agent/training/train.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                "dataset.path": "data/iris.csv",
+                "dataset.rows": "150",
+                "workflow.run_id": "local",
+                "quality_gate": "passed",
+                "mlflow.runName": "local",
+                "quality_gate.minimum_f1": "0.9"
+              }
+            },
+            {
+              "run_id": "d7c8b26401ac45c1834bc7e6bef483d4",
+              "experiment_id": "1",
+              "status": "FINISHED",
+              "start_time": 1794610889042,
+              "metrics": {
+                "f1": 0.9229629629629629,
+                "accuracy": 0.9210526315789473
+              },
+              "params": {
+                "C": "1.0",
+                "random_state": "42",
+                "test_size": "0.25"
+              },
+              "tags": {
+                "mlflow.user": "root",
+                "mlflow.source.name": "/home/airflow/.local/bin/airflow",
+                "mlflow.source.type": "LOCAL",
+                "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                "dataset.path": "data/iris.csv",
+                "dataset.rows": "150",
+                "workflow.run_id": "agent_28f4ac8d9eb947d48d9b35b0e9e37dcd",
+                "quality_gate": "passed",
+                "airflow.run_id": "agent_28f4ac8d9eb947d48d9b35b0e9e37dcd",
+                "mlflow.runName": "agent_28f4ac8d9eb947d48d9b35b0e9e37dcd",
+                "quality_gate.minimum_f1": "0.9"
+              }
+            },
+            {
+              "run_id": "24662e59aa414bc4bfae2c553546f9b1",
+              "experiment_id": "1",
+              "status": "FINISHED",
+              "start_time": 1794610875254,
+              "metrics": {
+                "f1": 0.9487179487179488,
+                "accuracy": 0.9473684210526315
+              },
+              "params": {
+                "C": "10.0",
+                "random_state": "42",
+                "test_size": "0.25"
+              },
+              "tags": {
+                "mlflow.user": "root",
+                "mlflow.source.name": "-c",
+                "mlflow.source.type": "LOCAL",
+                "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                "dataset.path": "data/iris.csv",
+                "dataset.rows": "150",
+                "workflow.run_id": "local-seed-C-10.0",
+                "quality_gate": "passed",
+                "mlflow.runName": "local-seed-C-10.0",
+                "quality_gate.minimum_f1": "0.7"
+              }
+            },
+            {
+              "run_id": "c826b951953a4376b5b04914ae8e39d7",
+              "experiment_id": "1",
+              "status": "FINISHED",
+              "start_time": 1794610871550,
+              "metrics": {
+                "f1": 0.9487179487179488,
+                "accuracy": 0.9473684210526315
+              },
+              "params": {
+                "C": "5.0",
+                "random_state": "42",
+                "test_size": "0.25"
+              },
+              "tags": {
+                "mlflow.user": "root",
+                "mlflow.source.name": "-c",
+                "mlflow.source.type": "LOCAL",
+                "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                "dataset.path": "data/iris.csv",
+                "dataset.rows": "150",
+                "workflow.run_id": "local-seed-C-5.0",
+                "quality_gate": "passed",
+                "mlflow.runName": "local-seed-C-5.0",
+                "quality_gate.minimum_f1": "0.7"
+              }
+            },
+            {
+              "run_id": "ccc4a5853ed24224b18678247c6ac3b8",
+              "experiment_id": "1",
+              "status": "FINISHED",
+              "start_time": 1794610862789,
+              "metrics": {
+                "f1": 0.9229629629629629,
+                "accuracy": 0.9210526315789473
+              },
+              "params": {
+                "C": "1.0",
+                "random_state": "42",
+                "test_size": "0.25"
+              },
+              "tags": {
+                "mlflow.user": "root",
+                "mlflow.source.name": "-c",
+                "mlflow.source.type": "LOCAL",
+                "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                "dataset.path": "data/iris.csv",
+                "dataset.rows": "150",
+                "workflow.run_id": "local-seed-C-1.0",
+                "quality_gate": "passed",
+                "mlflow.runName": "local-seed-C-1.0",
+                "quality_gate.minimum_f1": "0.7"
+              }
+            }
+          ],
+          "limit": 5,
+          "experiment_ids": [
+            "1",
+            "0"
+          ],
+          "metric": "f1",
+          "direction": "maximize",
+          "best": {
+            "run_id": "24662e59aa414bc4bfae2c553546f9b1",
+            "experiment_id": "1",
+            "status": "FINISHED",
+            "start_time": 1794610875254,
+            "metrics": {
+              "f1": 0.9487179487179488,
+              "accuracy": 0.9473684210526315
+            },
+            "params": {
+              "C": "10.0",
+              "random_state": "42",
+              "test_size": "0.25"
+            },
+            "tags": {
+              "mlflow.user": "root",
+              "mlflow.source.name": "-c",
+              "mlflow.source.type": "LOCAL",
+              "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+              "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+              "dataset.path": "data/iris.csv",
+              "dataset.rows": "150",
+              "workflow.run_id": "local-seed-C-10.0",
+              "quality_gate": "passed",
+              "mlflow.runName": "local-seed-C-10.0",
+              "quality_gate.minimum_f1": "0.7"
+            }
+          },
+          "candidate_age_days": 1.70332310836792,
+          "freshness_policy_days": null,
+          "freshness_policy_exceeded": null,
+          "selection_scope": "Best finite metric among at most 5 recent runs, not all history",
+          "caution": "Metric ranking alone does not establish production readiness; check gate, data, workflow and deployment."
+        },
+        "error": null
+      }
+    ],
+    "dvc_dataset_version": [
+      {
+        "evidence_id": "ev_0b8f4e0a929c",
+        "request_id": "live-verification",
+        "tool": "dvc_dataset_version",
+        "source": "dvc",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:02.373720+00:00",
+        "duration_ms": 51.39,
+        "data": {
+          "git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+          "reference": "8234870d72d3b706fa963335857a0c80f0252cab",
+          "dataset": "data/iris.csv",
+          "outputs": [
+            {
+              "md5": "4224576f0267bf88902f87f0f6200967",
+              "size": 2757,
+              "hash": "md5",
+              "path": "iris.csv"
+            }
+          ]
+        },
+        "error": null
+      }
+    ],
+    "mlflow_run_details": [
+      {
+        "evidence_id": "ev_7ef56c923636",
+        "request_id": "live-verification",
+        "tool": "mlflow_run_details",
+        "source": "mlflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:02.426780+00:00",
+        "duration_ms": 114.78,
+        "data": {
+          "run_id": "24662e59aa414bc4bfae2c553546f9b1",
+          "experiment_id": "1",
+          "status": "FINISHED",
+          "start_time": 1794610875254,
+          "metrics": {
+            "f1": 0.9487179487179488,
+            "accuracy": 0.9473684210526315
+          },
+          "params": {
+            "C": "10.0",
+            "random_state": "42",
+            "test_size": "0.25"
+          },
+          "tags": {
+            "mlflow.user": "root",
+            "mlflow.source.name": "-c",
+            "mlflow.source.type": "LOCAL",
+            "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+            "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+            "dataset.path": "data/iris.csv",
+            "dataset.rows": "150",
+            "workflow.run_id": "local-seed-C-10.0",
+            "quality_gate": "passed",
+            "mlflow.runName": "local-seed-C-10.0",
+            "quality_gate.minimum_f1": "0.7"
+          },
+          "artifacts": [
+            "inference",
+            "provenance"
+          ]
+        },
+        "error": null
+      }
+    ],
+    "mlflow_registry": [
+      {
+        "evidence_id": "ev_b7ef4664a80a",
+        "request_id": "live-verification",
+        "tool": "mlflow_registry",
+        "source": "mlflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:02.543381+00:00",
+        "duration_ms": 112.29,
+        "data": {
+          "models": [
+            {
+              "name": "iris-classifier",
+              "aliases": {}
+            }
+          ],
+          "versions": [
+            {
+              "name": "iris-classifier",
+              "version": "6",
+              "run_id": "ef1d1a0baeb844199ee30601fc78cba3",
+              "status": "READY"
+            },
+            {
+              "name": "iris-classifier",
+              "version": "5",
+              "run_id": "d7c8b26401ac45c1834bc7e6bef483d4",
+              "status": "READY"
+            },
+            {
+              "name": "iris-classifier",
+              "version": "4",
+              "run_id": "24662e59aa414bc4bfae2c553546f9b1",
+              "status": "READY"
+            },
+            {
+              "name": "iris-classifier",
+              "version": "3",
+              "run_id": "c826b951953a4376b5b04914ae8e39d7",
+              "status": "READY"
+            },
+            {
+              "name": "iris-classifier",
+              "version": "2",
+              "run_id": "ccc4a5853ed24224b18678247c6ac3b8",
+              "status": "READY"
+            },
+            {
+              "name": "iris-classifier",
+              "version": "1",
+              "run_id": "418ca82793df435d8d81d655143b0e84",
+              "status": "READY"
+            }
+          ],
+          "limits": {
+            "models": 20,
+            "versions": 50
+          }
+        },
+        "error": null
+      }
+    ],
+    "kubernetes_workloads": [
+      {
+        "evidence_id": "ev_0c79f00118f5",
+        "request_id": "live-verification",
+        "tool": "kubernetes_workloads",
+        "source": "kubernetes",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:02.657740+00:00",
+        "duration_ms": 148.42,
+        "data": {
+          "namespace": "mlops-agent",
+          "pods": [
+            {
+              "name": "iris-api-c95c98ff-nnhj5",
+              "phase": "Running",
+              "conditions": [
+                {
+                  "type": "PodReadyToStartContainers",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "Initialized",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "Ready",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "ContainersReady",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "PodScheduled",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                }
+              ],
+              "containers": [
+                {
+                  "name": "inference",
+                  "ready": true,
+                  "restarts": 3,
+                  "state": {
+                    "running": {
+                      "started_at": "2026-11-15T15:52:35Z"
+                    },
+                    "terminated": null,
+                    "waiting": null
+                  },
+                  "last_state": {
+                    "running": null,
+                    "terminated": {
+                      "container_id": "containerd://864106f2f2d46e16721cf52bd520a25f7c0d3e933ef485203a0e85aeeeadedaf",
+                      "exit_code": 255,
+                      "finished_at": "2026-11-15T15:51:51Z",
+                      "message": null,
+                      "reason": "Unknown",
+                      "signal": null,
+                      "started_at": "2026-11-15T15:50:04Z"
+                    },
+                    "waiting": null
+                  }
+                }
+              ]
+            },
+            {
+              "name": "iris-api-c95c98ff-x5fqk",
+              "phase": "Running",
+              "conditions": [
+                {
+                  "type": "PodReadyToStartContainers",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "Initialized",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "Ready",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "ContainersReady",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "PodScheduled",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                }
+              ],
+              "containers": [
+                {
+                  "name": "inference",
+                  "ready": true,
+                  "restarts": 3,
+                  "state": {
+                    "running": {
+                      "started_at": "2026-11-15T15:52:35Z"
+                    },
+                    "terminated": null,
+                    "waiting": null
+                  },
+                  "last_state": {
+                    "running": null,
+                    "terminated": {
+                      "container_id": "containerd://7e4a2560a6002533fe1e1f875cca78b5d5fc44d4a2deed0e696db0204a246c03",
+                      "exit_code": 255,
+                      "finished_at": "2026-11-15T15:51:51Z",
+                      "message": null,
+                      "reason": "Unknown",
+                      "signal": null,
+                      "started_at": "2026-11-15T15:50:04Z"
+                    },
+                    "waiting": null
+                  }
+                }
+              ]
+            }
+          ],
+          "deployments": [
+            {
+              "name": "iris-api",
+              "desired_replicas": 2,
+              "ready_replicas": 2,
+              "available_replicas": 2,
+              "images": [
+                "mlops-iris:1.0.0"
+              ],
+              "conditions": [
+                {
+                  "type": "Progressing",
+                  "status": "True",
+                  "reason": "NewReplicaSetAvailable",
+                  "message": "ReplicaSet \"iris-api-c95c98ff\" has successfully progressed."
+                },
+                {
+                  "type": "Available",
+                  "status": "True",
+                  "reason": "MinimumReplicasAvailable",
+                  "message": "Deployment has minimum availability."
+                }
+              ]
+            }
+          ]
+        },
+        "error": null
+      }
+    ],
+    "kubernetes_services": [
+      {
+        "evidence_id": "ev_b0516c9a2dcc",
+        "request_id": "live-verification",
+        "tool": "kubernetes_services",
+        "source": "kubernetes",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:02.811569+00:00",
+        "duration_ms": 19.71,
+        "data": {
+          "namespace": "mlops-agent",
+          "services": [
+            {
+              "name": "iris-api",
+              "type": "ClusterIP",
+              "cluster_ip": "10.96.94.220",
+              "selector": {
+                "app": "iris-api"
+              },
+              "ports": [
+                {
+                  "port": 80,
+                  "target_port": 8000
+                }
+              ]
+            }
+          ],
+          "ready_endpoints": [
+            "10.244.0.2",
+            "10.244.0.4"
+          ],
+          "unready_endpoints": []
+        },
+        "error": null
+      }
+    ],
+    "kubernetes_app_version": [
+      {
+        "evidence_id": "ev_65b2d7203e6c",
+        "request_id": "live-verification",
+        "tool": "kubernetes_app_version",
+        "source": "kubernetes",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:02.834623+00:00",
+        "duration_ms": 17.78,
+        "data": {
+          "namespace": "mlops-agent",
+          "application": {
+            "app_version": "1.0.0",
+            "run_id": "24662e59aa414bc4bfae2c553546f9b1",
+            "dataset": {
+              "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+              "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+              "dataset.path": "data/iris.csv",
+              "dataset.rows": "150",
+              "workflow.run_id": "local-seed-C-10.0",
+              "quality_gate": "passed",
+              "quality_gate.minimum_f1": "0.7"
+            },
+            "metrics": {
+              "f1": 0.9487179487179488,
+              "accuracy": 0.9473684210526315
+            },
+            "model_uri": "models:/m-1f73f71a67574904a9f79534398f01d4"
+          },
+          "source": "Kubernetes Service proxy -> running application's /version"
+        },
+        "error": null
+      }
+    ],
+    "kubernetes_events": [
+      {
+        "evidence_id": "ev_0e6b89af5877",
+        "request_id": "live-verification",
+        "tool": "kubernetes_events",
+        "source": "kubernetes",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:02.855315+00:00",
+        "duration_ms": 48.89,
+        "data": {
+          "namespace": "mlops-agent",
+          "events": [
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "SandboxChanged",
+              "message": "Pod sandbox changed, it will be killed and re-created.",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:46:13+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Pulled",
+              "message": "Container image \"mlops-iris:1.0.0\" already present on machine",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:46:16+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Created",
+              "message": "Created container: inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:46:16+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Started",
+              "message": "Started container inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:46:17+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Readiness probe failed: Get \"http://10.244.0.2:8000/readyz\": dial tcp 10.244.0.2:8000: connect: connection refused",
+              "count": 6,
+              "last_timestamp": "2026-11-15 15:46:49+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.2:8000/healthz\": dial tcp 10.244.0.2:8000: connect: connection refused",
+              "count": 2,
+              "last_timestamp": "2026-11-15 15:46:43+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "SandboxChanged",
+              "message": "Pod sandbox changed, it will be killed and re-created.",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:49:40+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Pulled",
+              "message": "Container image \"mlops-iris:1.0.0\" already present on machine",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:03+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Created",
+              "message": "Created container: inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:04+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Started",
+              "message": "Started container inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:04+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Readiness probe failed: Get \"http://10.244.0.2:8000/readyz\": dial tcp 10.244.0.2:8000: connect: connection refused",
+              "count": 4,
+              "last_timestamp": "2026-11-15 15:50:26+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.2:8000/healthz\": dial tcp 10.244.0.2:8000: connect: connection refused",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:20+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.2:8000/healthz\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:32+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "SandboxChanged",
+              "message": "Pod sandbox changed, it will be killed and re-created.",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:19+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Pulled",
+              "message": "Container image \"mlops-iris:1.0.0\" already present on machine",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:33+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Created",
+              "message": "Created container: inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:34+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Started",
+              "message": "Started container inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:35+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Readiness probe failed: Get \"http://10.244.0.2:8000/readyz\": dial tcp 10.244.0.2:8000: connect: connection refused",
+              "count": 5,
+              "last_timestamp": "2026-11-15 15:53:02+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.2:8000/healthz\": dial tcp 10.244.0.2:8000: connect: connection refused",
+              "count": 2,
+              "last_timestamp": "2026-11-15 15:52:59+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "SandboxChanged",
+              "message": "Pod sandbox changed, it will be killed and re-created.",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:46:13+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Pulled",
+              "message": "Container image \"mlops-iris:1.0.0\" already present on machine",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:46:16+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Created",
+              "message": "Created container: inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:46:16+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Started",
+              "message": "Started container inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:46:17+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Readiness probe failed: Get \"http://10.244.0.3:8000/readyz\": dial tcp 10.244.0.3:8000: connect: connection refused",
+              "count": 6,
+              "last_timestamp": "2026-11-15 15:46:49+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.3:8000/healthz\": dial tcp 10.244.0.3:8000: connect: connection refused",
+              "count": 2,
+              "last_timestamp": "2026-11-15 15:46:46+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "SandboxChanged",
+              "message": "Pod sandbox changed, it will be killed and re-created.",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:49:40+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Pulled",
+              "message": "Container image \"mlops-iris:1.0.0\" already present on machine",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:03+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Created",
+              "message": "Created container: inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:04+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Started",
+              "message": "Started container inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:04+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Readiness probe failed: Get \"http://10.244.0.3:8000/readyz\": dial tcp 10.244.0.3:8000: connect: connection refused",
+              "count": 4,
+              "last_timestamp": "2026-11-15 15:50:27+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.3:8000/healthz\": dial tcp 10.244.0.3:8000: connect: connection refused",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:20+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.3:8000/healthz\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:32+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "SandboxChanged",
+              "message": "Pod sandbox changed, it will be killed and re-created.",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:18+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Pulled",
+              "message": "Container image \"mlops-iris:1.0.0\" already present on machine",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:34+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Created",
+              "message": "Created container: inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:34+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Started",
+              "message": "Started container inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:35+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Readiness probe failed: Get \"http://10.244.0.4:8000/readyz\": dial tcp 10.244.0.4:8000: connect: connection refused",
+              "count": 5,
+              "last_timestamp": "2026-11-15 15:53:03+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.4:8000/healthz\": dial tcp 10.244.0.4:8000: connect: connection refused",
+              "count": 2,
+              "last_timestamp": "2026-11-15 15:52:58+00:00"
+            }
+          ]
+        },
+        "error": null
+      }
+    ],
+    "kubernetes_pod_logs": [
+      {
+        "evidence_id": "ev_f64451607091",
+        "request_id": "live-verification",
+        "tool": "kubernetes_pod_logs",
+        "source": "kubernetes",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:02.911452+00:00",
+        "duration_ms": 119.01,
+        "data": {
+          "pod": "iris-api-c95c98ff-nnhj5",
+          "namespace": "mlops-agent",
+          "logs": "INFO:     Started server process [1]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)\nINFO:     10.244.0.1:55266 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:55272 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:55276 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:35020 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:35034 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:35036 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:47348 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:47362 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:47376 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60646 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60652 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60658 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:59008 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:59020 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:59034 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:57298 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:57306 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:57312 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:57322 - \"GET /version HTTP/1.1\" 200 OK\n",
+          "tail_lines": 80
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_3244b5873c92",
+        "request_id": "live-verification",
+        "tool": "kubernetes_pod_logs",
+        "source": "kubernetes",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:03.038791+00:00",
+        "duration_ms": 18.42,
+        "data": {
+          "pod": "iris-api-c95c98ff-x5fqk",
+          "namespace": "mlops-agent",
+          "logs": "INFO:     Started server process [1]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)\nINFO:     10.244.0.1:59320 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:59326 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:59336 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:49458 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:49462 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:49474 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:57672 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:57682 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:57696 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:48716 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:48722 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:48730 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:49378 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:49384 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:49394 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:37330 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:37342 - \"GET /healthz HTTP/1.1\" 200 OK\n",
+          "tail_lines": 80
+        },
+        "error": null
+      }
+    ],
+    "airflow_trigger": [
+      {
+        "evidence_id": "ev_2d97f0194e3b",
+        "request_id": "live-verification",
+        "tool": "airflow_trigger",
+        "source": "airflow",
+        "status": "confirmation_required",
+        "observed_at": "2026-11-15T15:54:04.701541+00:00",
+        "duration_ms": 0.39,
+        "data": {
+          "confirmation_id": "2d79975872b94e80be5b14f6ecae9e7b",
+          "operation": "airflow_trigger",
+          "arguments": {
+            "dag_id": "training_pipeline",
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "expires_in_seconds": 300,
+          "executed": false,
+          "instruction": "Human confirmation required via CLI prompt or POST /confirm"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_e5c2fca3629c",
+        "request_id": "live-verification",
+        "tool": "airflow_trigger",
+        "source": "airflow",
+        "status": "confirmation_required",
+        "observed_at": "2026-11-15T15:56:38.747973+00:00",
+        "duration_ms": 14.18,
+        "data": {
+          "confirmation_id": "0a75007f9c4240c9b724b407aded6daf",
+          "operation": "airflow_trigger",
+          "arguments": {
+            "dag_id": "training_pipeline",
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": true
+          },
+          "expires_in_seconds": 300,
+          "executed": false,
+          "instruction": "Human confirmation required via CLI prompt or POST /confirm"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_af49debe19db",
+        "request_id": "live-verification",
+        "tool": "airflow_trigger",
+        "source": "airflow",
+        "status": "confirmation_required",
+        "observed_at": "2026-11-15T15:56:59.370882+00:00",
+        "duration_ms": 2.19,
+        "data": {
+          "confirmation_id": "f91cf1a33651426e9df76dfb57c9cb6a",
+          "operation": "airflow_trigger",
+          "arguments": {
+            "dag_id": "training_pipeline",
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": false
+          },
+          "expires_in_seconds": 300,
+          "executed": false,
+          "instruction": "Human confirmation required via CLI prompt or POST /confirm"
+        },
+        "error": null
+      }
+    ],
+    "airflow_run_status": [
+      {
+        "evidence_id": "ev_ea276b4f9d2b",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:05.931706+00:00",
+        "duration_ms": 106.12,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": null,
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": null,
+          "run_type": "manual",
+          "state": "queued",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_73fb92a82e0e",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:11.055804+00:00",
+        "duration_ms": 181.89,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:54:10.561647Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_dfa17de4f25b",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:16.514591+00:00",
+        "duration_ms": 601.77,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:54:13.194451Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_cce19e038bff",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:22.124384+00:00",
+        "duration_ms": 33.83,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:54:16.524989Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_580fdae9bcb1",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:27.163087+00:00",
+        "duration_ms": 26857.85,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:54:52.819980Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_ce3fc9266189",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:59.068995+00:00",
+        "duration_ms": 1730.96,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:54:58.359677Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_e7c971ddda40",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:55:05.807264+00:00",
+        "duration_ms": 213.69,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:55:00.219944Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_bdb9ac8f91ce",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:55:11.029765+00:00",
+        "duration_ms": 17.6,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:55:10.354351Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_8e052303ce77",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:55:16.054076+00:00",
+        "duration_ms": 46.49,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:55:15.600795Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_41ee46f805f1",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:55:21.128802+00:00",
+        "duration_ms": 58.6,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:55:20.586349Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_75a21a6d11ba",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:55:26.227525+00:00",
+        "duration_ms": 630.61,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:55:25.434701Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_32e36c662f61",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:55:31.930507+00:00",
+        "duration_ms": 16.34,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:55:31.025650Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_7666f85653ff",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:55:37.164479+00:00",
+        "duration_ms": 1087.02,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:55:35.624922Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_7df6297f4c51",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:55:43.909334+00:00",
+        "duration_ms": 41.61,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:55:43.842299Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_afca8757e963",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:55:48.971500+00:00",
+        "duration_ms": 24.74,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:55:48.109653Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_7cd31c01b65e",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:55:54.011301+00:00",
+        "duration_ms": 124.05,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:55:53.691805Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_03fb84929104",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:55:59.176334+00:00",
+        "duration_ms": 141.7,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:55:59.073720Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_14109bcd6257",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:04.464999+00:00",
+        "duration_ms": 1501.07,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:56:01.904259Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_72a9f86d440c",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:11.546772+00:00",
+        "duration_ms": 33.07,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:56:10.623127Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_7de84c43fdc0",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:16.605192+00:00",
+        "duration_ms": 34.54,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:56:16.398826Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_42ff81c1b2dd",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:21.654324+00:00",
+        "duration_ms": 17.73,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:56:20.667481Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_2cc175202dfa",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:26.684382+00:00",
+        "duration_ms": 139.19,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:56:25.812515Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_6e7ac2764413",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:32.304654+00:00",
+        "duration_ms": 464.19,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:56:27.971905Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_32b2b7982c62",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:37.892726+00:00",
+        "duration_ms": 29.51,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": "2026-11-15T15:54:08.734084Z",
+          "end_date": "2026-11-15T15:56:37.765560Z",
+          "duration": 149.031476,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": "2026-11-15T15:56:37.760971Z",
+          "run_type": "manual",
+          "state": "failed",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_304598c33baa",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:38.997919+00:00",
+        "duration_ms": 26.62,
+        "data": {
+          "dag_run_id": "agent_2f057edf871f4f308fd6792d3c4f6c3e",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:38.791673Z",
+          "queued_at": "2026-11-15T15:56:38.909308Z",
+          "start_date": null,
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:56:38.791673Z",
+          "data_interval_end": "2026-11-15T15:56:38.791673Z",
+          "run_after": "2026-11-15T15:56:38.791673Z",
+          "last_scheduling_decision": null,
+          "run_type": "manual",
+          "state": "queued",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": true
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_afab6da6ac49",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:44.037838+00:00",
+        "duration_ms": 45.1,
+        "data": {
+          "dag_run_id": "agent_2f057edf871f4f308fd6792d3c4f6c3e",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:38.791673Z",
+          "queued_at": "2026-11-15T15:56:38.909308Z",
+          "start_date": "2026-11-15T15:56:39.861171Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:56:38.791673Z",
+          "data_interval_end": "2026-11-15T15:56:38.791673Z",
+          "run_after": "2026-11-15T15:56:38.791673Z",
+          "last_scheduling_decision": "2026-11-15T15:56:43.360318Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": true
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_165bf9f063f5",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:49.117736+00:00",
+        "duration_ms": 43.01,
+        "data": {
+          "dag_run_id": "agent_2f057edf871f4f308fd6792d3c4f6c3e",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:38.791673Z",
+          "queued_at": "2026-11-15T15:56:38.909308Z",
+          "start_date": "2026-11-15T15:56:39.861171Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:56:38.791673Z",
+          "data_interval_end": "2026-11-15T15:56:38.791673Z",
+          "run_after": "2026-11-15T15:56:38.791673Z",
+          "last_scheduling_decision": "2026-11-15T15:56:48.392599Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": true
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_de5096350391",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:54.180032+00:00",
+        "duration_ms": 19.76,
+        "data": {
+          "dag_run_id": "agent_2f057edf871f4f308fd6792d3c4f6c3e",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:38.791673Z",
+          "queued_at": "2026-11-15T15:56:38.909308Z",
+          "start_date": "2026-11-15T15:56:39.861171Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:56:38.791673Z",
+          "data_interval_end": "2026-11-15T15:56:38.791673Z",
+          "run_after": "2026-11-15T15:56:38.791673Z",
+          "last_scheduling_decision": "2026-11-15T15:56:53.438088Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": true
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_9d03f2e7980c",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:59.213471+00:00",
+        "duration_ms": 23.07,
+        "data": {
+          "dag_run_id": "agent_2f057edf871f4f308fd6792d3c4f6c3e",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:38.791673Z",
+          "queued_at": "2026-11-15T15:56:38.909308Z",
+          "start_date": "2026-11-15T15:56:39.861171Z",
+          "end_date": "2026-11-15T15:56:55.528714Z",
+          "duration": 15.667543,
+          "data_interval_start": "2026-11-15T15:56:38.791673Z",
+          "data_interval_end": "2026-11-15T15:56:38.791673Z",
+          "run_after": "2026-11-15T15:56:38.791673Z",
+          "last_scheduling_decision": "2026-11-15T15:56:55.526281Z",
+          "run_type": "manual",
+          "state": "failed",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": true
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_ec431e118f1e",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:59.455752+00:00",
+        "duration_ms": 15.41,
+        "data": {
+          "dag_run_id": "agent_10052de2e43e4df680f37b2e7425ed7f",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:59.386418Z",
+          "queued_at": "2026-11-15T15:56:59.406853Z",
+          "start_date": null,
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:56:59.386418Z",
+          "data_interval_end": "2026-11-15T15:56:59.386418Z",
+          "run_after": "2026-11-15T15:56:59.386418Z",
+          "last_scheduling_decision": null,
+          "run_type": "manual",
+          "state": "queued",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_f3023b9b1d72",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:57:04.485773+00:00",
+        "duration_ms": 25.08,
+        "data": {
+          "dag_run_id": "agent_10052de2e43e4df680f37b2e7425ed7f",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:59.386418Z",
+          "queued_at": "2026-11-15T15:56:59.406853Z",
+          "start_date": "2026-11-15T15:56:59.655771Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:56:59.386418Z",
+          "data_interval_end": "2026-11-15T15:56:59.386418Z",
+          "run_after": "2026-11-15T15:56:59.386418Z",
+          "last_scheduling_decision": "2026-11-15T15:57:03.964722Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_c7cd3b84fb10",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:57:09.530907+00:00",
+        "duration_ms": 7688.0,
+        "data": {
+          "dag_run_id": "agent_10052de2e43e4df680f37b2e7425ed7f",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:59.386418Z",
+          "queued_at": "2026-11-15T15:56:59.406853Z",
+          "start_date": "2026-11-15T15:56:59.655771Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:56:59.386418Z",
+          "data_interval_end": "2026-11-15T15:56:59.386418Z",
+          "run_after": "2026-11-15T15:56:59.386418Z",
+          "last_scheduling_decision": "2026-11-15T15:57:13.484607Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_702b050c9c64",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:57:22.240985+00:00",
+        "duration_ms": 27.5,
+        "data": {
+          "dag_run_id": "agent_10052de2e43e4df680f37b2e7425ed7f",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:59.386418Z",
+          "queued_at": "2026-11-15T15:56:59.406853Z",
+          "start_date": "2026-11-15T15:56:59.655771Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:56:59.386418Z",
+          "data_interval_end": "2026-11-15T15:56:59.386418Z",
+          "run_after": "2026-11-15T15:56:59.386418Z",
+          "last_scheduling_decision": "2026-11-15T15:57:21.189204Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_6fc813a244c9",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:57:27.288525+00:00",
+        "duration_ms": 72.48,
+        "data": {
+          "dag_run_id": "agent_10052de2e43e4df680f37b2e7425ed7f",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:59.386418Z",
+          "queued_at": "2026-11-15T15:56:59.406853Z",
+          "start_date": "2026-11-15T15:56:59.655771Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:56:59.386418Z",
+          "data_interval_end": "2026-11-15T15:56:59.386418Z",
+          "run_after": "2026-11-15T15:56:59.386418Z",
+          "last_scheduling_decision": "2026-11-15T15:57:27.202426Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_c7248629b9f9",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:57:32.474342+00:00",
+        "duration_ms": 1042.01,
+        "data": {
+          "dag_run_id": "agent_10052de2e43e4df680f37b2e7425ed7f",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:59.386418Z",
+          "queued_at": "2026-11-15T15:56:59.406853Z",
+          "start_date": "2026-11-15T15:56:59.655771Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:56:59.386418Z",
+          "data_interval_end": "2026-11-15T15:56:59.386418Z",
+          "run_after": "2026-11-15T15:56:59.386418Z",
+          "last_scheduling_decision": "2026-11-15T15:57:29.509729Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_3bfd53dd9309",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:57:38.702887+00:00",
+        "duration_ms": 44.65,
+        "data": {
+          "dag_run_id": "agent_10052de2e43e4df680f37b2e7425ed7f",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:59.386418Z",
+          "queued_at": "2026-11-15T15:56:59.406853Z",
+          "start_date": "2026-11-15T15:56:59.655771Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:56:59.386418Z",
+          "data_interval_end": "2026-11-15T15:56:59.386418Z",
+          "run_after": "2026-11-15T15:56:59.386418Z",
+          "last_scheduling_decision": "2026-11-15T15:57:34.709866Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_f1066074e1b2",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:57:43.782034+00:00",
+        "duration_ms": 26.58,
+        "data": {
+          "dag_run_id": "agent_10052de2e43e4df680f37b2e7425ed7f",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:59.386418Z",
+          "queued_at": "2026-11-15T15:56:59.406853Z",
+          "start_date": "2026-11-15T15:56:59.655771Z",
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:56:59.386418Z",
+          "data_interval_end": "2026-11-15T15:56:59.386418Z",
+          "run_after": "2026-11-15T15:56:59.386418Z",
+          "last_scheduling_decision": "2026-11-15T15:57:43.517720Z",
+          "run_type": "manual",
+          "state": "running",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_fa950024c54a",
+        "request_id": "live-verification",
+        "tool": "airflow_run_status",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:57:48.830250+00:00",
+        "duration_ms": 25.1,
+        "data": {
+          "dag_run_id": "agent_10052de2e43e4df680f37b2e7425ed7f",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:59.386418Z",
+          "queued_at": "2026-11-15T15:56:59.406853Z",
+          "start_date": "2026-11-15T15:56:59.655771Z",
+          "end_date": "2026-11-15T15:57:46.756085Z",
+          "duration": 47.100314,
+          "data_interval_start": "2026-11-15T15:56:59.386418Z",
+          "data_interval_end": "2026-11-15T15:56:59.386418Z",
+          "run_after": "2026-11-15T15:56:59.386418Z",
+          "last_scheduling_decision": "2026-11-15T15:57:46.752171Z",
+          "run_type": "manual",
+          "state": "success",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      }
+    ],
+    "airflow_tasks": [
+      {
+        "evidence_id": "ev_27b0140d6dea",
+        "request_id": "live-verification",
+        "tool": "airflow_tasks",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:37.943119+00:00",
+        "duration_ms": 430.57,
+        "data": {
+          "tasks": [
+            {
+              "task_id": "validate_dataset",
+              "state": "success",
+              "try_number": 1,
+              "start_date": "2026-11-15T15:54:23.153766Z",
+              "end_date": "2026-11-15T15:55:13.973523Z",
+              "duration": 50.819757,
+              "hostname": "d25dd54a6d1f"
+            },
+            {
+              "task_id": "preprocess_data",
+              "state": "success",
+              "try_number": 1,
+              "start_date": "2026-11-15T15:55:14.719462Z",
+              "end_date": "2026-11-15T15:55:18.220732Z",
+              "duration": 3.50127,
+              "hostname": "d25dd54a6d1f"
+            },
+            {
+              "task_id": "train_model",
+              "state": "success",
+              "try_number": 1,
+              "start_date": "2026-11-15T15:55:20.803272Z",
+              "end_date": "2026-11-15T15:55:24.127941Z",
+              "duration": 3.324669,
+              "hostname": "d25dd54a6d1f"
+            },
+            {
+              "task_id": "evaluate_and_log",
+              "state": "success",
+              "try_number": 1,
+              "start_date": "2026-11-15T15:55:25.538909Z",
+              "end_date": "2026-11-15T15:56:00.557230Z",
+              "duration": 35.018321,
+              "hostname": "d25dd54a6d1f"
+            },
+            {
+              "task_id": "apply_quality_gate",
+              "state": "failed",
+              "try_number": 2,
+              "start_date": "2026-11-15T15:56:24.749662Z",
+              "end_date": "2026-11-15T15:56:34.827025Z",
+              "duration": 10.077363,
+              "hostname": "d25dd54a6d1f"
+            }
+          ],
+          "failed_tasks": [
+            {
+              "task_id": "apply_quality_gate",
+              "state": "failed",
+              "try_number": 2,
+              "start_date": "2026-11-15T15:56:24.749662Z",
+              "end_date": "2026-11-15T15:56:34.827025Z",
+              "duration": 10.077363,
+              "hostname": "d25dd54a6d1f"
+            }
+          ]
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_02dd5da74259",
+        "request_id": "live-verification",
+        "tool": "airflow_tasks",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:59.252790+00:00",
+        "duration_ms": 57.73,
+        "data": {
+          "tasks": [
+            {
+              "task_id": "preprocess_data",
+              "state": "upstream_failed",
+              "try_number": 0,
+              "start_date": "2026-11-15T15:56:52.175704Z",
+              "end_date": "2026-11-15T15:56:52.175704Z",
+              "duration": 0.0,
+              "hostname": ""
+            },
+            {
+              "task_id": "train_model",
+              "state": "upstream_failed",
+              "try_number": 0,
+              "start_date": "2026-11-15T15:56:53.318037Z",
+              "end_date": "2026-11-15T15:56:53.318037Z",
+              "duration": 0.0,
+              "hostname": ""
+            },
+            {
+              "task_id": "evaluate_and_log",
+              "state": "upstream_failed",
+              "try_number": 0,
+              "start_date": "2026-11-15T15:56:53.441248Z",
+              "end_date": "2026-11-15T15:56:53.441248Z",
+              "duration": 0.0,
+              "hostname": ""
+            },
+            {
+              "task_id": "apply_quality_gate",
+              "state": "upstream_failed",
+              "try_number": 0,
+              "start_date": "2026-11-15T15:56:54.490002Z",
+              "end_date": "2026-11-15T15:56:54.490002Z",
+              "duration": 0.0,
+              "hostname": ""
+            },
+            {
+              "task_id": "validate_dataset",
+              "state": "failed",
+              "try_number": 2,
+              "start_date": "2026-11-15T15:56:51.128200Z",
+              "end_date": "2026-11-15T15:56:51.282236Z",
+              "duration": 0.154036,
+              "hostname": "d25dd54a6d1f"
+            }
+          ],
+          "failed_tasks": [
+            {
+              "task_id": "preprocess_data",
+              "state": "upstream_failed",
+              "try_number": 0,
+              "start_date": "2026-11-15T15:56:52.175704Z",
+              "end_date": "2026-11-15T15:56:52.175704Z",
+              "duration": 0.0,
+              "hostname": ""
+            },
+            {
+              "task_id": "train_model",
+              "state": "upstream_failed",
+              "try_number": 0,
+              "start_date": "2026-11-15T15:56:53.318037Z",
+              "end_date": "2026-11-15T15:56:53.318037Z",
+              "duration": 0.0,
+              "hostname": ""
+            },
+            {
+              "task_id": "evaluate_and_log",
+              "state": "upstream_failed",
+              "try_number": 0,
+              "start_date": "2026-11-15T15:56:53.441248Z",
+              "end_date": "2026-11-15T15:56:53.441248Z",
+              "duration": 0.0,
+              "hostname": ""
+            },
+            {
+              "task_id": "apply_quality_gate",
+              "state": "upstream_failed",
+              "try_number": 0,
+              "start_date": "2026-11-15T15:56:54.490002Z",
+              "end_date": "2026-11-15T15:56:54.490002Z",
+              "duration": 0.0,
+              "hostname": ""
+            },
+            {
+              "task_id": "validate_dataset",
+              "state": "failed",
+              "try_number": 2,
+              "start_date": "2026-11-15T15:56:51.128200Z",
+              "end_date": "2026-11-15T15:56:51.282236Z",
+              "duration": 0.154036,
+              "hostname": "d25dd54a6d1f"
+            }
+          ]
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_7af8270a750c",
+        "request_id": "live-verification",
+        "tool": "airflow_tasks",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:57:48.875529+00:00",
+        "duration_ms": 74.75,
+        "data": {
+          "tasks": [
+            {
+              "task_id": "validate_dataset",
+              "state": "success",
+              "try_number": 1,
+              "start_date": "2026-11-15T15:56:59.751883Z",
+              "end_date": "2026-11-15T15:57:02.174620Z",
+              "duration": 2.422737,
+              "hostname": "d25dd54a6d1f"
+            },
+            {
+              "task_id": "preprocess_data",
+              "state": "success",
+              "try_number": 1,
+              "start_date": "2026-11-15T15:57:02.973453Z",
+              "end_date": "2026-11-15T15:57:05.604049Z",
+              "duration": 2.630596,
+              "hostname": "d25dd54a6d1f"
+            },
+            {
+              "task_id": "train_model",
+              "state": "success",
+              "try_number": 1,
+              "start_date": "2026-11-15T15:57:06.189137Z",
+              "end_date": "2026-11-15T15:57:09.500764Z",
+              "duration": 3.311627,
+              "hostname": "d25dd54a6d1f"
+            },
+            {
+              "task_id": "evaluate_and_log",
+              "state": "success",
+              "try_number": 1,
+              "start_date": "2026-11-15T15:57:17.200352Z",
+              "end_date": "2026-11-15T15:57:27.368517Z",
+              "duration": 10.168165,
+              "hostname": "d25dd54a6d1f"
+            },
+            {
+              "task_id": "apply_quality_gate",
+              "state": "success",
+              "try_number": 1,
+              "start_date": "2026-11-15T15:57:28.406585Z",
+              "end_date": "2026-11-15T15:57:45.881087Z",
+              "duration": 17.474502,
+              "hostname": "d25dd54a6d1f"
+            }
+          ],
+          "failed_tasks": []
+        },
+        "error": null
+      }
+    ],
+    "airflow_task_log": [
+      {
+        "evidence_id": "ev_f7640a64fa15",
+        "request_id": "live-verification",
+        "tool": "airflow_task_log",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:38.386863+00:00",
+        "duration_ms": 347.78,
+        "data": {
+          "dag_id": "training_pipeline",
+          "run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "task_id": "apply_quality_gate",
+          "try_number": 2,
+          "content": "[{'event': '::group::Log message source details', 'sources': ['/opt/airflow/logs/dag_id=training_pipeline/run_id=agent_9f2b1582578242a78d343e0a47dd32e9/task_id=apply_quality_gate/attempt=2.log']}, {'event': '::endgroup::'}, {'timestamp': '2026-11-15T15:56:24.807903Z', 'event': 'DAG bundles loaded: dags-folder', 'level': 'info', 'logger': 'airflow.dag_processing.bundles.manager.DagBundlesManager', 'filename': 'manager.py', 'lineno': 179}, {'timestamp': '2026-11-15T15:56:24.809589Z', 'event': 'Filling up the DagBag from /workspace/dags/training_pipeline.py', 'level': 'info', 'logger': 'airflow.models.dagbag.DagBag', 'filename': 'dagbag.py', 'lineno': 593}, {'timestamp': '2026-11-15T15:56:34.689251Z', 'event': 'Task failed with exception', 'level': 'error', 'logger': 'task', 'filename': 'task_runner.py', 'lineno': 994, 'error_detail': [{'exc_type': 'ValueError', 'exc_value': 'Quality gate failed: F1=0.7454 < 1.0', 'exc_notes': [], 'syntax_error': None, 'is_cause': False, 'frames': [{'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/execution_time/task_runner.py', 'lineno': 920, 'name': 'run'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/execution_time/task_runner.py', 'lineno': 1302, 'name': '_execute_task'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/bases/operator.py', 'lineno': 416, 'name': 'wrapper'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/bases/decorator.py', 'lineno': 252, 'name': 'execute'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/bases/operator.py', 'lineno': 416, 'name': 'wrapper'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/providers/standard/operators/python.py', 'lineno': 216, 'name': 'execute'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/providers/standard/operators/python.py', 'lineno': 239, 'name': 'execute_callable'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/execution_time/callback_runner.py', 'lineno': 82, 'name': 'run'}, {'filename': '/workspace/dags/training_pipeline.py', 'lineno': 75, 'name': 'apply_quality_gate'}, {'filename': '/workspace/training/train.py', 'lineno': 135, 'name': 'quality_gate'}], 'is_group': False, 'exceptions': []}]}]",
+          "truncated": false
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_cf6856c86567",
+        "request_id": "live-verification",
+        "tool": "airflow_task_log",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:59.326617+00:00",
+        "duration_ms": 32.3,
+        "data": {
+          "dag_id": "training_pipeline",
+          "run_id": "agent_2f057edf871f4f308fd6792d3c4f6c3e",
+          "task_id": "validate_dataset",
+          "try_number": 2,
+          "content": "[{'event': '::group::Log message source details', 'sources': ['/opt/airflow/logs/dag_id=training_pipeline/run_id=agent_2f057edf871f4f308fd6792d3c4f6c3e/task_id=validate_dataset/attempt=2.log']}, {'event': '::endgroup::'}, {'timestamp': '2026-11-15T15:56:51.180864Z', 'event': 'DAG bundles loaded: dags-folder', 'level': 'info', 'logger': 'airflow.dag_processing.bundles.manager.DagBundlesManager', 'filename': 'manager.py', 'lineno': 179}, {'timestamp': '2026-11-15T15:56:51.183944Z', 'event': 'Filling up the DagBag from /workspace/dags/training_pipeline.py', 'level': 'info', 'logger': 'airflow.models.dagbag.DagBag', 'filename': 'dagbag.py', 'lineno': 593}, {'timestamp': '2026-11-15T15:56:51.271830Z', 'event': 'Task failed with exception', 'level': 'error', 'logger': 'task', 'filename': 'task_runner.py', 'lineno': 994, 'error_detail': [{'exc_type': 'ValueError', 'exc_value': 'Injected validation failure: dataset schema missing target column', 'exc_notes': [], 'syntax_error': None, 'is_cause': False, 'frames': [{'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/execution_time/task_runner.py', 'lineno': 920, 'name': 'run'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/execution_time/task_runner.py', 'lineno': 1302, 'name': '_execute_task'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/bases/operator.py', 'lineno': 416, 'name': 'wrapper'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/bases/decorator.py', 'lineno': 252, 'name': 'execute'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/bases/operator.py', 'lineno': 416, 'name': 'wrapper'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/providers/standard/operators/python.py', 'lineno': 216, 'name': 'execute'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/providers/standard/operators/python.py', 'lineno': 239, 'name': 'execute_callable'}, {'filename': '/home/airflow/.local/lib/python3.11/site-packages/airflow/sdk/execution_time/callback_runner.py', 'lineno': 82, 'name': 'run'}, {'filename': '/workspace/dags/training_pipeline.py', 'lineno': 40, 'name': 'validate_dataset'}], 'is_group': False, 'exceptions': []}]}]",
+          "truncated": false
+        },
+        "error": null
+      }
+    ]
+  },
+  "dataset_reproduction": {
+    "revision": "dataset-v1",
+    "git_commit": "4f8232c6eef70251749e6c007ebeadb37261db8e",
+    "expected_dvc_hash": "4a3beb7462eb695a87c685647c3245c2",
+    "restored_hash": "4a3beb7462eb695a87c685647c3245c2",
+    "matches": true,
+    "rows": 120,
+    "dvc_status": {}
+  },
+  "prediction": {
+    "class_id": 0,
+    "class_name": "setosa",
+    "run_id": "24662e59aa414bc4bfae2c553546f9b1"
+  },
+  "training": [
+    {
+      "confirmation": {
+        "evidence_id": "ev_87a04318f8a3",
+        "request_id": "live-verification",
+        "tool": "airflow_trigger",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:54:04.709215+00:00",
+        "duration_ms": 1213.82,
+        "data": {
+          "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:54:04.709401Z",
+          "queued_at": "2026-11-15T15:54:05.148815Z",
+          "start_date": null,
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:54:04.709401Z",
+          "data_interval_end": "2026-11-15T15:54:04.709401Z",
+          "run_after": "2026-11-15T15:54:04.709401Z",
+          "last_scheduling_decision": null,
+          "run_type": "manual",
+          "state": "queued",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 0.001,
+            "minimum_f1": 1.0,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      }
+    },
+    {
+      "confirmation": {
+        "evidence_id": "ev_76a596271ec2",
+        "request_id": "live-verification",
+        "tool": "airflow_trigger",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:38.785164+00:00",
+        "duration_ms": 199.28,
+        "data": {
+          "dag_run_id": "agent_2f057edf871f4f308fd6792d3c4f6c3e",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:38.791673Z",
+          "queued_at": "2026-11-15T15:56:38.909308Z",
+          "start_date": null,
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:56:38.791673Z",
+          "data_interval_end": "2026-11-15T15:56:38.791673Z",
+          "run_after": "2026-11-15T15:56:38.791673Z",
+          "last_scheduling_decision": null,
+          "run_type": "manual",
+          "state": "queued",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": true
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      }
+    },
+    {
+      "confirmation": {
+        "evidence_id": "ev_f13078d87b38",
+        "request_id": "live-verification",
+        "tool": "airflow_trigger",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:56:59.385155+00:00",
+        "duration_ms": 56.33,
+        "data": {
+          "dag_run_id": "agent_10052de2e43e4df680f37b2e7425ed7f",
+          "dag_id": "training_pipeline",
+          "logical_date": "2026-11-15T15:56:59.386418Z",
+          "queued_at": "2026-11-15T15:56:59.406853Z",
+          "start_date": null,
+          "end_date": null,
+          "duration": null,
+          "data_interval_start": "2026-11-15T15:56:59.386418Z",
+          "data_interval_end": "2026-11-15T15:56:59.386418Z",
+          "run_after": "2026-11-15T15:56:59.386418Z",
+          "last_scheduling_decision": null,
+          "run_type": "manual",
+          "state": "queued",
+          "triggered_by": "rest_api",
+          "triggering_user_name": "admin",
+          "conf": {
+            "c": 1.0,
+            "minimum_f1": 0.9,
+            "inject_validation_failure": false
+          },
+          "note": null,
+          "dag_versions": [
+            {
+              "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+              "version_number": 1,
+              "dag_id": "training_pipeline",
+              "bundle_name": "dags-folder",
+              "bundle_version": null,
+              "created_at": "2026-11-13T22:46:43.837771Z",
+              "dag_display_name": "training_pipeline",
+              "bundle_url": null
+            }
+          ],
+          "bundle_version": null,
+          "dag_display_name": "training_pipeline"
+        },
+        "error": null
+      }
+    }
+  ],
+  "failure_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+  "validation_failure_run_id": "agent_2f057edf871f4f308fd6792d3c4f6c3e",
+  "success_run_id": "agent_10052de2e43e4df680f37b2e7425ed7f",
+  "conversation": {
+    "request_id": "req_158a5757c52f4ac09d0ad627bece69d0",
+    "answer": "**Best recent model**\n- Run ID: `24662e59aa414bc4bfae2c553546f9b1` (ev_45e419cc590f)\n- Metric: f1\u202f=\u202f0.9487179487179488, accuracy\u202f=\u202f0.9473684210526316\n- Parameters: C\u202f=\u202f10.0, random_state\u202f=\u202f42, test_size\u202f=\u202f0.25\n- Quality gate: passed (minimum_f1\u202f=\u202f0.7)\n- Dataset provenance:\n  - Git commit: `8234870d72d3b706fa963335857a0c80f0252cab`\n  - DVC hash: `4224576f0267bf88902f87f0f6200967`\n  - Path: `data/iris.csv`, rows\u202f=\u202f150\n\n**Dataset version**\n- DVC version for commit `8234870d72d3b706fa963335857a0c80f0252cab` (ev_ee5dd7846e52):\n  - Hash: `4224576f0267bf88902f87f0f6200967` (md5)\n  - Output: `iris.csv`, size\u202f=\u202f2757 bytes\n\n**Deployment status**\n- Deployment: `iris-api` in namespace `mlops-agent` (ev_c2ea6a55cec8)\n  - Desired/ready replicas: 2/2, available: True\n  - Image: `mlops-iris:1.0.0`\n- Running app version (ev_80a9c1dd7303):\n  - App version: `1.0.0`\n  - Run ID: `24662e59aa414bc4bfae2c553546f9b1` (matches best model)\n  - Dataset git commit & DVC hash match best model\n- Pod health:\n  - Both pods (`iris-api-c95c98ff-nnhj5`, `iris-api-c95c98ff-x5fqk`) are `Running` and `Ready`.\n  - However, events show repeated readiness/liveness probe failures (ev_a57ab1fe8253) and 3 restarts each with exit code\u202f255, indicating instability.\n  - Recent logs (ev_f6b79b66812b, ev_6bc448628ddf) show many successful `/readyz` and `/healthz` checks, but no error logs.\n\n**Airflow workflow health**\n- Recent `training_pipeline` DAG runs (ev_32015ed7bc4a):\n  - Success: `agent_10052de2e43e4df680f37b2e7425ed7f` (c=1, min_f1=0.9) and `agent_28f4ac8d9eb947d48d9b35b0e9e37dcd` (c=1, min_f1=0.9)\n  - Failures: `agent_2f057edf871f4f308fd6792d3c4f6c3e` (injected validation failure) and `agent_9f2b1582578242a78d343e0a47dd32e9` (c=0.001, min_f1=1)\n- The best model run (`24662e59aa414bc4bfae2c553546f9b1`) is a local run, not part of Airflow.\n\n**Comparison**\n- Deployed run ID and DVC hash exactly match the selected best model (ev_80a9c1dd7303, ev_ee5dd7846e52). The deployment is serving the best model.\n\n**Retraining necessity**\n- No freshness policy is recorded (ev_45e419cc590f: freshness_policy_days\u202f=\u202fnull).\n- Selected model\u2019s quality gate passed.\n- No degradation evidence or failed quality gate for the deployed model.\n\n**Retraining necessity: unknown**",
+    "status": "complete",
+    "evidence": [
+      {
+        "evidence_id": "ev_45e419cc590f",
+        "request_id": "req_158a5757c52f4ac09d0ad627bece69d0",
+        "tool": "mlflow_best_run",
+        "source": "mlflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:57:54.218495+00:00",
+        "duration_ms": 321.22,
+        "data": {
+          "runs": [
+            {
+              "run_id": "a143a0279ead4cb593ac9c5ff42d9198",
+              "experiment_id": "1",
+              "status": "FINISHED",
+              "start_time": 1794758239223,
+              "metrics": {
+                "f1": 0.9229629629629629,
+                "accuracy": 0.9210526315789473
+              },
+              "params": {
+                "C": "1.0",
+                "random_state": "42",
+                "test_size": "0.25"
+              },
+              "tags": {
+                "mlflow.user": "root",
+                "mlflow.source.name": "/home/airflow/.local/bin/airflow",
+                "mlflow.source.type": "LOCAL",
+                "dataset.git_commit": "7afcdf0b98885f1421ea85921bd52c6db1922ac1",
+                "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                "dataset.path": "data/iris.csv",
+                "dataset.rows": "150",
+                "workflow.run_id": "agent_10052de2e43e4df680f37b2e7425ed7f",
+                "quality_gate": "passed",
+                "airflow.run_id": "agent_10052de2e43e4df680f37b2e7425ed7f",
+                "mlflow.runName": "agent_10052de2e43e4df680f37b2e7425ed7f",
+                "quality_gate.minimum_f1": "0.9"
+              }
+            },
+            {
+              "run_id": "b1ef8656104d41f7bc03819e3adc6104",
+              "experiment_id": "1",
+              "status": "FINISHED",
+              "start_time": 1794758131654,
+              "metrics": {
+                "f1": 0.745438596491228,
+                "accuracy": 0.7631578947368421
+              },
+              "params": {
+                "C": "0.001",
+                "random_state": "42",
+                "test_size": "0.25"
+              },
+              "tags": {
+                "mlflow.user": "root",
+                "mlflow.source.name": "/home/airflow/.local/bin/airflow",
+                "mlflow.source.type": "LOCAL",
+                "dataset.git_commit": "7afcdf0b98885f1421ea85921bd52c6db1922ac1",
+                "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                "dataset.path": "data/iris.csv",
+                "dataset.rows": "150",
+                "workflow.run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+                "quality_gate": "failed",
+                "airflow.run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+                "mlflow.runName": "agent_9f2b1582578242a78d343e0a47dd32e9",
+                "quality_gate.minimum_f1": "1.0"
+              }
+            },
+            {
+              "run_id": "ef1d1a0baeb844199ee30601fc78cba3",
+              "experiment_id": "1",
+              "status": "FINISHED",
+              "start_time": 1794611066567,
+              "metrics": {
+                "f1": 0.9229629629629629,
+                "accuracy": 0.9210526315789473
+              },
+              "params": {
+                "C": "1.0",
+                "random_state": "42",
+                "test_size": "0.25"
+              },
+              "tags": {
+                "mlflow.user": "root",
+                "mlflow.source.name": "/root/assignment-03-mlops-agent/training/train.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.source.git.commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                "dataset.path": "data/iris.csv",
+                "dataset.rows": "150",
+                "workflow.run_id": "local",
+                "quality_gate": "passed",
+                "mlflow.runName": "local",
+                "quality_gate.minimum_f1": "0.9"
+              }
+            },
+            {
+              "run_id": "d7c8b26401ac45c1834bc7e6bef483d4",
+              "experiment_id": "1",
+              "status": "FINISHED",
+              "start_time": 1794610889042,
+              "metrics": {
+                "f1": 0.9229629629629629,
+                "accuracy": 0.9210526315789473
+              },
+              "params": {
+                "C": "1.0",
+                "random_state": "42",
+                "test_size": "0.25"
+              },
+              "tags": {
+                "mlflow.user": "root",
+                "mlflow.source.name": "/home/airflow/.local/bin/airflow",
+                "mlflow.source.type": "LOCAL",
+                "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                "dataset.path": "data/iris.csv",
+                "dataset.rows": "150",
+                "workflow.run_id": "agent_28f4ac8d9eb947d48d9b35b0e9e37dcd",
+                "quality_gate": "passed",
+                "airflow.run_id": "agent_28f4ac8d9eb947d48d9b35b0e9e37dcd",
+                "mlflow.runName": "agent_28f4ac8d9eb947d48d9b35b0e9e37dcd",
+                "quality_gate.minimum_f1": "0.9"
+              }
+            },
+            {
+              "run_id": "24662e59aa414bc4bfae2c553546f9b1",
+              "experiment_id": "1",
+              "status": "FINISHED",
+              "start_time": 1794610875254,
+              "metrics": {
+                "f1": 0.9487179487179488,
+                "accuracy": 0.9473684210526315
+              },
+              "params": {
+                "C": "10.0",
+                "random_state": "42",
+                "test_size": "0.25"
+              },
+              "tags": {
+                "mlflow.user": "root",
+                "mlflow.source.name": "-c",
+                "mlflow.source.type": "LOCAL",
+                "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+                "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+                "dataset.path": "data/iris.csv",
+                "dataset.rows": "150",
+                "workflow.run_id": "local-seed-C-10.0",
+                "quality_gate": "passed",
+                "mlflow.runName": "local-seed-C-10.0",
+                "quality_gate.minimum_f1": "0.7"
+              }
+            }
+          ],
+          "limit": 5,
+          "experiment_ids": [
+            "1",
+            "0"
+          ],
+          "metric": "f1",
+          "direction": "maximize",
+          "best": {
+            "run_id": "24662e59aa414bc4bfae2c553546f9b1",
+            "experiment_id": "1",
+            "status": "FINISHED",
+            "start_time": 1794610875254,
+            "metrics": {
+              "f1": 0.9487179487179488,
+              "accuracy": 0.9473684210526315
+            },
+            "params": {
+              "C": "10.0",
+              "random_state": "42",
+              "test_size": "0.25"
+            },
+            "tags": {
+              "mlflow.user": "root",
+              "mlflow.source.name": "-c",
+              "mlflow.source.type": "LOCAL",
+              "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+              "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+              "dataset.path": "data/iris.csv",
+              "dataset.rows": "150",
+              "workflow.run_id": "local-seed-C-10.0",
+              "quality_gate": "passed",
+              "mlflow.runName": "local-seed-C-10.0",
+              "quality_gate.minimum_f1": "0.7"
+            }
+          },
+          "candidate_age_days": 1.7060102439117433,
+          "freshness_policy_days": null,
+          "freshness_policy_exceeded": null,
+          "selection_scope": "Best finite metric among at most 5 recent runs, not all history",
+          "caution": "Metric ranking alone does not establish production readiness; check gate, data, workflow and deployment."
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_ee5dd7846e52",
+        "request_id": "req_158a5757c52f4ac09d0ad627bece69d0",
+        "tool": "dvc_dataset_version",
+        "source": "dvc",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:57:57.556813+00:00",
+        "duration_ms": 6.8,
+        "data": {
+          "git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+          "reference": "8234870d72d3b706fa963335857a0c80f0252cab",
+          "dataset": "data/iris.csv",
+          "outputs": [
+            {
+              "md5": "4224576f0267bf88902f87f0f6200967",
+              "size": 2757,
+              "hash": "md5",
+              "path": "iris.csv"
+            }
+          ]
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_c2ea6a55cec8",
+        "request_id": "req_158a5757c52f4ac09d0ad627bece69d0",
+        "tool": "kubernetes_workloads",
+        "source": "kubernetes",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:58:12.833060+00:00",
+        "duration_ms": 638.83,
+        "data": {
+          "namespace": "mlops-agent",
+          "pods": [
+            {
+              "name": "iris-api-c95c98ff-nnhj5",
+              "phase": "Running",
+              "conditions": [
+                {
+                  "type": "PodReadyToStartContainers",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "Initialized",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "Ready",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "ContainersReady",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "PodScheduled",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                }
+              ],
+              "containers": [
+                {
+                  "name": "inference",
+                  "ready": true,
+                  "restarts": 3,
+                  "state": {
+                    "running": {
+                      "started_at": "2026-11-15T15:52:35Z"
+                    },
+                    "terminated": null,
+                    "waiting": null
+                  },
+                  "last_state": {
+                    "running": null,
+                    "terminated": {
+                      "container_id": "containerd://864106f2f2d46e16721cf52bd520a25f7c0d3e933ef485203a0e85aeeeadedaf",
+                      "exit_code": 255,
+                      "finished_at": "2026-11-15T15:51:51Z",
+                      "message": null,
+                      "reason": "Unknown",
+                      "signal": null,
+                      "started_at": "2026-11-15T15:50:04Z"
+                    },
+                    "waiting": null
+                  }
+                }
+              ]
+            },
+            {
+              "name": "iris-api-c95c98ff-x5fqk",
+              "phase": "Running",
+              "conditions": [
+                {
+                  "type": "PodReadyToStartContainers",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "Initialized",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "Ready",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "ContainersReady",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                },
+                {
+                  "type": "PodScheduled",
+                  "status": "True",
+                  "reason": null,
+                  "message": null
+                }
+              ],
+              "containers": [
+                {
+                  "name": "inference",
+                  "ready": true,
+                  "restarts": 3,
+                  "state": {
+                    "running": {
+                      "started_at": "2026-11-15T15:52:35Z"
+                    },
+                    "terminated": null,
+                    "waiting": null
+                  },
+                  "last_state": {
+                    "running": null,
+                    "terminated": {
+                      "container_id": "containerd://7e4a2560a6002533fe1e1f875cca78b5d5fc44d4a2deed0e696db0204a246c03",
+                      "exit_code": 255,
+                      "finished_at": "2026-11-15T15:51:51Z",
+                      "message": null,
+                      "reason": "Unknown",
+                      "signal": null,
+                      "started_at": "2026-11-15T15:50:04Z"
+                    },
+                    "waiting": null
+                  }
+                }
+              ]
+            }
+          ],
+          "deployments": [
+            {
+              "name": "iris-api",
+              "desired_replicas": 2,
+              "ready_replicas": 2,
+              "available_replicas": 2,
+              "images": [
+                "mlops-iris:1.0.0"
+              ],
+              "conditions": [
+                {
+                  "type": "Progressing",
+                  "status": "True",
+                  "reason": "NewReplicaSetAvailable",
+                  "message": "ReplicaSet \"iris-api-c95c98ff\" has successfully progressed."
+                },
+                {
+                  "type": "Available",
+                  "status": "True",
+                  "reason": "MinimumReplicasAvailable",
+                  "message": "Deployment has minimum availability."
+                }
+              ]
+            }
+          ]
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_80a9c1dd7303",
+        "request_id": "req_158a5757c52f4ac09d0ad627bece69d0",
+        "tool": "kubernetes_app_version",
+        "source": "kubernetes",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:58:33.024673+00:00",
+        "duration_ms": 61.44,
+        "data": {
+          "namespace": "mlops-agent",
+          "application": {
+            "app_version": "1.0.0",
+            "run_id": "24662e59aa414bc4bfae2c553546f9b1",
+            "dataset": {
+              "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+              "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+              "dataset.path": "data/iris.csv",
+              "dataset.rows": "150",
+              "workflow.run_id": "local-seed-C-10.0",
+              "quality_gate": "passed",
+              "quality_gate.minimum_f1": "0.7"
+            },
+            "metrics": {
+              "f1": 0.9487179487179488,
+              "accuracy": 0.9473684210526315
+            },
+            "model_uri": "models:/m-1f73f71a67574904a9f79534398f01d4"
+          },
+          "source": "Kubernetes Service proxy -> running application's /version"
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_5b6f8fc75244",
+        "request_id": "req_158a5757c52f4ac09d0ad627bece69d0",
+        "tool": "airflow_list_dags",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:58:38.341482+00:00",
+        "duration_ms": 294.07,
+        "data": {
+          "dags": [
+            {
+              "dag_id": "training_pipeline",
+              "is_paused": false
+            }
+          ],
+          "total_entries": 1,
+          "approved_dags": [
+            "training_pipeline"
+          ]
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_32015ed7bc4a",
+        "request_id": "req_158a5757c52f4ac09d0ad627bece69d0",
+        "tool": "airflow_list_runs",
+        "source": "airflow",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:58:38.635744+00:00",
+        "duration_ms": 221.85,
+        "data": {
+          "dag_runs": [
+            {
+              "dag_run_id": "agent_10052de2e43e4df680f37b2e7425ed7f",
+              "dag_id": "training_pipeline",
+              "logical_date": "2026-11-15T15:56:59.386418Z",
+              "queued_at": "2026-11-15T15:56:59.406853Z",
+              "start_date": "2026-11-15T15:56:59.655771Z",
+              "end_date": "2026-11-15T15:57:46.756085Z",
+              "duration": 47.100314,
+              "data_interval_start": "2026-11-15T15:56:59.386418Z",
+              "data_interval_end": "2026-11-15T15:56:59.386418Z",
+              "run_after": "2026-11-15T15:56:59.386418Z",
+              "last_scheduling_decision": "2026-11-15T15:57:46.752171Z",
+              "run_type": "manual",
+              "state": "success",
+              "triggered_by": "rest_api",
+              "triggering_user_name": "admin",
+              "conf": {
+                "c": 1.0,
+                "minimum_f1": 0.9,
+                "inject_validation_failure": false
+              },
+              "note": null,
+              "dag_versions": [
+                {
+                  "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+                  "version_number": 1,
+                  "dag_id": "training_pipeline",
+                  "bundle_name": "dags-folder",
+                  "bundle_version": null,
+                  "created_at": "2026-11-13T22:46:43.837771Z",
+                  "dag_display_name": "training_pipeline",
+                  "bundle_url": null
+                }
+              ],
+              "bundle_version": null,
+              "dag_display_name": "training_pipeline"
+            },
+            {
+              "dag_run_id": "agent_2f057edf871f4f308fd6792d3c4f6c3e",
+              "dag_id": "training_pipeline",
+              "logical_date": "2026-11-15T15:56:38.791673Z",
+              "queued_at": "2026-11-15T15:56:38.909308Z",
+              "start_date": "2026-11-15T15:56:39.861171Z",
+              "end_date": "2026-11-15T15:56:55.528714Z",
+              "duration": 15.667543,
+              "data_interval_start": "2026-11-15T15:56:38.791673Z",
+              "data_interval_end": "2026-11-15T15:56:38.791673Z",
+              "run_after": "2026-11-15T15:56:38.791673Z",
+              "last_scheduling_decision": "2026-11-15T15:56:55.526281Z",
+              "run_type": "manual",
+              "state": "failed",
+              "triggered_by": "rest_api",
+              "triggering_user_name": "admin",
+              "conf": {
+                "c": 1.0,
+                "minimum_f1": 0.9,
+                "inject_validation_failure": true
+              },
+              "note": null,
+              "dag_versions": [
+                {
+                  "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+                  "version_number": 1,
+                  "dag_id": "training_pipeline",
+                  "bundle_name": "dags-folder",
+                  "bundle_version": null,
+                  "created_at": "2026-11-13T22:46:43.837771Z",
+                  "dag_display_name": "training_pipeline",
+                  "bundle_url": null
+                }
+              ],
+              "bundle_version": null,
+              "dag_display_name": "training_pipeline"
+            },
+            {
+              "dag_run_id": "agent_9f2b1582578242a78d343e0a47dd32e9",
+              "dag_id": "training_pipeline",
+              "logical_date": "2026-11-15T15:54:04.709401Z",
+              "queued_at": "2026-11-15T15:54:05.148815Z",
+              "start_date": "2026-11-15T15:54:08.734084Z",
+              "end_date": "2026-11-15T15:56:37.765560Z",
+              "duration": 149.031476,
+              "data_interval_start": "2026-11-15T15:54:04.709401Z",
+              "data_interval_end": "2026-11-15T15:54:04.709401Z",
+              "run_after": "2026-11-15T15:54:04.709401Z",
+              "last_scheduling_decision": "2026-11-15T15:56:37.760971Z",
+              "run_type": "manual",
+              "state": "failed",
+              "triggered_by": "rest_api",
+              "triggering_user_name": "admin",
+              "conf": {
+                "c": 0.001,
+                "minimum_f1": 1.0,
+                "inject_validation_failure": false
+              },
+              "note": null,
+              "dag_versions": [
+                {
+                  "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+                  "version_number": 1,
+                  "dag_id": "training_pipeline",
+                  "bundle_name": "dags-folder",
+                  "bundle_version": null,
+                  "created_at": "2026-11-13T22:46:43.837771Z",
+                  "dag_display_name": "training_pipeline",
+                  "bundle_url": null
+                }
+              ],
+              "bundle_version": null,
+              "dag_display_name": "training_pipeline"
+            },
+            {
+              "dag_run_id": "agent_28f4ac8d9eb947d48d9b35b0e9e37dcd",
+              "dag_id": "training_pipeline",
+              "logical_date": "2026-11-13T23:01:18.901591Z",
+              "queued_at": "2026-11-13T23:01:18.931373Z",
+              "start_date": "2026-11-13T23:01:19.840288Z",
+              "end_date": "2026-11-13T23:01:45.072426Z",
+              "duration": 25.232138,
+              "data_interval_start": "2026-11-13T23:01:18.901591Z",
+              "data_interval_end": "2026-11-13T23:01:18.901591Z",
+              "run_after": "2026-11-13T23:01:18.901591Z",
+              "last_scheduling_decision": "2026-11-13T23:01:45.066240Z",
+              "run_type": "manual",
+              "state": "success",
+              "triggered_by": "rest_api",
+              "triggering_user_name": "admin",
+              "conf": {
+                "c": 1.0,
+                "minimum_f1": 0.9,
+                "inject_validation_failure": false
+              },
+              "note": null,
+              "dag_versions": [
+                {
+                  "id": "01a1d717-7f7d-7ce4-a950-332993b5f3bd",
+                  "version_number": 1,
+                  "dag_id": "training_pipeline",
+                  "bundle_name": "dags-folder",
+                  "bundle_version": null,
+                  "created_at": "2026-11-13T22:46:43.837771Z",
+                  "dag_display_name": "training_pipeline",
+                  "bundle_url": null
+                }
+              ],
+              "bundle_version": null,
+              "dag_display_name": "training_pipeline"
+            }
+          ],
+          "total_entries": 4
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_a57ab1fe8253",
+        "request_id": "req_158a5757c52f4ac09d0ad627bece69d0",
+        "tool": "kubernetes_events",
+        "source": "kubernetes",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:58:38.858764+00:00",
+        "duration_ms": 83.07,
+        "data": {
+          "namespace": "mlops-agent",
+          "events": [
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Created",
+              "message": "Created container: inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:46:16+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Started",
+              "message": "Started container inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:46:17+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Readiness probe failed: Get \"http://10.244.0.2:8000/readyz\": dial tcp 10.244.0.2:8000: connect: connection refused",
+              "count": 6,
+              "last_timestamp": "2026-11-15 15:46:49+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.2:8000/healthz\": dial tcp 10.244.0.2:8000: connect: connection refused",
+              "count": 2,
+              "last_timestamp": "2026-11-15 15:46:43+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "SandboxChanged",
+              "message": "Pod sandbox changed, it will be killed and re-created.",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:49:40+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Pulled",
+              "message": "Container image \"mlops-iris:1.0.0\" already present on machine",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:03+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Created",
+              "message": "Created container: inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:04+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Started",
+              "message": "Started container inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:04+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Readiness probe failed: Get \"http://10.244.0.2:8000/readyz\": dial tcp 10.244.0.2:8000: connect: connection refused",
+              "count": 4,
+              "last_timestamp": "2026-11-15 15:50:26+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.2:8000/healthz\": dial tcp 10.244.0.2:8000: connect: connection refused",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:20+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.2:8000/healthz\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:32+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "SandboxChanged",
+              "message": "Pod sandbox changed, it will be killed and re-created.",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:19+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Pulled",
+              "message": "Container image \"mlops-iris:1.0.0\" already present on machine",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:33+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Created",
+              "message": "Created container: inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:34+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Normal",
+              "reason": "Started",
+              "message": "Started container inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:35+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Readiness probe failed: Get \"http://10.244.0.2:8000/readyz\": dial tcp 10.244.0.2:8000: connect: connection refused",
+              "count": 5,
+              "last_timestamp": "2026-11-15 15:53:02+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.2:8000/healthz\": dial tcp 10.244.0.2:8000: connect: connection refused",
+              "count": 2,
+              "last_timestamp": "2026-11-15 15:52:59+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.2:8000/healthz\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:54:44+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-nnhj5",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Readiness probe failed: Get \"http://10.244.0.2:8000/readyz\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)",
+              "count": 3,
+              "last_timestamp": "2026-11-15 15:57:15+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "SandboxChanged",
+              "message": "Pod sandbox changed, it will be killed and re-created.",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:46:13+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Pulled",
+              "message": "Container image \"mlops-iris:1.0.0\" already present on machine",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:46:16+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Created",
+              "message": "Created container: inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:46:16+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Started",
+              "message": "Started container inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:46:17+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Readiness probe failed: Get \"http://10.244.0.3:8000/readyz\": dial tcp 10.244.0.3:8000: connect: connection refused",
+              "count": 6,
+              "last_timestamp": "2026-11-15 15:46:49+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.3:8000/healthz\": dial tcp 10.244.0.3:8000: connect: connection refused",
+              "count": 2,
+              "last_timestamp": "2026-11-15 15:46:46+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "SandboxChanged",
+              "message": "Pod sandbox changed, it will be killed and re-created.",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:49:40+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Pulled",
+              "message": "Container image \"mlops-iris:1.0.0\" already present on machine",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:03+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Created",
+              "message": "Created container: inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:04+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Started",
+              "message": "Started container inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:04+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Readiness probe failed: Get \"http://10.244.0.3:8000/readyz\": dial tcp 10.244.0.3:8000: connect: connection refused",
+              "count": 4,
+              "last_timestamp": "2026-11-15 15:50:27+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.3:8000/healthz\": dial tcp 10.244.0.3:8000: connect: connection refused",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:20+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.3:8000/healthz\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:50:32+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "SandboxChanged",
+              "message": "Pod sandbox changed, it will be killed and re-created.",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:18+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Pulled",
+              "message": "Container image \"mlops-iris:1.0.0\" already present on machine",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:34+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Created",
+              "message": "Created container: inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:34+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Normal",
+              "reason": "Started",
+              "message": "Started container inference",
+              "count": 1,
+              "last_timestamp": "2026-11-15 15:52:35+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Readiness probe failed: Get \"http://10.244.0.4:8000/readyz\": dial tcp 10.244.0.4:8000: connect: connection refused",
+              "count": 5,
+              "last_timestamp": "2026-11-15 15:53:03+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.4:8000/healthz\": dial tcp 10.244.0.4:8000: connect: connection refused",
+              "count": 2,
+              "last_timestamp": "2026-11-15 15:52:58+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Readiness probe failed: Get \"http://10.244.0.4:8000/readyz\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)",
+              "count": 7,
+              "last_timestamp": "2026-11-15 15:57:35+00:00"
+            },
+            {
+              "object": "iris-api-c95c98ff-x5fqk",
+              "type": "Warning",
+              "reason": "Unhealthy",
+              "message": "Liveness probe failed: Get \"http://10.244.0.4:8000/healthz\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)",
+              "count": 3,
+              "last_timestamp": "2026-11-15 15:55:39+00:00"
+            }
+          ]
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_f6b79b66812b",
+        "request_id": "req_158a5757c52f4ac09d0ad627bece69d0",
+        "tool": "kubernetes_pod_logs",
+        "source": "kubernetes",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:58:38.943953+00:00",
+        "duration_ms": 94.97,
+        "data": {
+          "pod": "iris-api-c95c98ff-nnhj5",
+          "namespace": "mlops-agent",
+          "logs": "INFO:     10.244.0.1:41334 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:41346 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:41360 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:57826 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:57842 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:57852 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:34318 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:34330 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:52892 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:52896 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:52912 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:59924 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:59924 - \"POST /predict HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:50942 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:50950 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:50958 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58998 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:59014 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:59026 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:42418 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:42434 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:42444 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:42956 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:42958 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:42968 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:59978 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:59992 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:59998 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:52500 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:52502 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:52518 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:36888 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:36898 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:36904 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:57148 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:57150 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:41008 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:41016 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:41018 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58126 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58138 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58148 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:42544 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:42560 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:42564 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:51588 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:51590 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:51594 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:56584 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:56588 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:56596 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58080 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58090 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58098 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:52158 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:52162 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:52172 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:38020 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:38028 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:38042 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:39934 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:39938 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:39952 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:53446 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:53462 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:53464 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:46592 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:46594 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:46602 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58904 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58920 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58932 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:55274 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:55278 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:55280 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60152 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60162 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60172 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60176 - \"GET /version HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:50880 - \"GET /readyz HTTP/1.1\" 200 OK\n",
+          "tail_lines": 80
+        },
+        "error": null
+      },
+      {
+        "evidence_id": "ev_6bc448628ddf",
+        "request_id": "req_158a5757c52f4ac09d0ad627bece69d0",
+        "tool": "kubernetes_pod_logs",
+        "source": "kubernetes",
+        "status": "ok",
+        "observed_at": "2026-11-15T15:58:39.039669+00:00",
+        "duration_ms": 20.07,
+        "data": {
+          "pod": "iris-api-c95c98ff-x5fqk",
+          "namespace": "mlops-agent",
+          "logs": "INFO:     10.244.0.1:49384 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:49394 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:37330 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:37342 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:37344 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:40344 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:40346 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:40356 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:49534 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:49518 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:49546 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:54502 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:54504 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:54518 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:34508 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:34516 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:34522 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:35540 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:35556 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:35570 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:56628 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:56630 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:56632 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:34654 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:34656 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:34664 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60646 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60666 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58212 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58220 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58234 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:47662 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:47668 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:47680 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:38524 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:38532 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:38544 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:42234 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:42248 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:42262 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60450 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60462 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60466 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58172 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58182 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:58192 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:47356 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:47360 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:47368 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:47106 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:47112 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:47118 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:41434 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:41440 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:41454 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:46604 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:46614 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:46626 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:55850 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:55852 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:54212 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:54216 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:54224 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:55522 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:55524 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:55528 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:41442 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:41444 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:41460 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:56876 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:56884 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:56896 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60584 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60586 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:60590 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:38804 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:38814 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:38816 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:35064 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:35068 - \"GET /healthz HTTP/1.1\" 200 OK\n",
+          "tail_lines": 80
+        },
+        "error": null
+      }
+    ],
+    "model": "openrouter/free"
+  },
+  "status": "passed"
+}

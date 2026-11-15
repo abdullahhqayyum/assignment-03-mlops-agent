@@ -6,9 +6,13 @@ An LLM selects structured tools to inspect **DVC**, **MLflow**, **Airflow 3** an
 **Kubernetes**. Answers include actual tool responses, timestamps and request IDs.
 The project trains an Iris classifier and serves predictions with FastAPI.
 
+For Windows/Ubuntu WSL startup and interaction, see
+[local run instructions](docs/RUN-LOCALLY.md).
+
 See [architecture](architecture.md), [technical report](docs/report.md), and
 [exported live evidence](docs/evidence/). CI mocks external services; live evidence
 is collected separately against running services and a real LLM.
+The [screenshot index](screenshots/README.md) provides visual demonstration evidence.
 
 ## 1. Environment
 
@@ -64,6 +68,12 @@ Exported shell variables take precedence. `openrouter/free` can select different
 models on different calls. Configure a current tool-capable free slug to pin a
 model; see [OpenRouter routing](https://openrouter.ai/docs/guides/routing/routers/free-router).
 Free model availability and account quotas can change.
+
+Omitting a Kubernetes tool's namespace uses `KUBERNETES_NAMESPACE`; explicitly
+requesting any other namespace is rejected. Match the namespace in the manifests
+when changing this setting. The Iris schema and `iris-api` application identifiers
+are the supplied demo's design and permission boundary; operational run IDs,
+hashes, metrics and health always come from tool responses.
 
 ## 2. DVC data and historical reproduction
 
@@ -189,6 +199,20 @@ main pushes for Python 3.11 and 3.13. Tests need no keys or services. They cover
 selection/execution, timeouts, invalid inputs, service failures, missing evidence,
 namespace/confirmation rules, quality gates and inference readiness. Live Airflow
 import/execution is checked separately in its container.
+
+Recheck an existing running stack without rebuilding or replacing the deployment:
+
+```bash
+python scripts/verify_live.py --approve-training --with-llm --output .runtime/live-verification.json
+```
+
+This uses real services: historical DVC restoration, MLflow records, Kubernetes
+health/logs/endpoints and an actual prediction. `--approve-training` authorizes
+two deliberately failed DAG runs (quality gate and validation), followed by a
+successful recovery run. Omit that flag for read-only service checks.
+`--with-llm` additionally verifies the mandatory four-service conversation using
+the configured API key. The script exits unsuccessfully if a required check fails
+and preserves the observations collected so far. Allow several minutes on WSL.
 
 Capture another real conversation (consumes LLM quota):
 

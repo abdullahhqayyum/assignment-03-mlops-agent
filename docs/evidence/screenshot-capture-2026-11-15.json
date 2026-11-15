@@ -1,0 +1,100 @@
+{
+  "observed_at": "2026-11-15T16:05:19.405415+00:00",
+  "commands": [
+    {
+      "label": "Current Git revision",
+      "command": "git rev-parse HEAD",
+      "returncode": 0,
+      "stdout": "7afcdf0b98885f1421ea85921bd52c6db1922ac1",
+      "stderr": ""
+    },
+    {
+      "label": "Historical dataset-v1 pointer",
+      "command": "git show dataset-v1:data/iris.csv.dvc",
+      "returncode": 0,
+      "stdout": "outs:\n- md5: 4a3beb7462eb695a87c685647c3245c2\n  size: 2217\n  hash: md5\n  path: iris.csv",
+      "stderr": ""
+    },
+    {
+      "label": "Historical dataset-v2 pointer",
+      "command": "git show dataset-v2:data/iris.csv.dvc",
+      "returncode": 0,
+      "stdout": "outs:\n- md5: 4224576f0267bf88902f87f0f6200967\n  size: 2757\n  hash: md5\n  path: iris.csv",
+      "stderr": ""
+    },
+    {
+      "label": "Current DVC data status",
+      "command": "/root/.venvs/mlops-assignment03/bin/python -m dvc data status --json",
+      "returncode": 0,
+      "stdout": "{}",
+      "stderr": ""
+    },
+    {
+      "label": "Deployment, Pods and ClusterIP Service",
+      "command": ".runtime/bin/kubectl --kubeconfig .runtime/kubeconfig -n mlops-agent get deployments,pods,services",
+      "returncode": 0,
+      "stdout": "NAME                       READY   UP-TO-DATE   AVAILABLE   AGE\ndeployment.apps/iris-api   2/2     2            2           40h\n\nNAME                          READY   STATUS    RESTARTS      AGE\npod/iris-api-c95c98ff-nnhj5   1/1     Running   3 (13m ago)   40h\npod/iris-api-c95c98ff-x5fqk   1/1     Running   3 (13m ago)   40h\n\nNAME               TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE\nservice/iris-api   ClusterIP   10.96.94.220   <none>        80/TCP    40h",
+      "stderr": ""
+    },
+    {
+      "label": "Ready Service endpoints",
+      "command": ".runtime/bin/kubectl --kubeconfig .runtime/kubeconfig -n mlops-agent get endpoints iris-api",
+      "returncode": 0,
+      "stdout": "NAME       ENDPOINTS                         AGE\niris-api   10.244.0.2:8000,10.244.0.4:8000   40h",
+      "stderr": "Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice"
+    },
+    {
+      "label": "Actual inference Pod logs",
+      "command": ".runtime/bin/kubectl --kubeconfig .runtime/kubeconfig -n mlops-agent logs deployment/iris-api --tail=8",
+      "returncode": 0,
+      "stdout": "INFO:     10.244.0.1:33604 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:33606 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:33614 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:56074 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:56080 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:44636 - \"GET /healthz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:44646 - \"GET /readyz HTTP/1.1\" 200 OK\nINFO:     10.244.0.1:43102 - \"GET /readyz HTTP/1.1\" 200 OK",
+      "stderr": "Found 2 pods, using pod/iris-api-c95c98ff-nnhj5"
+    }
+  ],
+  "http": {
+    "/readyz": {
+      "status_code": 200,
+      "response": {
+        "status": "ready",
+        "run_id": "24662e59aa414bc4bfae2c553546f9b1"
+      }
+    },
+    "/version": {
+      "status_code": 200,
+      "response": {
+        "app_version": "1.0.0",
+        "run_id": "24662e59aa414bc4bfae2c553546f9b1",
+        "dataset": {
+          "dataset.git_commit": "8234870d72d3b706fa963335857a0c80f0252cab",
+          "dataset.dvc_hash": "4224576f0267bf88902f87f0f6200967",
+          "dataset.path": "data/iris.csv",
+          "dataset.rows": "150",
+          "workflow.run_id": "local-seed-C-10.0",
+          "quality_gate": "passed",
+          "quality_gate.minimum_f1": "0.7"
+        },
+        "metrics": {
+          "f1": 0.9487179487179488,
+          "accuracy": 0.9473684210526315
+        },
+        "model_uri": "models:/m-1f73f71a67574904a9f79534398f01d4"
+      }
+    },
+    "/predict": {
+      "request": {
+        "features": [
+          5.1,
+          3.5,
+          1.4,
+          0.2
+        ]
+      },
+      "status_code": 200,
+      "response": {
+        "class_id": 0,
+        "class_name": "setosa",
+        "run_id": "24662e59aa414bc4bfae2c553546f9b1"
+      }
+    }
+  }
+}

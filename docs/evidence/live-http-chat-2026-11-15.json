@@ -1,0 +1,110 @@
+﻿{
+    "scenario":  "Dataset provenance through POST /chat",
+    "mode":  "live_services_and_llm",
+    "turns":  [
+                  {
+                      "user":  "List the datasets actually tracked by DVC in this repository and their recorded hashes.",
+                      "assistant":  {
+                                        "request_id":  "req_3aede68bf1814963b5be909ecc7ebb38",
+                                        "answer":  "Based on the DVC inspection, here are the datasets/files actually tracked by DVC in this repository, along with their recorded hashes:\n\n## DVC-Tracked Datasets and Hashes\n\n| Path | MD5 Hash | Size | Notes |\n|---|---|---|---|\n| `data/iris.csv` | `4224576f0267bf88902f87f0f6200967` | 2,757 B | Primary dataset |\n| `.runtime/training/local/metadata.json` | `d6281879a9ff3de1d50a4fcc233d9abc` | 473 B | Training metadata |\n| `.runtime/training/local/model.joblib` | `5c7414d5b8f4e3d0e871055cfa43fc54` | 1,585 B | Model artifact |\n| `.runtime/training/local/parameters.json` | `2390fc970b7f6c5fb5ed89eb5c68e9d2` | 58 B | Training parameters |\n| `.runtime/training/local/provenance.json` | `7f118deebbe79ed4f8482e1d2f31054b` | 189 B | Provenance record |\n| `.runtime/training/local/split.npz` | `a844df34d22d0e13a853595d5c79cd75` | 7,002 B | Train split |\n| `.runtime/training/local/validated.npy` | `fe13d561bdebe0f29a35f4c75cd401ee` | 6,128 B | Validated split |\n\n## Primary Dataset Detail\n\n- **Dataset:** `data/iris.csv`\n- **MD5:** `4224576f0267bf88902f87f0f6200967`\n- **Size:** 2,757 bytes\n- **Git commit:** `7afcdf0b98885f1421ea85921bd52c6db1922ac1` (at reference `HEAD`)\n\n## Summary\n\nThe repository tracks **7 DVC-managed outputs** in total. The core dataset is `data/iris.csv` with MD5 hash `4224576f0267bf88902f87f0f6200967`, committed at git revision `7afcdf0b98885f1421ea85921bd52c6db1922ac1`.\n\nThe remaining tracked files are training artifacts and intermediate data products under `.runtime/training/local/`, which are also registered as DVC outputs.\n\n**Evidence:** `ev_1d71f3b7120a` (dvc_list_datasets), `ev_bbd25d981208` (dvc_dataset_version)",
+                                        "status":  "complete",
+                                        "evidence":  [
+                                                         {
+                                                             "evidence_id":  "ev_1d71f3b7120a",
+                                                             "request_id":  "req_3aede68bf1814963b5be909ecc7ebb38",
+                                                             "tool":  "dvc_list_datasets",
+                                                             "source":  "dvc",
+                                                             "status":  "ok",
+                                                             "observed_at":  "2026-11-15T15:57:42.457146+00:00",
+                                                             "duration_ms":  2643.93,
+                                                             "data":  {
+                                                                          "datasets":  [
+                                                                                           {
+                                                                                               "isout":  true,
+                                                                                               "isdir":  false,
+                                                                                               "isexec":  false,
+                                                                                               "size":  473,
+                                                                                               "md5":  "d6281879a9ff3de1d50a4fcc233d9abc",
+                                                                                               "path":  ".runtime/training/local/metadata.json"
+                                                                                           },
+                                                                                           {
+                                                                                               "isout":  true,
+                                                                                               "isdir":  false,
+                                                                                               "isexec":  false,
+                                                                                               "size":  1585,
+                                                                                               "md5":  "5c7414d5b8f4e3d0e871055cfa43fc54",
+                                                                                               "path":  ".runtime/training/local/model.joblib"
+                                                                                           },
+                                                                                           {
+                                                                                               "isout":  true,
+                                                                                               "isdir":  false,
+                                                                                               "isexec":  false,
+                                                                                               "size":  58,
+                                                                                               "md5":  "2390fc970b7f6c5fb5ed89eb5c68e9d2",
+                                                                                               "path":  ".runtime/training/local/parameters.json"
+                                                                                           },
+                                                                                           {
+                                                                                               "isout":  true,
+                                                                                               "isdir":  false,
+                                                                                               "isexec":  false,
+                                                                                               "size":  189,
+                                                                                               "md5":  "7f118deebbe79ed4f8482e1d2f31054b",
+                                                                                               "path":  ".runtime/training/local/provenance.json"
+                                                                                           },
+                                                                                           {
+                                                                                               "isout":  true,
+                                                                                               "isdir":  false,
+                                                                                               "isexec":  false,
+                                                                                               "size":  7002,
+                                                                                               "md5":  "a844df34d22d0e13a853595d5c79cd75",
+                                                                                               "path":  ".runtime/training/local/split.npz"
+                                                                                           },
+                                                                                           {
+                                                                                               "isout":  true,
+                                                                                               "isdir":  false,
+                                                                                               "isexec":  false,
+                                                                                               "size":  6128,
+                                                                                               "md5":  "fe13d561bdebe0f29a35f4c75cd401ee",
+                                                                                               "path":  ".runtime/training/local/validated.npy"
+                                                                                           },
+                                                                                           {
+                                                                                               "isout":  true,
+                                                                                               "isdir":  false,
+                                                                                               "isexec":  false,
+                                                                                               "size":  2757,
+                                                                                               "md5":  "4224576f0267bf88902f87f0f6200967",
+                                                                                               "path":  "data/iris.csv"
+                                                                                           }
+                                                                                       ]
+                                                                      },
+                                                             "error":  null
+                                                         },
+                                                         {
+                                                             "evidence_id":  "ev_bbd25d981208",
+                                                             "request_id":  "req_3aede68bf1814963b5be909ecc7ebb38",
+                                                             "tool":  "dvc_dataset_version",
+                                                             "source":  "dvc",
+                                                             "status":  "ok",
+                                                             "observed_at":  "2026-11-15T15:57:52.173878+00:00",
+                                                             "duration_ms":  53.86,
+                                                             "data":  {
+                                                                          "git_commit":  "7afcdf0b98885f1421ea85921bd52c6db1922ac1",
+                                                                          "reference":  "HEAD",
+                                                                          "dataset":  "data/iris.csv",
+                                                                          "outputs":  [
+                                                                                          {
+                                                                                              "md5":  "4224576f0267bf88902f87f0f6200967",
+                                                                                              "size":  2757,
+                                                                                              "hash":  "md5",
+                                                                                              "path":  "iris.csv"
+                                                                                          }
+                                                                                      ]
+                                                                      },
+                                                             "error":  null
+                                                         }
+                                                     ],
+                                        "model":  "openrouter/free"
+                                    }
+                  }
+              ]
+}
